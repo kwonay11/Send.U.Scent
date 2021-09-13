@@ -1,64 +1,44 @@
-# Sub_pjt_1
+# SSAFY Bigdata project
 
-[toc]
+## How to Run
 
-## 기능/과제 목록
+### Sub1
 
-- 데이터 전처리
-- 데이터 통계 값 구하기
-- 데이터 시각화
-- User-Item 행렬 생성
+```sh
+cd sub1
+pip install -r requirements.txt
+python parse.py
+python analyze.py
+python visualize.py
+```
 
+### Sub 2
 
------------------------------------------------------------------------------------
+**Backend**
 
-## 1. 데이터 전처리
+```sh
+cd sub2/backend
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py initialize
+python manage.py runserver
+```
 
-### 1-1 데이터 로딩 및 Pandas DataFrame 변환
+**Frontend**
 
+```sh
+cd sub2/frontend
+npm install
+npm run serve
+```
 
------------------------------------------------------------------------------------
-
-## 2. 데이터 통계 값 구하기
-
-### 2-1 음식점 평점 순 출력하기
-
-### 2-2 최소 리뷰 개수 필터링
-
-### 2-3 리뷰 개수 기준 음식점 정렬
-
-### 2-4 리뷰 개수 기준 유저 정렬
-
-
------------------------------------------------------------------------------------
-
-## 3. 데이터 시각화
-
-### 3-1 음식점 리뷰 수 분포 구하기
-
-### 3-2 평균 평점 분포 구하기
-
-### 3-3 유저 리뷰 수 분포 구하기
-
-### 3-4 유저 나이대, 성별 분포 구하기
-
-### 3-5 음식점 위치 분포 구하기
-
-
------------------------------------------------------------------------------------
-
-## 4. 유저-아이템 행렬 생성
-
-### 4-1 유저-음식점 행렬 생성
-
-### 4-2 유저-카테고리 행렬 생성
-
-
-
-
-
-
-
-
-
+### data file
+  - 기본 제공 데이터: 맛집 데이터
+    - 스켈레톤 폴더 내 포함
+    - PW: ssafy2021!@#$ - 확인 후 본 문서에서 PW 삭제 요망
+  - 추가 제공 데이터: 카드사 데이터
+    - 다운로드 링크: https://lab.ssafy.com/s05-bigdata-rec/card-data/-/blob/master/card-data.zip
+    - PW: ssafy2021!@#$ - 확인 후 본 문서에서 PW 삭제
+  - **SSAFY에서 제공하는 기업 데이터는 다른 목적으로 사용할 수 없으며, 데이터 원본의 외부 반출을 금합니다.**
 
