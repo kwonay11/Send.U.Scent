@@ -1,12 +1,12 @@
 export default [
-  {
-    path: "",
-    view: "Home",
-    name: "home"
-  },
-  {
-    path: "/search",
-    view: "Search",
-    name: "search"
-  }
-];
+    {
+        path: "/",
+        view: "Home",
+        name: "Home",
+    },
+    {
+        path: "/about",
+        view: "Home",
+        name: "About",
+    },
+]
