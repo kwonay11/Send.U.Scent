@@ -1,6 +1,6 @@
-// 상단 Nav bar
+// 404 Not Found 페이지
 <template>
-    <div id="NavRoot">
+    <div id="NotFoundRoot">
 
     </div>
 </template>

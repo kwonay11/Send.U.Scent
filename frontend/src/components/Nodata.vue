@@ -1,6 +1,6 @@
-// 상단 Nav bar
+// 검색 결과가 없을 때
 <template>
-    <div id="NavRoot">
+    <div id="NodataRoot">
 
     </div>
 </template>
