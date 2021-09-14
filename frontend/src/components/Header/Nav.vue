@@ -2,6 +2,7 @@
 <template>
     <div id="NavRoot">
         <nav>
+            
             <div class="logo"><router-link to="/">Send.U.Scent</router-link></div>
         
             <div class="menu-item p-0">
@@ -43,6 +44,7 @@
 
 <style scoped>
 nav {
+    padding: 1%;
     background-color: #78949D;
     display: flex;
     align-items: center;
@@ -55,11 +57,9 @@ nav {
 nav .logo a{
    margin-left: 2vw;
     font-size: 2vw;
-    /* margin-right: 55vw;
-    margin-left: 5vw; */
     text-decoration:none;
     position: absolute;
-    top: 0vh; left: 0vw;
+    top: 1.5vh; left: 0vw;
 
   
 }
