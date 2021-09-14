@@ -8,7 +8,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Recommend
                 </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-dark mt-1" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><div class="drop-item"><router-link to="/all">ALL</router-link></div></li>
                         <li><div class="drop-item"><router-link to="/perfume">Perfume</router-link></div></li>
                         <li><div class="drop-item"><router-link to="/softener">Softener</router-link></div></li>
@@ -23,7 +23,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Community
                 </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-dark mt-1" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><div class="drop-item"><router-link to="/notice">Notice</router-link></div></li>
                         <li><div class="drop-item"><router-link to="/qna">QnA</router-link></div></li>
                     </ul>
