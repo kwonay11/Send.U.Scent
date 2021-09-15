@@ -2,7 +2,8 @@
 <template>
     <div id="FooterRoot">
         <div class="name">Send.U.Scent</div>
-        <div class="info">서비스소개 | 팀소개 | 사이트맵</div>
+        <div class="info"><router-link to="/about">서비스소개&nbsp;|&nbsp;팀소개&nbsp;|&nbsp;</router-link>
+        사이트맵</div>
         <div class="team">Developed by TEAM. C204</div>
 
 
@@ -32,12 +33,15 @@ export default {
 }
 .info{
     color:white;
-    height: 30px;
     margin-left: 5vh;
     margin-top: -2vh;;
     height: 100px;
     display: flex;
     
+}
+.info a{
+    color:white;
+    text-decoration: none;
 }
 .team{
     color:white;
