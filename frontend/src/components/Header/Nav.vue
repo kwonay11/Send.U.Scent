@@ -49,11 +49,13 @@ nav {
     display: flex;
     align-items: center;
     justify-content:flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    box-shadow: 1px 1px  7px  3px rgba(129, 127, 127, 0.849);
 }
-/* nav .dropdown-menu {
-    background-color: #4F4F4F;
-    
-} */
 nav .logo a{
    margin-left: 2vw;
     font-size: 2vw;
