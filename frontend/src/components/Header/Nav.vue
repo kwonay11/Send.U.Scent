@@ -2,11 +2,12 @@
 <template>
     <div id="NavRoot">
         <nav>
+            
             <div class="logo"><router-link to="/">Send.U.Scent</router-link></div>
         
             <div class="menu-item p-0">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Recommend
+                    Recommend&nbsp;&nbsp;
                 </a>
                     <ul class="dropdown-menu dropdown-menu-dark mt-1" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><div class="drop-item"><router-link to="/all">ALL</router-link></div></li>
@@ -21,7 +22,7 @@
 
             <div class="menu-item p-0">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Community
+                    Community&nbsp;&nbsp;&nbsp;
                 </a>
                     <ul class="dropdown-menu dropdown-menu-dark mt-1" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><div class="drop-item"><router-link to="/notice">Notice</router-link></div></li>
@@ -29,9 +30,9 @@
                     </ul>
             </div>
 
-            <div class="menu-item"><router-link to="/mypage"><img src="@/assets/icons/mypage-btn.png" alt="mypage" style="width:1vw"></router-link></div>
+            <div class="menu-item"><router-link to="/mypage">&nbsp;<img src="@/assets/icons/mypage-btn.png" alt="mypage" style="width:1vw">&nbsp;</router-link></div>
             <!-- 로그인 상태일 때 로그아웃 처리해야함-->
-            <div class="menu-item" style="margin-right:2vw;"><router-link to="/logout"><img src="@/assets/icons/Logout-btn.png" alt="logout" style="width:1.2vw"></router-link></div>
+            <div class="menu-item" style="margin-right:2vw;"><router-link to="/logout">&nbsp;<img src="@/assets/icons/Logout-btn.png" alt="logout" style="width:1.2vw">&nbsp;</router-link></div>
 
        
  
@@ -43,6 +44,7 @@
 
 <style scoped>
 nav {
+    padding: 1%;
     background-color: #78949D;
     display: flex;
     align-items: center;
@@ -55,11 +57,9 @@ nav {
 nav .logo a{
    margin-left: 2vw;
     font-size: 2vw;
-    /* margin-right: 55vw;
-    margin-left: 5vw; */
     text-decoration:none;
     position: absolute;
-    top: 0vh; left: 0vw;
+    top: 1.5vh; left: 0vw;
 
   
 }
