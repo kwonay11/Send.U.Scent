@@ -62,7 +62,6 @@ export default {
         pauseOnHover: false,
         arrows      : false,
         dots: true,
-        animatedDots: true,
 
       
         },
