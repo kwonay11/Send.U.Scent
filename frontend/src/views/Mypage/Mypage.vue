@@ -1,16 +1,18 @@
 // 마이페이지 메인
 <template>
-    <div id="MypageRoot">
-
-    </div>
+  <div id="MypageRoot">
+    <p class="title">Mypage</p>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+@import "../../styles/common.scss";
+.title {
+  font-family: $eng-font-family;
+  font-size: $title-font-size;
+}
 </style>
