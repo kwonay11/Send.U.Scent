@@ -22,3 +22,22 @@ $subtitle-font-size: 24px;
 $body-font-size: 18px;
 $detail-font-size: 14px;
 $smallest-font-size: 12px;
+
+// default setting
+a {
+	text-decoration: none;
+}
+ul {
+	padding: 0;
+	margin: 0;
+}
+li {
+	list-style: none;
+}
+input {
+	border: 0;
+	background: none;
+}
+input:focus {
+	outline: none;
+}
