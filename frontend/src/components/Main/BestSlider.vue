@@ -52,11 +52,15 @@ export default {
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/common.scss";
+
 #BestPerFumeRoot{
     height:80vh;
 }
 h3{
+    font-family:$kor-font-family;
+    font-size:$subtitle-font-size;
     color:#78949D;
     margin-top: 6vh;
     margin-bottom: 6vh;
