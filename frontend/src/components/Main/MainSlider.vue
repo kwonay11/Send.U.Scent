@@ -71,7 +71,9 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styles/common.scss";
+
 img{
     filter: brightness(77%);;
 }
@@ -86,6 +88,8 @@ img{
     
 }
 .gorecommend {
+    font-family:$kor-font-family;
+    font-size:$subtitle-font-size;
     /* 중앙 정렬 */
     margin: 0 auto;
   font-size: 20px;
@@ -102,6 +106,15 @@ img{
 text-decoration: none;
 color:white;
 
+}
+h1{
+    font-family:$eng-font-family;
+    font-size:$title-font-size;
+
+}
+h4{
+    font-family:$kor-font-family;
+    font-size:$subtitle-font-size;
 }
 
 </style>
