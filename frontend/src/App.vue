@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="app">
     <Nav />
     <router-view />
     
@@ -21,7 +21,17 @@ export default {
 </script>
 
 <style lang="scss">
-
+@import "./styles/common.scss";
+a {
+	text-decoration: none;
+}
+ul {
+	padding: 0;
+	margin: 0;
+}
+li {
+	list-style: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
