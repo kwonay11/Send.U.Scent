@@ -13,8 +13,8 @@
                         <li><div class="drop-item"><router-link to="/recommend">ALL</router-link></div></li>
                         <li><div class="drop-item"><router-link to="/recommend/perfume">Perfume</router-link></div></li>
                         <li><div class="drop-item"><router-link to="/recommend/softener">Softener</router-link></div></li>
-                        <li><div class="drop-item"><router-link to="/recommend/test">Test For Me</router-link></div></li>
-                        <li><div class="drop-item"><router-link to="/recommend/test">Test For Dear</router-link></div></li>
+                        <li><div class="drop-item"><router-link to="/recommend/mytest">Test For Me</router-link></div></li>
+                        <li><div class="drop-item"><router-link to="/recommend/deartest">Test For Dear</router-link></div></li>
                     </ul>
             </div>
             

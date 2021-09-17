@@ -1,13 +1,13 @@
 // 테스트 메인 페이지
 <template>
-    <div id="TestMainRoot" >
+    <div id="DearTestMainRoot" >
          <!-- For gift, For Me 에 따라 타이틀과 버튼, 사진이 다름 -->
-        <img src="@/assets/images/TestCard_1.png" alt="main1">
+        <img src="@/assets/images/TestCard_2.png" alt="main1">
         
-            <div class="title">Test For You</div>
-            <div class="subtitle">당신의 성향에 맞는 향수를 추천해드립니다.<br>
-            취향 테스트로 #나만의 시그니처 향기 찾기</div>
-            <div class="gotest"><router-link to="/">START</router-link></div>
+            <div class="title">Test For Dear</div>
+            <div class="subtitle">상대의 성향에 맞는 향수를 추천해드립니다.<br>
+            성향 테스트로 #상대에게 맞는 향수 선물하기</div>
+            <div class="gotest"><router-link to="/testQnA">START</router-link></div>
     </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
 
-#TestMainRoot{
+#DearTestMainRoot{
     background-color: $sub-color;
     background-size: 100%;
 
@@ -30,6 +30,7 @@ img{
     filter: brightness(50%);
     width:80%;
     height:40%;
+    padding-bottom: 10%;
 
 
 }
@@ -68,13 +69,13 @@ img{
     font-family:$eng-font-family;
     font-size:$subtitle-font-size;
     /* 중앙 정렬 */
-    margin-top:3vh;
+    margin-top:5vh;
     right: 45%;
     text-decoration: none;
     display: block;
     background: $point-color;
     width: 150px;
-    padding:1%;
+    padding:0.5% 1% 0.5% 1%;
     font-weight: bold;
     border-radius:30px;
     box-shadow: 2px 2px  4px  3px rgba(97, 95, 95, 0.849);

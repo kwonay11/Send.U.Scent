@@ -5,19 +5,19 @@
   
 
     <router-view />
-    <!-- <Footer/> -->
+    <Footer/>
 
   </div>
 </template>
 
 <script>
 import Nav from "@/components/Header/Nav.vue"
-// import Footer from "@/components/Footer.vue"
+import Footer from "@/components/Footer.vue"
 export default {
   name: "App",
   components:{
     Nav,
-    // Footer,
+    Footer,
   },
 }
 
