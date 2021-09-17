@@ -30,6 +30,16 @@
                         <li><div class="drop-item"><router-link to="/qna">QnA</router-link></div></li>
                     </ul>
             </div>
+            <div class="menu-item" >
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    User
+                </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark mt-3 " aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><div class="drop-item"><router-link to="/signup">Signup</router-link></div></li>
+                        <li><div class="drop-item"><router-link to="/qna">Login</router-link></div></li>
+                    </ul>
+            </div>
 
             <div class="menu-item" style="padding:20px"><router-link to="/mypage"><img src="@/assets/icons/mypage-btn.png" alt="mypage" style="width:1vw"></router-link></div>
             <!-- 로그인 상태일 때 로그아웃 처리해야함-->
