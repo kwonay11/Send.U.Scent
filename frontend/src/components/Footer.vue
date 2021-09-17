@@ -24,6 +24,17 @@ export default {
 #FooterRoot{
     background:#242424;
     height:28vh;
+//    position: relative !important;
+//    left: 0;
+
+//     bottom: 0;
+
+//     width: 100%;
+
+
+
+
+
 }
 .logo{
     font-family: $eng-font-family;
