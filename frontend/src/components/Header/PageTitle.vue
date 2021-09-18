@@ -4,7 +4,7 @@
         <!-- <div class="sub-title"> -->
         <div class="sub-title" :style="{ backgroundImage: 'url(' + this.pageUrl +')'}" >
             <div class="sub-title-bg">
-                <p class="title">MyPage</p>
+                <p class="title">{{this.page}}</p>
             </div>
         </div>
     </div>
@@ -25,11 +25,11 @@ export default {
         getImgSrc() {
             if(this.page === "About") {
                 this.pageUrl = "/img/PageTitle_1.3d732872.png";
-            } else if(this.page === "Community") {
+            } else if(this.page === "Notice" || this.page === "QnA") {
                 this.pageUrl = "/img/{ageTitle_2.598cf4e9.png";
-            } else if(this.page === "Mypage") {
+            } else if(this.page === "MyPage" || this.page === "I have" || this.page === "I want") {
                 this.pageUrl = "/img/PageTitle_3.a6e86150.png";
-            } else if(this.page === "Login") {
+            } else if(this.page === "Login" || this.page === "SignUp") {
                 this.pageUrl = "/img/PageTitle_4.03b2913f.png";
             }
         },
