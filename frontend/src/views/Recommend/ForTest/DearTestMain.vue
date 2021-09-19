@@ -7,7 +7,7 @@
             <div class="title">Test For Dear</div>
             <div class="subtitle">상대의 성향에 맞는 향수를 추천해드립니다.<br>
             성향 테스트로 #상대에게 맞는 향수 선물하기</div>
-            <div class="gotest"><router-link to="/testQnA">START</router-link></div>
+            <div class="gotest"><router-link to="/recommend/testQnA">START</router-link></div>
     </div>
 </template>
 
