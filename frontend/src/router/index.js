@@ -19,6 +19,7 @@ import BoardWrite from "@/components/Board/WriteForm.vue"
 import BoardRead from "@/components/Board/BoardReadForm.vue"
 // Mypage 메뉴
 import Mypage from "../views/Mypage/Mypage.vue"
+import MypageMain from "@/components/Mypage/MypageMain.vue"
 import HaveList from "../views/Mypage/HaveList.vue"
 import WantList from "../views/Mypage/WantList.vue"
 // 에러 페이지
@@ -133,6 +134,11 @@ const routes = [
     name: 'MyPage',
     component: Mypage,
     children: [
+      {
+        path: '',
+        name: 'MypageMain',
+        component: MypageMain,
+      },
       {
         path: 'havelist',
         name: 'HaveList',
