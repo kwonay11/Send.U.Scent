@@ -35,9 +35,9 @@ export default {
         },
     },
     mounted() {
-        console.log(this.page);
+        // console.log(this.page);
         this.getImgSrc();
-        console.log(this.pageUrl);
+        // console.log(this.pageUrl);
     },
 }
 </script>
