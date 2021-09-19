@@ -1,26 +1,43 @@
 // 테스트 문항답변 페이지
 <template>
     <div id="TestQnARoot" >
+      <div class="box">
+        <div class="statusbar">
+          <div v-if="step === 0" class="step0"></div>
+          <div v-if="step === 1" class="step1"></div>
+          <div v-if="step === 2" class="step2"></div>
+          <div v-if="step === 3" class="step3"></div>
+          <div v-if="step === 4" class="step4"></div>
+          <div v-if="step === 5" class="step5"></div>
+          
+  
+        </div>
         <div class="list-form" v-for="(question, index) in list"
             :key="index">
-        <div class="statusbar"></div>
             <div class="question-box">
                 <div class="question-card col-md-9"
                     v-show="index === step"
                 >
-                <span>{{question.q}}</span>
+
+                <!-- 질문 -->
+                <div class="fadeIn">{{question.q}}</div>
                 </div>
             </div>
+            <!-- 질문 답변 -->
             <div class="answer-box" v-show="index === step">
                 <div class="answer-list"
                 v-for="(item, index) in question.a"
                 :key="index"
                 >
-                <button class="answer-item col-md-6" @click="checkAns(item.type)">{{item.answer}}</button>
+                 <!-- <button class="answer-item col-md-6" @click="checkAns(item.type,this.index)">{{item.answer}}</button> -->
+                 <button class="answer-item col-md-6 fadeIn" @click="checkAns(item.type)">{{item.answer}}</button>
                 </div>
             </div>
+
   
         </div>
+        
+      </div>
   </div>
 </template>
 
@@ -28,27 +45,45 @@
 import data from '@/js/TestQnAData.js'
 export default {
     name: "TestQnA",
+
     data() {
       return {
           list: data.qnaList,
-          endPoint : 7,
+          endPoint : 6,
           step: 0,
-          idx:0,
+          idx: 0,
+          select:0,
+          resultString: '',
 
       }
     },
     methods: {
+      //다음 질문 항목
         goNext(){
             this.step++;
         },
-        checkAns(idx){
-            this.select[idx]++;
-            if(this.step == endPoint){
-                // this.calResult();
-                console.log("마지막")
+        //마지막 문항인지 체크
+        checkAns(type){
+          console.log("타입",type)
+          // console.log("질문 번호",this.idx)
+          this.resultString += type
+          console.log("결과 스트링",this.resultString)
+            
+            // 마지막 문항이면 결과로 넘기기
+            if(this.step == 5){
+              console.log("결과창으로 넘기기")
+              // this.goResult(this.resultString);
+               this.$router.push({name: "TestResult", query : {resid: this.resultString}});
+              
             }else{
-                this.goNext();
+              this.goNext();//인덱스 증가
             }
+        },
+        goResult:function(res){
+          console.log("결과~", res)
+          // this.emit('select-result',this.res)
+          this.$router.push({name: "TestResult", params : {resid: this.res }});
+
         }
     }
 
@@ -64,16 +99,120 @@ export default {
 #TestQnARoot{
     background-color: $sub-color;
     background-size: 100%;
+    width: 100%;
+    height: 100vh;
+}
+.box{
+  background-color: white;
+  position: relative;
+  width:80%;
+  left: 9.8%;
+  height: 100%;
+  // padding-left: 50px;
+
 }
 .statusbar{
-    width: 52.4%;
+  z-index: 10;
+    width: 41%;
     height: 2.3vh;
-    top:10vh;
+    top:13vh; left:22.3vw;
     position: relative;
     margin: 1.5%;
     background-color:$gray-color;
     border-radius: 20px;
+    box-shadow: 1px 4px 3px 0px #00000038;
 
+
+
+}
+.statusbar .step0{
+  z-index: 13;
+  width: 16.6%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step1{
+  z-index: 13;
+  width: 33.2%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step2{
+  z-index: 13;
+  width: 49.8%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step3{
+  z-index: 13;
+  width: 66.4%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step4{
+  z-index: 13;
+  width: 83%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step5{
+  z-index: 13;
+  width: 101.5%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
 
 }
 ul {
@@ -97,61 +236,48 @@ button {
 #qnaForm {
   width: 100%;
   text-align: center;
+ 
 }
 .list-form {
-    width:80%;
-    position: relative;
-    left:10vw;
-    background-color: white;
+  top:3vh;
+  width:80%;
+  position: relative;
+  left:8vw;
+  // background-color: white;
   display: flex;
   flex-direction: column;
-//   flex-wrap: nowrap;
-//   align-content: center;
-//   justify-content: center;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
   align-items: center;
+
+ 
   
 }
 .question-box {
-  width: 70%;
+  width: 67%;
+  
 }
 .question-card {
   border: 2px solid $gray-color;
   position: relative;
-//   margin-bottom: 4vh;
-  top:10vh;
+  top:12vh;
   padding:5%;
   border-radius: 10px;
   margin: 0 auto;
   font-size: $subtitle-font-size;
   font-weight: bold;
-//   display: flex;
-//   flex-direction: column;
-//   align-content: center;
-//   align-items: center;
-//   justify-content: center;
+
 }
 .answer-box {
   width: 100%;
+  margin-top: 15vh;
+   
 
-  margin-top: 12vh;
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: nowrap;
-//   align-content: center;
-//   justify-content: center;
-//   align-items: center;
-}
-.answer-list {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: nowrap;
-//   align-content: center;
-//   justify-content: center;
-//   align-items: center;
 }
 .answer-item {
-  margin: 1%;
+   border-radius: 10px;
+  margin: 1.3%;
   min-height: 70px;
 //   border: 0;
   font-size: $body-font-size;
@@ -172,6 +298,7 @@ button {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+// 크롬은 웹킷
 @-webkit-keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
@@ -182,7 +309,7 @@ button {
 }
 .fadeIn {
   animation: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 1.6s;
 }
 .fadeOut {
   animation: fadeOut;
