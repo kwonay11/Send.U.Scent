@@ -24,13 +24,13 @@ export default {
     methods: {
         getImgSrc() {
             if(this.page === "About") {
-                this.pageUrl = "/img/PageTitle_1.3d732872.png";
+                this.pageUrl = require("@/assets/images/PageTitle_1.png");
             } else if(this.page === "Notice" || this.page === "QnA") {
-                this.pageUrl = "/img/{ageTitle_2.598cf4e9.png";
+                this.pageUrl = require("@/assets/images/PageTitle_2.png");
             } else if(this.page === "MyPage" || this.page === "I have" || this.page === "I want") {
-                this.pageUrl = "/img/PageTitle_3.a6e86150.png";
+                this.pageUrl = require("@/assets/images/PageTitle_3.png");
             } else if(this.page === "Login" || this.page === "SignUp") {
-                this.pageUrl = "/img/PageTitle_4.03b2913f.png";
+                this.pageUrl = require("@/assets/images/PageTitle_4.png");
             }
         },
     },
@@ -54,7 +54,7 @@ export default {
 .sub-title {
   width: 100%;
   height: 250px;
-  background-image: url("../../assets/images/PageTitle_4.png");
+//   background-image: url("../../assets/images/PageTitle_4.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
