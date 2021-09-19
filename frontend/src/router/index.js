@@ -9,8 +9,9 @@ import RecPerfume from "../views/Recommend/RecPerfume.vue";
 import RecSoftener from "../views/Recommend/RecSoftener.vue";
 import RecDetail from "../views/Recommend/RecDetail.vue";
 
-import TestMain from "../views/Recommend/ForTest/TestMain.vue";
-import TestQna from "../views/Recommend/ForTest/TestQnA.vue";
+import MyTestMain from "../views/Recommend/ForTest/MyTestMain.vue";
+import DearTestMain from "../views/Recommend/ForTest/DearTestMain.vue";
+import TestQnA from "../views/Recommend/ForTest/TestQnA.vue";
 import TestResult from "../views/Recommend/ForTest/TestResult.vue";
 // Community 메뉴
 import Notice from "../views/Community/Notice.vue"
@@ -57,14 +58,19 @@ const routes = [
         component: RecDetail,
       },
       {
-        path: 'test',
-        name: 'Test',
-        component: TestMain,
+        path: 'mytest',
+        name: 'MyTest',
+        component: MyTestMain,
+      },
+      {
+        path: 'deartest',
+        name: 'DearTest',
+        component: DearTestMain,
       },
       {
         path: 'testQnA',
-        name: 'TestQna',
-        component: TestQna,
+        name: 'TestQnA',
+        component: TestQnA,
       },
       {
         path: 'testResult',
