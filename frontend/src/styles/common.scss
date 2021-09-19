@@ -20,6 +20,7 @@ $kor-font-family: "Nanum Gothic", sans-serif;
 $title-font-size: 48px;
 $subtitle-font-size: 30px;
 $bodytitle-font-size: 24px;
+$body-subtitle-font-size: 20px;
 $body-font-size: 18px;
 $detail-font-size: 14px;
 $smallest-font-size: 12px;
@@ -41,4 +42,14 @@ input {
 }
 input:focus {
 	outline: none;
+}
+
+// div class
+.content-box {
+	width: 80vw;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	top: 250px;
+	// background-color: gray;
 }
