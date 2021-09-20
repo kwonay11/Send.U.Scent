@@ -21,6 +21,7 @@ import BoardRead from "@/components/Board/BoardReadForm.vue"
 // Mypage 메뉴
 import Mypage from "../views/Mypage/Mypage.vue"
 import MypageMain from "@/components/Mypage/MypageMain.vue"
+import MyinfoModify from "@/components/Mypage/MyinfoModify.vue"
 import HaveList from "../views/Mypage/HaveList.vue"
 import WantList from "../views/Mypage/WantList.vue"
 // 에러 페이지
@@ -144,6 +145,11 @@ const routes = [
         path: '',
         name: 'MypageMain',
         component: MypageMain,
+      },
+      {
+        path: 'modify',
+        name: 'MyinfoModify',
+        component: MyinfoModify,
       },
       {
         path: 'havelist',
