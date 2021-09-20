@@ -53,3 +53,9 @@ input:focus {
 	top: 250px;
 	// background-color: gray;
 }
+.wrap {
+	min-height: 100%;
+	position: relative;
+	width: 100%;
+	padding-bottom: 200px; /* footer height */
+}
