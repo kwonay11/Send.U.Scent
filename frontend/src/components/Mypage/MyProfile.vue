@@ -2,7 +2,7 @@
   <div id="MyProfileRoot">
     <div class="profile-box">
       <p class="user-id">| {{user.id}}
-        <router-link to="" class="user-edit-btn"><i class="fas fa-user-edit edit-btn"></i></router-link>
+        <router-link to="/mypage/modify" class="user-edit-btn"><i class="fas fa-user-edit edit-btn"></i></router-link>
       </p>
       <div class="scents-box">
         <!-- accords -->
