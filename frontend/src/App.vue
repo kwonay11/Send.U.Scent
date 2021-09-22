@@ -47,6 +47,11 @@ body::-webkit-scrollbar-track {
   border-radius: 10px;
   margin: 10px;
 }
+// 마우스 드래그
+::selection {
+  // background: #e5f9ff;
+  background: #ffebe4;
+}
 
 /* #nav {
   padding: 30px;
