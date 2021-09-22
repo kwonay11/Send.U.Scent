@@ -49,14 +49,28 @@
       </div>
 
 
+      <!-- 지속력,잔향,계절,낮밤 -->
+      <div class="line"></div>
+      <ul>
+        <li class="icon" v-for="(item, idx) in iconList" :key="idx">
+          <SIcon :id="item.id" :color="item.color" :number="item.number" />
+        </li>
+      </ul>
+      <div class="line"></div>
+
 
     </div>
   </div>
 </template>
 
 <script>
+import SIcon from '@/components/Recommend/SeasonIcon.vue'
+
 export default {
   name: "RecDetail",
+  components: {
+    SIcon,
+  },
   data() {
     return {
       // 일단 하드코딩
@@ -79,6 +93,44 @@ export default {
         summer: 48,
         autumn: 27,
       },
+      iconList: [
+        {
+          id: "longevity",
+          color: "#fa9d81",
+          // number: this.perfumeInfo.longevity,
+          number: 80,
+        },
+        {
+          id: "sillage",
+          color: "#f28e85",
+          // number: this.perfumeInfo.sillage,
+          number: 50,
+        },
+        {
+          id: "winter",
+          color: "#78D6F0",
+          // number: this.perfumeInfo.winter,
+          number: 22,
+        },
+        {
+          id: "spring",
+          color: "#9FE584",
+          // number: this.perfumeInfo.spring,
+          number: 84,
+        },
+        {
+          id: "summer",
+          color: "#FFF574",
+          // number: this.perfumeInfo.summer,
+          number: 48,
+        },
+        {
+          id: "autumn",
+          color: "#F9BE6E",
+          // number: this.perfumeInfo.autumn,
+          number: 27,
+        },
+      ],
     }
   },
 }
@@ -159,6 +211,18 @@ export default {
   font-weight: bold;
   font-size: $body-subtitle-font-size;
   color: $main-color;
+}
+
+// --------------------------------
+.line {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-top: 1px solid $gray-color;
+}
+.icon {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
 }
 
 </style>
