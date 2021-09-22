@@ -59,17 +59,70 @@
       <div class="line"></div>
 
 
+      <!-- 상세설명(accord, note) -->
+      <div class="d-desc">
+        이미지로 분위기를 느껴보세요
+      </div>
+
+      <div class="d-content">
+        <div class="d-title">
+          <strong>Main Accords</strong><br>
+          " {{ perfumeInfo.accords }} "
+        </div>
+        <ul>
+          <li class="accord-img" v-for="(accord, idx) in this.accordList" :key="`a-${idx}`">
+            <SAccord :accord="accord" />
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-content">
+        <div class="d-title">
+          <strong>Top Notes</strong>
+        </div>
+        <ul>
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.top" :key="`t-img-${idx}`">
+            <SNote :note="note" />{{note}}
+          </li>
+        </ul>
+      </div>
+      <div class="d-content">
+        <div class="d-title">
+          <strong>Middle Notes</strong>
+        </div>
+        <ul>
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.middle" :key="`m-img-${idx}`">
+            <SNote :note="note" />{{note}}
+          </li>
+        </ul>
+      </div>
+      <div class="d-content">
+        <div class="d-title">
+          <strong>Base Notes</strong>
+        </div>
+        <ul>
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.base" :key="`b-img-${idx}`">
+            <SNote :note="note" />{{note}}
+          </li>
+        </ul>
+      </div>
+
+
     </div>
   </div>
 </template>
 
 <script>
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
+import SAccord from '@/components/Recommend/SimpleAccord.vue'
+import SNote from '@/components/Recommend/SimpleNote.vue'
 
 export default {
   name: "RecDetail",
   components: {
     SIcon,
+    SAccord,
+    SNote,
   },
   data() {
     return {
@@ -222,6 +275,32 @@ export default {
 .icon {
   width: 100px;
   height: 100px;
+  display: inline-block;
+}
+
+// --------------------------------
+.d-desc {
+  font-size: $bodytitle-font-size;
+  color: $dark-color;
+  margin: 110px 0;
+}
+.d-content {
+  margin: 50px 0;
+}
+.d-title {
+  font-family: NanumGothic;
+  font-size: $body-subtitle-font-size;
+  line-height: 2.4rem;
+  margin: 20px;
+}
+.accord-img {
+  width: 330px;
+  height: 250px;
+  display: inline-block;
+}
+.note-img {
+  width: 190px;
+  height: 160px;
   display: inline-block;
 }
 
