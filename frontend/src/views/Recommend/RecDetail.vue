@@ -184,7 +184,22 @@ export default {
           number: 27,
         },
       ],
+      accordList: [],
     }
+  },
+  // axios 데이터 바인딩+로그인 구분 전
+  created() {
+    this.perfumeInfo.top = this.perfumeInfo.top.split(",");
+    this.perfumeInfo.middle = this.perfumeInfo.middle.split(",");
+    this.perfumeInfo.base = this.perfumeInfo.base.split(",");
+    this.perfumeInfo.longevity = this.perfumeInfo.longevity * 20
+    this.perfumeInfo.sillage = this.perfumeInfo.sillage * 25
+    const aList = this.perfumeInfo.accords.split(",")
+    for (let idx = 0; idx < 3; idx++) {
+      // if (aList.length < idx) break
+      this.accordList.push(aList[idx])
+    }
+    this.perfumeInfo.accords = aList.join(', ')
   },
 }
 </script>
