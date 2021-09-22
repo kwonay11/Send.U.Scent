@@ -108,6 +108,17 @@
       </div>
 
 
+      <!-- 리뷰 -->
+      <div class="line"></div>
+        <div>리뷰리뷰</div>
+      <div class="line"></div>
+
+
+      <!-- 뒤로가기 버튼 -->
+      <div class="center-btn">
+        <button class="back-btn" @click="goBack">목록</button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -200,6 +211,11 @@ export default {
       this.accordList.push(aList[idx])
     }
     this.perfumeInfo.accords = aList.join(', ')
+  },
+  methods: {
+    goBack() {
+      this.$router.push({ name: 'Perfume'})
+    },
   },
 }
 </script>
@@ -317,6 +333,23 @@ export default {
   width: 190px;
   height: 160px;
   display: inline-block;
+}
+
+// --------------------------------
+.center-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+.back-btn {
+	width: 130px;
+	height: 45px;
+	border: none;
+	border-radius: 3px;
+  background: $main-color;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  color: $white-color;
 }
 
 </style>
