@@ -23,15 +23,7 @@ export default {
 
 #FooterRoot{
     background:#242424;
-    height:200px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-.footer-box {
-    width: 100%;
-    height: 100%;
+    height:28vh;
 }
 .logo{
     font-family: $eng-font-family;
