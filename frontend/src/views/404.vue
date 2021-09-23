@@ -87,9 +87,13 @@ export default {
 }
 .content-right {
     width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .content-right > img {
     width: 100%;
-    height: 50%;
+    height: 80%;
 }
 </style>
