@@ -1,12 +1,12 @@
 // Footer
 <template>
     <div id="FooterRoot">
-        <div class="logo">Send.U.Scent</div>
-        <div class="info"><router-link to="/about">서비스소개&nbsp;|&nbsp;팀소개&nbsp;|&nbsp;</router-link>
-        사이트맵</div>
-        <div class="team">Developed by TEAM. C204</div>
-
-
+        <div class="footer-box">
+            <p class="logo">Send.U.Scent</p>
+            <p class="info"><router-link to="/about">서비스소개 &nbsp;|&nbsp; 팀소개&nbsp;| &nbsp;</router-link>
+            사이트맵</p>
+            <p class="team">Developed by TEAM. C204</p>
+        </div>
     </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
     padding-top: 5vh;
     padding-left: 5vh;
     font-size: 30px;
-    height: 100px;
+    // height: 100px;
     display: flex;
     font-weight: bold;
 }
@@ -43,7 +43,7 @@ export default {
     color:white;
     margin-left: 5vh;
     margin-top: -2vh;;
-    height: 100px;
+    // height: 100px;
     display: flex;
     
 }
@@ -55,7 +55,8 @@ export default {
     font-family: $eng-font-family;
     font-size: $detail-font-size;
     color:white;
-    margin: -4vh;
+    // margin: -4vh;
+    margin-top: 45px;
  
 }
 

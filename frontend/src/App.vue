@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Nav />
+    <Nav v-if="$route.name !== 'Page404'"/>
    
   
 
     <router-view />
-    <Footer/>
+    <Footer v-if="$route.name !== 'Page404'"/>
 
   </div>
 </template>
@@ -46,6 +46,11 @@ body::-webkit-scrollbar-track {
   background-color: $light-color;
   border-radius: 10px;
   margin: 10px;
+}
+// 마우스 드래그
+::selection {
+  // background: #e5f9ff;
+  background: #ffebe4;
 }
 
 /* #nav {
