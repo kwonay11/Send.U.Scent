@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Nav />
+    <Nav v-if="$route.name !== 'Page404'"/>
    
   
 
     <router-view />
-    <Footer/>
+    <Footer v-if="$route.name !== 'Page404'"/>
 
   </div>
 </template>

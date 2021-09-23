@@ -28,8 +28,8 @@ import WantList from "../views/Mypage/WantList.vue";
 import Page404 from "../views/404.vue";
 
 // User 메뉴
-import SignUp from "../components/user/SignUpForm.vue";
-import LogIn from "../components/user/LogInForm.vue";
+import SignUp from "@/components/user/SignUpForm.vue";
+import LogIn from "@/components/user/LoginForm.vue";
 
 const routes = [
   {
