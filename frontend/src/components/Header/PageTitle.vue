@@ -27,7 +27,7 @@ export default {
                 this.pageUrl = require("@/assets/images/PageTitle_1.png");
             } else if(this.page === "Notice" || this.page === "QnA") {
                 this.pageUrl = require("@/assets/images/PageTitle_2.png");
-            } else if(this.page === "MyPage" || this.page === "I have" || this.page === "I want") {
+            } else if(this.page === "MyPage" || this.page === "I have" || this.page === "I want" || this.page === "회원탈퇴") {
                 this.pageUrl = require("@/assets/images/PageTitle_3.png");
             } else if(this.page === "Login" || this.page === "SignUp") {
                 this.pageUrl = require("@/assets/images/PageTitle_4.png");
