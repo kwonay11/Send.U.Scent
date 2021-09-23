@@ -22,6 +22,7 @@ import BoardRead from "@/components/Board/BoardReadForm.vue";
 import Mypage from "../views/Mypage/Mypage.vue";
 import MypageMain from "@/components/Mypage/MypageMain.vue";
 import MyinfoModify from "@/components/Mypage/MyinfoModify.vue";
+import MyinfoCancel from "@/components/Mypage/MyinfoCancel.vue";
 import HaveList from "../views/Mypage/HaveList.vue";
 import WantList from "../views/Mypage/WantList.vue";
 // 에러 페이지
@@ -153,6 +154,11 @@ const routes = [
         path: "modify",
         name: "MyinfoModify",
         component: MyinfoModify,
+      },
+      {
+        path: "cancel",
+        name: "MyinfoCancel",
+        component: MyinfoCancel,
       },
       {
         path: "havelist",

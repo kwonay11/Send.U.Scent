@@ -46,6 +46,11 @@
           <button class="cancel-btn" @click="cancelBtn">취소</button>
           <button class="submit-btn" @click="goSubmit">수정</button>
         </div>
+        <div class="mem-cancel-box mt-5">
+          <p class="mem-cancel-text">
+            <router-link to="/mypage/cancel">회원탈퇴</router-link>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -307,5 +312,15 @@ span, p {
 .submit-btn {
   background: $point-color;
   color: $white-color;
+}
+.mem-cancel-box {
+  border-top: 1px solid $white-color;
+  text-align: center;
+}
+.mem-cancel-text {
+  padding: 10px;
+}
+.mem-cancel-text > a {
+  color: $sub-color;
 }
 </style>
