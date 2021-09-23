@@ -41,6 +41,7 @@ export default {
 }
 .nf-box {
     width: 80vw;
+    max-width: 900px;
     height: 60vh;
     background: white;
     position: relative;
