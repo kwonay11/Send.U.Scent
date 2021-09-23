@@ -27,6 +27,9 @@ import WantList from "../views/Mypage/WantList.vue"
 // 에러 페이지
 import Page404 from "../views/404.vue"
 
+// User 메뉴
+import SignUp from "../components/user/SignUpForm.vue"
+
 const routes = [
   {
     path: "/",
@@ -171,6 +174,11 @@ const routes = [
   {
     path: '/:catchAll(.*)', // vue3 사용자 정의 정규표현식 매개변수 사용
     redirect: '/404'
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: SignUp,
   },
 ];
 
