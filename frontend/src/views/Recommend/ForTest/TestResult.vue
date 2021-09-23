@@ -3,7 +3,13 @@
     <div id="TestResultRoot">
 
     <div class="box">
+        <div class="title">Send you your Scent</div>
         <h1 class="res"> 결과 : {{ $route.query.resid }}</h1>
+        <div class="subtitle">000님에게 어울리는 향수는,</div>
+        <div class="wordcloud"> 워드클라우드 이미지 자리</div>
+        <div>
+            
+        </div>
     
     </div>
 
@@ -11,16 +17,21 @@
 </template>
 
 <script>
+
 export default {
     name:'TestResult',
-    methods:{
-        onSelectResult:function(result) {
-            console.log("결과 받아온 값",this.result);
+    data() {
+        return{ 
+        
 
+        }
+    },
+    methods:{
+       
         },
     }
 
-}
+
 </script>
 
 
@@ -50,5 +61,36 @@ export default {
     top:20vh;
     left:10vw;
     color:rgb(9, 31, 23);
+}
+.title{
+    color:$heart-color;
+    font-family:$eng-font-family;
+    font-size:$title-font-size;
+    position: absolute;
+    top: 13%;
+    width: 100%;
+    font-weight: bold;
+
+}
+.subtitle{
+    
+    position: absolute;
+    top: 21%;
+    width: 100%;
+    color:black;
+    font-family:$kor-font-family;
+    font-size:$subtitle-font-size;
+    font-weight: bold;
+    z-index: 1;
+    margin-top:2vh;
+    height:10vh;
+
+}
+.wordcloud{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    color:black;
+
 }
 </style>

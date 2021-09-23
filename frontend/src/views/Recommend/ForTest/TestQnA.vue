@@ -54,8 +54,10 @@ export default {
           idx: 0,
           select:0,
           resultString: '',
+          // resultString: [],
 
       }
+
     },
     methods: {
       //다음 질문 항목
@@ -67,27 +69,28 @@ export default {
           console.log("타입",type)
           // console.log("질문 번호",this.idx)
           this.resultString += type
+          
+          // splite기준
+          if (this.step ==2 || this.step == 3 || this.step == 4){
+                this.resultString += "/"
+              }
+          // this.resultString.push(type)
           console.log("결과 스트링",this.resultString)
             
             // 마지막 문항이면 결과로 넘기기
             if(this.step == 5){
               console.log("결과창으로 넘기기")
-              // this.goResult(this.resultString);
                this.$router.push({name: "TestResult", query : {resid: this.resultString}});
-              
+               //백엔드에 this.resultString를 axios.push로 보내기
             }else{
               this.goNext();//인덱스 증가
             }
         },
-        goResult:function(res){
-          console.log("결과~", res)
-          // this.emit('select-result',this.res)
-          this.$router.push({name: "TestResult", params : {resid: this.res }});
-
-        }
-    }
-
+        
+        
+    },
 }
+
 </script>
 
 <style lang="scss" scoped>
