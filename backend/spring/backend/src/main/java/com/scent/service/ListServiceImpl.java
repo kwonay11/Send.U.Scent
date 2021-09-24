@@ -1,4 +1,4 @@
-package com.scent.list.service;
+package com.scent.service;
 
 public class ListServiceImpl {
 
