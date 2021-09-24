@@ -79,13 +79,11 @@ export default {
 .background {
     height: 800px;
     font-family: "Do Hyeon", sans-serif;
-
+    
     .up-box {
             position:absolute;
             margin-top: 69px;
-            
             width: 100%;
-            
     }
     .content-box {
         .user {
@@ -122,7 +120,6 @@ export default {
             }
             .button-div {
                 display: flex;
-                // background-color: #8064A2 !important;
                 .btn-color {
                     background-color: #FA9D81;
                     border-radius: 50px;
