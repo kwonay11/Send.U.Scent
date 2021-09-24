@@ -1,17 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,get_list_or_404
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.db import connection
+from .serializers import TestResult
+from .models import PerfumeResult
+
 def tests(request):
     pass
+
 @api_view(['POST'])
 def tests_result(request):
     #데이터 받기
     resultString = request.data.get('resultString')
-    res = resultString.split('/')
+    res = []
+    res.append(resultString.split('/'))
     #res[0] : season_gender_age
     #res[1] : daynight
     #res[2] : accords
     #res[3] : rating_score 컬럼 이용해야함
+    
     try:
         '''
         cursor(): cursor 객체 생성
@@ -24,7 +31,9 @@ def tests_result(request):
         '''
         cursor = connection.cursor()
 
+        # strSql = "SELECT perfume_id, title FROM perfume LIMITE 5"
         strSql = "SELECT perfume_id, title FROM perfume WHERE res[1] and res[3] LIMITE 5"
+        global result
         result = cursor.execute(strSql)
         print("출력!!!!!!!!!!!!!!!!!!!!!!!",result)
         # perfumes = cursor.fetchall()
@@ -37,5 +46,6 @@ def tests_result(request):
         print("Failed selecting in PerfumeView")
 
     # return render(request, 'book_list.html', {'books': books})
+    return Response(serializers.data)
 
     

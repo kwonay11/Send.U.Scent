@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import axios from "axios"
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 import data from '@/js/TestQnAData.js'
 export default {
     name: "TestQnA",
@@ -53,8 +55,11 @@ export default {
           step: 0,
           idx: 0,
           select:0,
-          resultString: '',
           // resultString: [],
+          contents:{
+            resultString: '',
+
+          }
 
       }
 
@@ -68,20 +73,29 @@ export default {
         checkAns(type){
           console.log("타입",type)
           // console.log("질문 번호",this.idx)
-          this.resultString += type
+          this.contents.resultString += type
           
           // splite기준
           if (this.step ==2 || this.step == 3 || this.step == 4){
-                this.resultString += "/"
+                this.contents.resultString += "/"
               }
           // this.resultString.push(type)
-          console.log("결과 스트링",this.resultString)
+          console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기
             if(this.step == 5){
               console.log("결과창으로 넘기기")
-               this.$router.push({name: "TestResult", query : {resid: this.resultString}});
+               this.$router.push({name: "TestResult", query : {resid: this.contents.resultString}});
                //백엔드에 this.resultString를 axios.push로 보내기
+              //  axios.post(`${DJANGO_URL}/tests/result/`,this.resultString)
+
+               axios.post(`${DJANGO_URL}/tests/result/`,this.contents)
+               .then(()=>{ 
+                 console.log("백엔드에 보내기 성공")
+               })
+               .catch(()=>{
+                 console.log("엑시오스 실패")
+               })
             }else{
               this.goNext();//인덱스 증가
             }
