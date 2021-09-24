@@ -3,6 +3,14 @@
   <div id="RecDetailRoot">
     <div class="content-box">
 
+      <!-- test용 -->
+      {{ ppInfo }}
+      <hr>
+      {{perfumeInfo}}
+      <hr>
+      <img :src="`https://fimgs.net/mdimg/perfume/375x500.${ppInfo.perfume_id}.jpg`" style="width:100px;">
+
+
       <div class="per-title">{{ perfumeInfo.title }}</div>
 
       <!-- 요약(평점,브랜드,젠더,노트) -->
@@ -128,6 +136,9 @@ import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
 
+import axios from 'axios'
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
+
 export default {
   name: "RecDetail",
   components: {
@@ -137,6 +148,7 @@ export default {
   },
   data() {
     return {
+      ppInfo: {},
       // 일단 하드코딩
       perfumeInfo: {
         // perfume_id: this.$route.params.id,
@@ -211,10 +223,32 @@ export default {
       this.accordList.push(aList[idx])
     }
     this.perfumeInfo.accords = aList.join(', ')
+
+// --------------------------------------------------
+    const perfume_id = this.$route.params.id
+    this.getPerfumeInfo(perfume_id)
+    .then((res) => {
+      console.log(res)
+      this.ppInfo = res.data
+      // this.perfumeInfo = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   },
   methods: {
     goBack() {
       this.$router.push({ name: 'Perfume'})
+    },
+    getPerfumeInfo: async function (perfume_id) {
+      const url = DJANGO_URL + `/api/detail/${perfume_id}`
+      const res = await axios.get(url)
+      if (res.status === 200) {
+        console.log(url)
+        return res
+      } else {
+        throw new Error(res.status)
+      }
     },
   },
 }
