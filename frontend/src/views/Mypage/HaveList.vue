@@ -13,6 +13,7 @@
         </ul>
       </div>
     </div>
+    <go-top />
     <review-modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
   </div>
 </template>
@@ -21,12 +22,14 @@
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import ReviewModal from '../../components/ModalReview.vue';
+import GoTop from '../../components/GoTop.vue';
 export default {
   name: "HaveList",
   components: {
     PageTitle,
     Prod,
     ReviewModal,
+    GoTop,
   },
   methods: {
     writeReview(id, name) {

@@ -13,6 +13,7 @@
             </div>
         </div>
         <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
+        <go-top />
     </div>
 </template>
 
@@ -20,12 +21,14 @@
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import Modal from '../../components/Modal.vue';
+import GoTop from '../../components/GoTop.vue';
 export default {
     name: "WantList",
     components: {
         PageTitle,
         Prod,
         Modal,
+        GoTop,
     },
     methods: {
         addHave(id, name) {
