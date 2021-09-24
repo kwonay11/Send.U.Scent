@@ -66,6 +66,7 @@ export default {
 .black-bg {
   width: 100%;
   height: 100%;
+  min-height: 1300px;
   position: relative;
   top: 0;
   left: 0;
@@ -76,7 +77,7 @@ export default {
   width: 370px;
   height: 260px;
   position: relative;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
