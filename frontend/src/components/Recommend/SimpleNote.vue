@@ -2,9 +2,7 @@
 <template>
   <div id="SimplNoteRoot">
     <div class="note-img">
-      <!-- 일단 이미지 주소 하드코딩 -->
-      <img src="@/assets/test/jasmine.png" alt="note-image">
-      <!-- <img :src="require(`@/assets/test/${note}.png`)" alt="note-image"> -->
+      <img :src="require(`@/assets/notes/${this.note}.jpg`)" alt="note-image">
     </div>
   </div>
 </template>

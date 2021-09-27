@@ -172,6 +172,11 @@ export default {
           color: "#F9BE6E",
           number: null,
         },
+        {
+          id: "day",
+          color: "#FFD454",
+          number: 82,
+        },
       ],
     }
   },
@@ -186,6 +191,10 @@ export default {
       this.iconList[3].number = res.data.spring
       this.iconList[4].number = res.data.summer
       this.iconList[5].number = res.data.autumn
+      if (res.data.daynight === 2) {
+        this.iconList[6].id = "night"
+        this.iconList[6].color = "#43508C"
+      }
     })
     .catch((err) => {
       this.$router.push({ name: 'Page404'})
@@ -299,7 +308,7 @@ export default {
   margin: 110px 0;
 }
 .d-content {
-  margin: 50px 0;
+  margin: 60px 0;
 }
 .d-title {
   font-family: NanumGothic;
