@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scent.entity.User;
-import com.scent.list.model.BasicResponse;
+import com.scent.model.BasicResponse;
 import com.scent.repo.UserRepository;
 import com.scent.service.UserService;
 
