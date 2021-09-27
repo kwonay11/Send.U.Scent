@@ -58,6 +58,7 @@
 
 <script>
 import PV from 'password-validator';
+import http from '@/utils/http-common.js'
 export default {
   created() {
     this.passwordSchema
@@ -68,7 +69,11 @@ export default {
       .has()
       .digits()
       .has()
-      .letters()
+      .letters(),
+    
+    this.getUser(),
+    localStorage.setItem("user_id", "ssafy"),
+    this.user_id = localStorage.getItem("user_id")
   },
   watch: {
     password(v) {
@@ -85,6 +90,14 @@ export default {
     }
   },
   methods: {
+    getUser() {
+      http.get('/user/info', this.user_id)
+          .then((res) => {
+            if(res.data.result === "success") {
+              // this.user_nickname = res.data.
+            }
+          })
+    },
     onCheckPassword() {
       if(this.editPassword) {
         if( 
@@ -181,8 +194,8 @@ export default {
   },
   data() {
     return {
-      user_id: 'User_ID',
-      user_nickname: 'User_Nickname',
+      user_id: String,
+      user_nickname: String,
       password: '',
       passwordConfirm: '',
       passwordChk: false,
