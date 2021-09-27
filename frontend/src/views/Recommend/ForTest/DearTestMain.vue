@@ -6,13 +6,41 @@
         
             <div class="title">Test For Dear</div>
             <div class="subtitle">상대의 성향에 맞는 향수를 추천해드립니다.<br>
-            성향 테스트로 #상대에게 맞는 향수 선물하기</div>
-            <div class="gotest"><router-link to="/recommend/testQnA">START</router-link></div>
+            성향 테스트로 #상대에게 맞는 향수 선물하기
+            
+            </div>
+            <div class="name">
+                <input v-model="name" type="text" placeholder="받는 사람 이름 입력" autofocus style="color:white"/>
+                
+            </div>
+            
+            
+            <div :disabled="!name" class="gotest" @click="gotest()">START</div>
+            <p v-if="!name" style="color:white" class="mt-2">받는 사람 이름을 입력해 주세요.</p>
     </div>
 </template>
 
 <script>
 export default {
+     name: "DearTestMain",
+
+    data() {
+      return {
+          name:'',
+
+      }
+
+    },
+    methods: {
+        gotest(){
+            if (this.name != ''){
+
+                this.$router.push({name: "DearTestQnA", query : {name: this.name}});
+            }
+           
+
+        }
+    }
 
 }
 </script>
@@ -61,10 +89,31 @@ img{
     height:10vh;
 
 }
+.name{
+     z-index: 100;
+    position: absolute;
+    top: 68%;
+    right: 40%;
+    height:8vh;
+    padding:1vw;
+    width: 20%;
+    border-radius: 20px;
+    border: 0.7px solid $sub-light-color;
+ 
+    background: $dark-color;
+    font-family:$kor-font-family;
+    font-size:$body-font-size;
+
+}
+input::placeholder {
+  color: $sub-light-color;
+  font-style: italic;
+}
+
 .gotest{
 
     position: absolute;
-    top: 65%;
+    top: 78%;
 
     font-family:$eng-font-family;
     font-size:$subtitle-font-size;
@@ -84,6 +133,12 @@ img{
 }
 .gotest a{
     color:white;
+}
+p{ 
+    position: absolute;
+    top: 77%;
+    right:42%;
+
 }
 
 </style>

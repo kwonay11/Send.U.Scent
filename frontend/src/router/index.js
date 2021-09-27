@@ -11,8 +11,10 @@ import RecDetail from "../views/Recommend/RecDetail.vue";
 
 import MyTestMain from "../views/Recommend/ForTest/MyTestMain.vue";
 import DearTestMain from "../views/Recommend/ForTest/DearTestMain.vue";
-import TestQnA from "../views/Recommend/ForTest/TestQnA.vue";
-import TestResult from "../views/Recommend/ForTest/TestResult.vue";
+import MyTestQnA from "../views/Recommend/ForTest/MyTestQnA.vue";
+import DearTestQnA from "../views/Recommend/ForTest/DearTestQnA.vue";
+import MyTestResult from "../views/Recommend/ForTest/MyTestResult.vue";
+import DearTestResult from "../views/Recommend/ForTest/DearTestResult.vue";
 // Community 메뉴
 import Notice from "../views/Community/Notice.vue";
 import QnA from "../views/Community/QnA.vue";
@@ -73,14 +75,24 @@ const routes = [
         component: DearTestMain,
       },
       {
-        path: "testQnA",
-        name: "TestQnA",
-        component: TestQnA,
+        path: "mytestQnA",
+        name: "MyTestQnA",
+        component: MyTestQnA,
       },
       {
-        path: "testResult",
-        name: "TestResult",
-        component: TestResult,
+        path: "deartestQnA",
+        name: "DearTestQnA",
+        component: DearTestQnA,
+      },
+      {
+        path: "mytestResult",
+        name: "MyTestResult",
+        component: MyTestResult,
+      },
+      {
+        path: "deartestResult",
+        name: "DearTestResult",
+        component: DearTestResult,
       },
     ],
   },

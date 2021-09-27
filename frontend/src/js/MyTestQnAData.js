@@ -36,6 +36,7 @@ const qnaList = [
             { answer: '상큼한 과일을 베어 문', type: 'citrus' },
             { answer: '숲 속에 서 있는', type: 'woody' },
             { answer: '사탕을 한 입 가득', type: 'sweet' },
+            { answer: '바닷가처럼 시원한', type: ' aquatic' },
 
         ]
     },
@@ -44,6 +45,13 @@ const qnaList = [
         a: [
             { answer: '인기 많은 것엔 다 이유가 있는 법.', type: 'rating_score>4'},
             { answer: '독특한게 좋아.', type: 'rating_score<4' },
+        ]
+    }, // rating_score컬럼 4이상인것
+    {
+        q: '7. 지속성에 대한 나의 중요도는?',
+        a: [
+            { answer: '지속성이 긴게 좋지.', type: 'longevity>4'},
+            { answer: '지속성 약한게 좋아.', type: 'longevity<4' },
         ]
     }, // rating_score컬럼 4이상인것
 ];
