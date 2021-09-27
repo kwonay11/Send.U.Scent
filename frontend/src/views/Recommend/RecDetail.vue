@@ -1,7 +1,7 @@
 // 상세보기 페이지
 <template>
   <div id="RecDetailRoot">
-    <div class="content-box">
+    <div v-if="perfumeInfo" class="content-box">
 
       <div class="per-title">{{ perfumeInfo.title }}</div>
 
@@ -16,7 +16,7 @@
         </div>
         <div class="prod-content-desc">
           <div class="per-brand">{{ perfumeInfo.brand }}</div>
-          <div class="per-gender">PREFER | {{ perfumeInfo.gender.toUpperCase() }}</div>
+          <div class="per-gender">PREFER | {{ perfumeInfo.gender }}</div>
           
           <div class="per-note-div">
             <h3>탑 노트&nbsp;&nbsp;<span>5-10 MIN</span></h3>
@@ -70,7 +70,7 @@
           " {{ perfumeInfo.accords }} "
         </div>
         <ul>
-          <li class="accord-img" v-for="(accord, idx) in this.accordList" :key="`a-${idx}`">
+          <li class="accord-img" v-for="(accord, idx) in this.perfumeInfo.accord_list" :key="`a-${idx}`">
             <SAccord :accord="accord" />
           </li>
         </ul>
@@ -81,7 +81,7 @@
           <strong>Top Notes</strong>
         </div>
         <ul>
-          <li class="note-img" v-for="(note, idx) in perfumeInfo.top" :key="`t-img-${idx}`">
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.top_list" :key="`t-img-${idx}`">
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -91,7 +91,7 @@
           <strong>Middle Notes</strong>
         </div>
         <ul>
-          <li class="note-img" v-for="(note, idx) in perfumeInfo.middle" :key="`m-img-${idx}`">
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.middle_list" :key="`m-img-${idx}`">
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -101,7 +101,7 @@
           <strong>Base Notes</strong>
         </div>
         <ul>
-          <li class="note-img" v-for="(note, idx) in perfumeInfo.base" :key="`b-img-${idx}`">
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.base_list" :key="`b-img-${idx}`">
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -128,6 +128,9 @@ import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
 
+import axios from 'axios'
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
+
 export default {
   name: "RecDetail",
   components: {
@@ -137,84 +140,67 @@ export default {
   },
   data() {
     return {
-      // 일단 하드코딩
-      perfumeInfo: {
-        // perfume_id: this.$route.params.id,
-        perfume_id: 11588,
-        title: "Miss Dior Cherie Eau de Parfum",
-        brand: "Christian Dior",
-        accords: "fruity,patchouli,woody,earthy,sweet,citrus",
-        gender: "women,men",
-        longevity: 4,
-        sillage: 2,
-        daynight:	1,
-        top: "strawberry",
-        middle: "jasmine,rose",
-        base: "vetiver,sandalwood,patchouli,oak moss,amber",
-        rating_score: 4.3,
-        winter: 22,
-        spring: 84,
-        summer: 48,
-        autumn: 27,
-      },
+      perfumeInfo: {},
       iconList: [
         {
           id: "longevity",
           color: "#fa9d81",
-          // number: this.perfumeInfo.longevity,
-          number: 80,
+          number: null,
         },
         {
           id: "sillage",
           color: "#f28e85",
-          // number: this.perfumeInfo.sillage,
-          number: 50,
+          number: null,
         },
         {
           id: "winter",
           color: "#78D6F0",
-          // number: this.perfumeInfo.winter,
-          number: 22,
+          number: null,
         },
         {
           id: "spring",
           color: "#9FE584",
-          // number: this.perfumeInfo.spring,
-          number: 84,
+          number: null,
         },
         {
           id: "summer",
           color: "#FFF574",
-          // number: this.perfumeInfo.summer,
-          number: 48,
+          number: null,
         },
         {
           id: "autumn",
           color: "#F9BE6E",
-          // number: this.perfumeInfo.autumn,
-          number: 27,
+          number: null,
         },
       ],
-      accordList: [],
     }
   },
-  // axios 데이터 바인딩+로그인 구분 전
   created() {
-    this.perfumeInfo.top = this.perfumeInfo.top.split(",");
-    this.perfumeInfo.middle = this.perfumeInfo.middle.split(",");
-    this.perfumeInfo.base = this.perfumeInfo.base.split(",");
-    this.perfumeInfo.longevity = this.perfumeInfo.longevity * 20
-    this.perfumeInfo.sillage = this.perfumeInfo.sillage * 25
-    const aList = this.perfumeInfo.accords.split(",")
-    for (let idx = 0; idx < 3; idx++) {
-      // if (aList.length < idx) break
-      this.accordList.push(aList[idx])
-    }
-    this.perfumeInfo.accords = aList.join(', ')
+    const perfume_id = this.$route.params.id
+    this.getPerfumeInfo(perfume_id)
+    .then((res) => {
+      this.perfumeInfo = res.data
+      this.iconList[0].number = res.data.longevity
+      this.iconList[1].number = res.data.sillage
+      this.iconList[2].number = res.data.winter
+      this.iconList[3].number = res.data.spring
+      this.iconList[4].number = res.data.summer
+      this.iconList[5].number = res.data.autumn
+    })
+    .catch((err) => {
+      this.$router.push({ name: 'Page404'})
+    })
   },
   methods: {
     goBack() {
       this.$router.push({ name: 'Perfume'})
+    },
+    getPerfumeInfo: async function (perfume_id) {
+      const url = DJANGO_URL + `/api/detail/${perfume_id}`
+      const res = await axios.get(url)
+      if (res.status === 200) {
+        return res
+      }
     },
   },
 }
@@ -281,7 +267,6 @@ export default {
 }
 .per-note-div ul span {
   font-weight: bold;
-  // color: $main-color;
   color: #528596;
 }
 .score {
@@ -297,7 +282,6 @@ export default {
   color: $main-color;
 }
 
-// --------------------------------
 .line {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -309,7 +293,6 @@ export default {
   display: inline-block;
 }
 
-// --------------------------------
 .d-desc {
   font-size: $bodytitle-font-size;
   color: $dark-color;
@@ -335,7 +318,6 @@ export default {
   display: inline-block;
 }
 
-// --------------------------------
 .center-btn {
   display: flex;
   justify-content: center;
