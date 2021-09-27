@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL } from "../util/config.js";
+import { API_BASE_URL } from "../utils/config.js";
 // axios 객체 생성
 
 export default axios.create({
