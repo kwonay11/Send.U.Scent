@@ -1,4 +1,4 @@
-package com.scent.list.model;
+package com.scent.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
