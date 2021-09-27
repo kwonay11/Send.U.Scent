@@ -6,9 +6,24 @@
         <div class="title">Send you your Scent</div>
         <div class="subtitle">000님에게 어울리는 향수는,</div>
         <div class="wordcloud"> 워드클라우드 이미지 자리</div>
+        <div class="dec"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
-            {{perfume_id}}
-            {{title}}
+   
+            <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
+                <router-link to="`/recommend/detail/${value}`">
+                <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                 <div class="perfume_title">{{title[idx]}}</div>
+                </router-link>
+            </div>
+        </div>
+        <div class="dec2"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
+        <div class="perfume2">
+            <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
+                    <router-link :to="`/recommend/detail/${value}`">
+                    <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                    <p class="perfume_title">{{title2[idx]}}</p>
+                    </router-link>
+                </div>
         </div>
     
     </div>
@@ -24,8 +39,10 @@ export default {
     data() {
         return{ 
             perfume_id : [],
-            title : []
-        
+            title : [],
+            perfume_id2 : [],
+            title2 : [],
+           
 
         }
     },
@@ -38,7 +55,11 @@ export default {
             console.log(res.data.perfume_id)
             this.perfume_id = res.data.perfume_id
             this.title = res.data.title
-            console.log(res.data.title)
+            this.perfume_id2 = res.data.perfume_id2
+            this.title2 = res.data.title2
+            // this.items = res.data
+
+            console.log(res.data)
             console.log("데이터 받아옴")
         })
         .catch(()=>{
@@ -56,15 +77,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
-*{
-    font-family:$kor-font-family;
-    font-size:$body-font-size;
-}
 #TestResultRoot{
     background-color: $sub-color;
     background-size: 100%;
     width: 100%;
-    height: 100vh;
+    height: 250vh;
 }
 .box{
   background-color: white;
@@ -86,7 +103,7 @@ export default {
     font-family:$eng-font-family;
     font-size:$title-font-size;
     position: absolute;
-    top: 13%;
+    top: 7%;
     width: 100%;
     font-weight: bold;
 
@@ -94,7 +111,7 @@ export default {
 .subtitle{
     
     position: absolute;
-    top: 21%;
+    top: 13%;
     width: 100%;
     color:black;
     font-family:$kor-font-family;
@@ -112,9 +129,82 @@ export default {
     color:black;
 
 }
-.perfume{
+.dec{
+    font-family:$kor-font-family;
+    font-size:$bodytitle-font-size;
     position: absolute;
-     top: 50%;
-     color:black;
+    top: 52%;
+    width: 100%;
+    color:black;
+    font-weight: bold;
+    
+
 }
+.dec2{
+    font-family:$kor-font-family;
+    font-size:$bodytitle-font-size;
+    position: absolute;
+    top: 75%;
+    width: 100%;
+    color:black;
+    font-weight: bold;
+    
+
+}
+.perfume{
+     display: flex;
+    position: relative;
+     top: 60%;
+     width: 100%;
+     height:10vh;
+     padding-left: 6vw;
+    margin-left:1vw;
+    margin-right:0.5vw;
+
+    
+    
+}
+.perfume2{
+    display: flex;
+    position: relative;
+     top: 79%;
+     width: 100%;
+     height:10vh;
+     padding-left: 6vw;
+    //  float: left;
+    margin-left:1vw;
+    margin-right:0.5vw;
+    
+
+    
+    
+}
+.img{
+    // position: relative;
+    width: 54%;
+    float: left;
+    margin-left:0.5vw;
+    margin-right:0.5vw;
+    display:block;
+    margin-bottom:1vh ;
+    
+}
+
+.perfume_title{
+    // display: flex;
+    // position: absolute;
+    // float:left;
+    // left:-10vw;
+     width:59%;
+    color:black;
+    font-family:$eng-font-family;
+    font-size:$detail-font-size;
+ 
+    display:block;
+   
+    
+
+    
+}
+
 </style>

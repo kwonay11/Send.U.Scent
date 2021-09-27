@@ -33,18 +33,27 @@ def tests_result(request):
         connection.rollback(): 쿼리문 실행 도중 잘못된 경우 실행 전으로 되돌려 놓음
         '''
         cursor = connection.cursor()
+        cursor2 = connection.cursor()
         # string으로 붙여줘야 sql 명령어에 입력이 됨 바로는 안됨
         queryString = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where " +res[1]+" and "+res[3]+" and accords like '%"+res[2]+"%' order by "+res[0]+" desc limit 5"
+        queryString2 = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where accords like '%"+res[2]+"%' order by "+res[0]+" desc limit 5"
 
         strSql = queryString
+        strSql2 = queryString2
         cursor.execute(strSql)
+        cursor2.execute(strSql2)
         perfumes = cursor.fetchall()
+        perfumes2 = cursor2.fetchall()
         # print(perfumes)
     
         global context
         context = {
             'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
-            'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]]
+            'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
+            'perfume_id2' : [perfumes2[0][0],perfumes2[1][0],perfumes2[2][0],perfumes2[3][0],perfumes2[4][0]],
+            'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
+
+            
 
             # 'perfume_id0' : perfumes[0][0],
             # 'title0' : perfumes[0][1],
