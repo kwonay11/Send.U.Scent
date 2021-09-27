@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Perfume
+from .models import PerfumeResult
 class TestResultSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Perfume
+        model = PerfumeResult
         fields = '__all__'

@@ -85,13 +85,13 @@ export default {
             // 마지막 문항이면 결과로 넘기기
             if(this.step == 5){
               console.log("결과창으로 넘기기")
-               this.$router.push({name: "TestResult", query : {resid: this.contents.resultString}});
                //백엔드에 this.resultString를 axios.push로 보내기
               //  axios.post(`${DJANGO_URL}/tests/result/`,this.resultString)
 
                axios.post(`${DJANGO_URL}/tests/result/`,this.contents)
                .then(()=>{ 
                  console.log("백엔드에 보내기 성공")
+                 this.$router.push({name: "TestResult"});
                })
                .catch(()=>{
                  console.log("엑시오스 실패")

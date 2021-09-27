@@ -4,11 +4,11 @@
 
     <div class="box">
         <div class="title">Send you your Scent</div>
-        <h1 class="res"> 결과 : {{ $route.query.resid }}</h1>
         <div class="subtitle">000님에게 어울리는 향수는,</div>
         <div class="wordcloud"> 워드클라우드 이미지 자리</div>
-        <div>
-            
+        <div class="perfume">
+            {{perfume_id}}
+            {{title}}
         </div>
     
     </div>
@@ -17,11 +17,14 @@
 </template>
 
 <script>
-
+import axios from "axios"
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
     data() {
         return{ 
+            perfume_id : [],
+            title : []
         
 
         }
@@ -29,7 +32,23 @@ export default {
     methods:{
        
         },
-    }
+    created(){
+        axios.get(`${DJANGO_URL}/tests/getresult/`)
+        .then((res)=>{
+            console.log(res.data.perfume_id)
+            this.perfume_id = res.data.perfume_id
+            this.title = res.data.title
+            console.log(res.data.title)
+            console.log("데이터 받아옴")
+        })
+        .catch(()=>{
+            console.log("데이터 못받음")
+
+        })
+
+
+    },
+}
 
 
 </script>
@@ -92,5 +111,10 @@ export default {
     width: 100%;
     color:black;
 
+}
+.perfume{
+    position: absolute;
+     top: 50%;
+     color:black;
 }
 </style>
