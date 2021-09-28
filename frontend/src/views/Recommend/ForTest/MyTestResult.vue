@@ -21,16 +21,16 @@
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                    <p class="perfume_title">{{title2[idx]}}</p>
+                    </router-link>
                     <button @click="modal()">
                         <img src="@/assets/icons/heart-off-btn.png" alt="hert-off">
                     </button>
-                    <p class="perfume_title">{{title2[idx]}}</p>
-                    </router-link>
                 </div>
         </div>
     
     </div>
-
+    <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
     </div>
 </template>
 
@@ -45,13 +45,25 @@ export default {
             title : [],
             perfume_id2 : [],
             title2 : [],
+
+            setModal: false,    
+            selectedProd: {
+                id: Number,
+                name: String,
+            },
            
 
         }
     },
     methods:{
-        modal(){
-            
+         addHave(id, name) {
+            // alert(id + "번 향수 리뷰");
+            this.setModal = true;
+            this.selectedProd.id = id;
+            this.selectedProd.name = name;
+        },
+        closeModal() {
+            this.setModal = false;
         }
        
         },

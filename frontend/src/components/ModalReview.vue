@@ -109,10 +109,7 @@ export default {
 .black-bg {
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
-=======
   min-height: 1300px;
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   position: relative;
   top: 0;
   left: 0;
@@ -123,11 +120,7 @@ export default {
   width: 600px;
   height: 300px;
   position: relative;
-<<<<<<< HEAD
-  top: 50%;
-=======
   top: 40%;
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
