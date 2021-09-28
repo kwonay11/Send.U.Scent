@@ -1,19 +1,11 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
-    <Nav />
-=======
     <Nav v-if="$route.name !== 'Page404'"/>
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
    
   
 
     <router-view />
-<<<<<<< HEAD
-    <Footer/>
-=======
     <Footer v-if="$route.name !== 'Page404'"/>
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 
   </div>
 </template>

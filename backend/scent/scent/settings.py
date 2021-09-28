@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #django-cors
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+#모든 Origin 허용
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'scent.urls'
 

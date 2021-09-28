@@ -54,8 +54,4 @@ def detail(request, perfume_id):
 
 
 def review(request, perfume_id):
-<<<<<<< HEAD
     pass
-=======
-    pass
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630

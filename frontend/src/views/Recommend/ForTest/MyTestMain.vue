@@ -7,7 +7,7 @@
             <div class="title">Test For You</div>
             <div class="subtitle">당신의 성향에 맞는 향수를 추천해드립니다.<br>
             취향 테스트로 #나만의 시그니처 향기 찾기</div>
-            <div class="gotest"><router-link to="/recommend/testQnA">START</router-link></div>
+            <div class="gotest"><router-link to="/recommend/mytestQnA">START</router-link></div>
     </div>
 </template>
 
