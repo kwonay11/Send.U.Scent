@@ -21,6 +21,9 @@
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                    <button @click="modal()">
+                        <img src="@/assets/icons/heart-off-btn.png" alt="hert-off">
+                    </button>
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
                 </div>
@@ -47,6 +50,9 @@ export default {
         }
     },
     methods:{
+        modal(){
+            
+        }
        
         },
     created(){

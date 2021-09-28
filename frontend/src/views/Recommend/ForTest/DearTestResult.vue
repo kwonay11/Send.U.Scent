@@ -10,8 +10,11 @@
         <div class="perfume">
    
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
-                <router-link to="`/recommend/detail/${value}`">
+                <router-link :to="`/recommend/detail/${value}`">
                 <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                <button>
+                    <img src="@/assets/icons/heart-off-btn.png" alt="hert-off">
+                </button>
                  <div class="perfume_title">{{title[idx]}}</div>
                 </router-link>
             </div>
