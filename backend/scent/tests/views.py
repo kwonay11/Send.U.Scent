@@ -20,7 +20,8 @@ def tests_result(request):
     # # res[0] : season_gender_age
     # # res[1] : daynight
     # # res[2] : accords
-    # # res[3] : rating_score 컬럼 이용해야함
+    # # res[3] : rating_score
+    # # res[4] : longevity 컬럼 이용해야함
     
     try:
         '''
@@ -35,7 +36,7 @@ def tests_result(request):
         cursor = connection.cursor()
         cursor2 = connection.cursor()
         # string으로 붙여줘야 sql 명령어에 입력이 됨 바로는 안됨
-        queryString = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where " +res[1]+" and "+res[3]+" and accords like '%"+res[2]+"%' order by "+res[0]+" desc limit 5"
+        queryString = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where " +res[1]+" and "+res[3]+" and accords like '%"+res[2]+"%' and " +res[4]+" order by "+res[0]+" desc limit 5"
         queryString2 = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where accords like '%"+res[2]+"%' order by "+res[0]+" desc limit 5"
 
         strSql = queryString
