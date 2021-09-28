@@ -2,9 +2,13 @@
 <template>
   <div id="SimplAccordRoot">
     <div class="accord-img">
+<<<<<<< HEAD
       <!-- 일단 이미지 주소 하드코딩 -->
       <img src="@/assets/test/woody.png" alt="accord-image">
       <!-- <img :src="require(`@/assets/test/${this.accord}.png`)" :alt="`${this.accord}-image`"> -->
+=======
+      <img :src="require(`@/assets/accords/${this.accord}.jpg`)" :alt="`${this.accord}-image`">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
     </div>
   </div>
 </template>

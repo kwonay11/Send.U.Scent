@@ -1,7 +1,11 @@
 // 상세보기 페이지
 <template>
   <div id="RecDetailRoot">
+<<<<<<< HEAD
     <div class="content-box">
+=======
+    <div v-if="perfumeInfo" class="content-box">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 
       <div class="per-title">{{ perfumeInfo.title }}</div>
 
@@ -16,7 +20,11 @@
         </div>
         <div class="prod-content-desc">
           <div class="per-brand">{{ perfumeInfo.brand }}</div>
+<<<<<<< HEAD
           <div class="per-gender">PREFER | {{ perfumeInfo.gender.toUpperCase() }}</div>
+=======
+          <div class="per-gender">PREFER | {{ perfumeInfo.gender }}</div>
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
           
           <div class="per-note-div">
             <h3>탑 노트&nbsp;&nbsp;<span>5-10 MIN</span></h3>
@@ -70,7 +78,11 @@
           " {{ perfumeInfo.accords }} "
         </div>
         <ul>
+<<<<<<< HEAD
           <li class="accord-img" v-for="(accord, idx) in this.accordList" :key="`a-${idx}`">
+=======
+          <li class="accord-img" v-for="(accord, idx) in this.perfumeInfo.accord_list" :key="`a-${idx}`">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
             <SAccord :accord="accord" />
           </li>
         </ul>
@@ -81,7 +93,11 @@
           <strong>Top Notes</strong>
         </div>
         <ul>
+<<<<<<< HEAD
           <li class="note-img" v-for="(note, idx) in perfumeInfo.top" :key="`t-img-${idx}`">
+=======
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.top_list" :key="`t-img-${idx}`">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -91,7 +107,11 @@
           <strong>Middle Notes</strong>
         </div>
         <ul>
+<<<<<<< HEAD
           <li class="note-img" v-for="(note, idx) in perfumeInfo.middle" :key="`m-img-${idx}`">
+=======
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.middle_list" :key="`m-img-${idx}`">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -101,7 +121,11 @@
           <strong>Base Notes</strong>
         </div>
         <ul>
+<<<<<<< HEAD
           <li class="note-img" v-for="(note, idx) in perfumeInfo.base" :key="`b-img-${idx}`">
+=======
+          <li class="note-img" v-for="(note, idx) in perfumeInfo.base_list" :key="`b-img-${idx}`">
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
             <SNote :note="note" />{{note}}
           </li>
         </ul>
@@ -127,6 +151,12 @@
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
+<<<<<<< HEAD
+=======
+
+import axios from 'axios'
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 
 export default {
   name: "RecDetail",
@@ -137,6 +167,7 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       // 일단 하드코딩
       perfumeInfo: {
         // perfume_id: this.$route.params.id,
@@ -157,40 +188,64 @@ export default {
         summer: 48,
         autumn: 27,
       },
+=======
+      perfumeInfo: {},
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
       iconList: [
         {
           id: "longevity",
           color: "#fa9d81",
+<<<<<<< HEAD
           // number: this.perfumeInfo.longevity,
           number: 80,
+=======
+          number: null,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
         },
         {
           id: "sillage",
           color: "#f28e85",
+<<<<<<< HEAD
           // number: this.perfumeInfo.sillage,
           number: 50,
+=======
+          number: null,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
         },
         {
           id: "winter",
           color: "#78D6F0",
+<<<<<<< HEAD
           // number: this.perfumeInfo.winter,
           number: 22,
+=======
+          number: null,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
         },
         {
           id: "spring",
           color: "#9FE584",
+<<<<<<< HEAD
           // number: this.perfumeInfo.spring,
           number: 84,
+=======
+          number: null,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
         },
         {
           id: "summer",
           color: "#FFF574",
+<<<<<<< HEAD
           // number: this.perfumeInfo.summer,
           number: 48,
+=======
+          number: null,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
         },
         {
           id: "autumn",
           color: "#F9BE6E",
+<<<<<<< HEAD
           // number: this.perfumeInfo.autumn,
           number: 27,
         },
@@ -211,11 +266,52 @@ export default {
       this.accordList.push(aList[idx])
     }
     this.perfumeInfo.accords = aList.join(', ')
+=======
+          number: null,
+        },
+        {
+          id: "day",
+          color: "#FFD454",
+          number: 82,
+        },
+      ],
+    }
+  },
+  created() {
+    const perfume_id = this.$route.params.id
+    this.getPerfumeInfo(perfume_id)
+    .then((res) => {
+      this.perfumeInfo = res.data
+      this.iconList[0].number = res.data.longevity
+      this.iconList[1].number = res.data.sillage
+      this.iconList[2].number = res.data.winter
+      this.iconList[3].number = res.data.spring
+      this.iconList[4].number = res.data.summer
+      this.iconList[5].number = res.data.autumn
+      if (res.data.daynight === 2) {
+        this.iconList[6].id = "night"
+        this.iconList[6].color = "#43508C"
+      }
+    })
+    .catch((err) => {
+      this.$router.push({ name: 'Page404'})
+    })
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   },
   methods: {
     goBack() {
       this.$router.push({ name: 'Perfume'})
     },
+<<<<<<< HEAD
+=======
+    getPerfumeInfo: async function (perfume_id) {
+      const url = DJANGO_URL + `/api/detail/${perfume_id}`
+      const res = await axios.get(url)
+      if (res.status === 200) {
+        return res
+      }
+    },
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   },
 }
 </script>
@@ -281,7 +377,10 @@ export default {
 }
 .per-note-div ul span {
   font-weight: bold;
+<<<<<<< HEAD
   // color: $main-color;
+=======
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   color: #528596;
 }
 .score {
@@ -297,7 +396,10 @@ export default {
   color: $main-color;
 }
 
+<<<<<<< HEAD
 // --------------------------------
+=======
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 .line {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -309,14 +411,21 @@ export default {
   display: inline-block;
 }
 
+<<<<<<< HEAD
 // --------------------------------
+=======
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 .d-desc {
   font-size: $bodytitle-font-size;
   color: $dark-color;
   margin: 110px 0;
 }
 .d-content {
+<<<<<<< HEAD
   margin: 50px 0;
+=======
+  margin: 60px 0;
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 }
 .d-title {
   font-family: NanumGothic;
@@ -335,7 +444,10 @@ export default {
   display: inline-block;
 }
 
+<<<<<<< HEAD
 // --------------------------------
+=======
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 .center-btn {
   display: flex;
   justify-content: center;
