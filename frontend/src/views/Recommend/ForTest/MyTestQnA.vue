@@ -9,6 +9,7 @@
           <div v-if="step === 3" class="step3"></div>
           <div v-if="step === 4" class="step4"></div>
           <div v-if="step === 5" class="step5"></div>
+          <div v-if="step === 6" class="step6"></div>
           
   
         </div>
@@ -42,56 +43,25 @@
 </template>
 
 <script>
-import data from '@/js/TestQnAData.js'
+import axios from "axios"
+const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
+import data from '@/js/MyTestQnAData.js'
 export default {
-    name: "TestQnA",
+    name: "MyTestQnA",
 
     data() {
       return {
           list: data.qnaList,
-          endPoint : 6,
           step: 0,
           idx: 0,
           select:0,
-          resultString: '',
-<<<<<<< HEAD
-
-      }
-    },
-    methods: {
-      //다음 질문 항목
-        goNext(){
-            this.step++;
-        },
-        //마지막 문항인지 체크
-        checkAns(type){
-          console.log("타입",type)
-          // console.log("질문 번호",this.idx)
-          this.resultString += type
-          console.log("결과 스트링",this.resultString)
-            
-            // 마지막 문항이면 결과로 넘기기
-            if(this.step == 5){
-              console.log("결과창으로 넘기기")
-              // this.goResult(this.resultString);
-               this.$router.push({name: "TestResult", query : {resid: this.resultString}});
-              
-            }else{
-              this.goNext();//인덱스 증가
-            }
-        },
-        goResult:function(res){
-          console.log("결과~", res)
-          // this.emit('select-result',this.res)
-          this.$router.push({name: "TestResult", params : {resid: this.res }});
-
-        }
-    }
-=======
           // resultString: [],
+          contents:{
+            resultString: '',
+
+          }
 
       }
->>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 
     },
     methods: {
@@ -103,20 +73,29 @@ export default {
         checkAns(type){
           console.log("타입",type)
           // console.log("질문 번호",this.idx)
-          this.resultString += type
+          this.contents.resultString += type
           
           // splite기준
-          if (this.step ==2 || this.step == 3 || this.step == 4){
-                this.resultString += "/"
+          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5){
+                this.contents.resultString += "/"
               }
           // this.resultString.push(type)
-          console.log("결과 스트링",this.resultString)
+          console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기
-            if(this.step == 5){
+            if(this.step == 6){
               console.log("결과창으로 넘기기")
-               this.$router.push({name: "TestResult", query : {resid: this.resultString}});
                //백엔드에 this.resultString를 axios.push로 보내기
+              //  axios.post(`${DJANGO_URL}/tests/result/`,this.resultString)
+
+               axios.post(`${DJANGO_URL}/tests/result/`,this.contents)
+               .then(()=>{ 
+                 console.log("백엔드에 보내기 성공")
+                 this.$router.push({name: "MyTestResult"});
+               })
+               .catch(()=>{
+                 console.log("엑시오스 실패")
+               })
             }else{
               this.goNext();//인덱스 증가
             }
@@ -138,7 +117,7 @@ export default {
     background-color: $sub-color;
     background-size: 100%;
     width: 100%;
-    height: 100vh;
+    height: 130vh;
 }
 .box{
   background-color: white;
@@ -165,7 +144,7 @@ export default {
 }
 .statusbar .step0{
   z-index: 13;
-  width: 16.6%;
+  width: 14.3%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -180,7 +159,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step1{
   z-index: 13;
-  width: 33.2%;
+  width: 28.5%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -195,7 +174,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step2{
   z-index: 13;
-  width: 49.8%;
+  width: 42.8%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -210,7 +189,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step3{
   z-index: 13;
-  width: 66.4%;
+  width: 57.1%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -225,7 +204,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step4{
   z-index: 13;
-  width: 83%;
+  width: 71.4%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -239,6 +218,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 
 }
 .statusbar .step5{
+  z-index: 13;
+  width: 85.7%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step6{
   z-index: 13;
   width: 101.5%;
   left:-0.5vw;
