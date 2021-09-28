@@ -18,9 +18,13 @@ export default {
 }
 #MypageRoot {
   width: 100%;
+<<<<<<< HEAD
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+=======
+  min-height: 1300px;
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 }
 </style>

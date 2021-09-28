@@ -13,6 +13,10 @@
         </ul>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+    <go-top />
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
     <review-modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
   </div>
 </template>
@@ -21,12 +25,20 @@
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import ReviewModal from '../../components/ModalReview.vue';
+<<<<<<< HEAD
+=======
+import GoTop from '../../components/GoTop.vue';
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
 export default {
   name: "HaveList",
   components: {
     PageTitle,
     Prod,
     ReviewModal,
+<<<<<<< HEAD
+=======
+    GoTop,
+>>>>>>> 2a546c36ee003f59f973552ecb92e95f8beb9630
   },
   methods: {
     writeReview(id, name) {
