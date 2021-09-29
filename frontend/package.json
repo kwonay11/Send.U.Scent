@@ -16,9 +16,13 @@
     "node-sass": "^6.0.1",
     "password-validator": "^5.1.1",
     "slither-slider": "^2.11.0",
+    "sweetalert": "^2.1.2",
     "vue": "^3.0.0",
+    "vue-d3-cloud": "^0.2.0",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^4.0.0-0",
+    "vue-wordcloud": "^1.1.1",
+    "vuewordcloud": "^18.7.12",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

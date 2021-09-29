@@ -5,7 +5,18 @@
     <div class="box">
         <div class="title">Send you your Scent</div>
         <div class="subtitle">000님에게 어울리는 향수는,</div>
-        <div class="wordcloud"> 워드클라우드 이미지 자리</div>
+        <div class="wordcloud">
+            <vue-word-cloud :words="words">
+                <vue-word-cloud
+  :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
+  :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+  font-family="Roboto"
+/>
+</vue-word-cloud>
+        </div>
+
+   
+   
         <div class="dec"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
    
@@ -21,38 +32,110 @@
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
-                    <button @click="modal()">
-                        <img src="@/assets/icons/heart-off-btn.png" alt="hert-off">
-                    </button>
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
+                    <div @click="modal()">
+                        <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
+                        <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
+                    </div>
+                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                 </div>
+          
         </div>
-    
+     </div>
     </div>
 
-    </div>
+    
 </template>
 
+
 <script>
+import VueWordCloud from 'vuewordcloud';
+
 import axios from "axios"
+import ModalLike from '@/components/ModalLike.vue';
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
+    components: {
+        ModalLike,
+        [VueWordCloud.name]: VueWordCloud,
+
+     
+    },
     data() {
         return{ 
             perfume_id : [],
             title : [],
             perfume_id2 : [],
             title2 : [],
+            
+            setModal: false,
+            selectedProd: {
+                id: Number,
+                name: String,
+            },
+
+          
            
 
         }
     },
+    mounted() {
+    this.genLayout();
+  },
     methods:{
-        modal(){
+        
+        addHave(id, name) {
+            this.setModal = true;
+            this.selectedProd.id = id;
             
-        }
+        },
+        closeModal() {
+            this.setModal = false;
+        },
+        modal(){
+            this.setModal = true;
+        },
+         genLayout() {
+      const cloud = require('d3-cloud');
+      cloud()
+        .words(this.words)
+        .padding(1)
+        .font('Impact')
+        .fontSize(function (d) {
+          return d.size;
+        })
+        .on('end', this.end)
+        .spiral('archimedean')
+        .start()
+        .stop();
+    },
+    end(words) {
+      const d3 = require('d3');
+      const width = 300;
+      const height = 300;
+      d3.select('#word-cloud')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .style('background', 'white')
+        .append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')') // g를 중심에서 단어들을 그리기 때문에 g를 svg 중심으로 이동
+        .selectAll('text')
+        .data(words)
+        .enter()
+        .append('text')
+        .style('font-size', (d) => {
+          return d.size + 'px';
+        })
+        .style('font-family', 'Impact')
+        .attr('text-anchor', 'middle')
+        .attr('transform', (d) => {
+          return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')';
+        })
+        .text((d) => d.text);
+    },
        
         },
     created(){
