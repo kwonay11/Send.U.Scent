@@ -5,7 +5,29 @@
     <div class="box">
         <div class="title">Send you your Scent</div>
         <div class="subtitle">000님에게 어울리는 향수는,</div>
-        <div class="wordcloud"> 워드클라우드 이미지 자리</div>
+        <div class="wordcloud">
+            <!-- <vue-word-cloud :words="words">
+                <vue-word-cloud
+                :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
+                :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+                font-family="Roboto"
+                />
+            </vue-word-cloud> -->
+
+            <wordcloud
+            :data="defaultWords"
+            nameKey="name"
+            valueKey="value"
+            :color="myColors"
+            :showTooltip="true"
+            :wordClick="wordClickHandler">
+            </wordcloud>
+
+            
+        </div>
+
+   
+   
         <div class="dec"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
    
@@ -23,48 +45,149 @@
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
-                    <button @click="modal()">
-                        <img src="@/assets/icons/heart-off-btn.png" alt="hert-off">
-                    </button>
+                    <div @click="modal()">
+                        <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
+                        <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
+                    </div>
+                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                 </div>
+          
         </div>
+     </div>
+    </div>
+
     
-    </div>
-    <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
-    </div>
 </template>
 
+
 <script>
+import VueWordCloud from 'vuewordcloud';
+import wordcloud from 'vue-wordcloud'
 import axios from "axios"
+import ModalLike from '@/components/ModalLike.vue';
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
+    components: {
+        ModalLike,
+        [VueWordCloud.name]: VueWordCloud,
+
+     
+    },
     data() {
         return{ 
             perfume_id : [],
             title : [],
             perfume_id2 : [],
             title2 : [],
-
-            setModal: false,    
+            
+            setModal: false,
             selectedProd: {
                 id: Number,
                 name: String,
             },
+            myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
+      defaultWords: [{
+          "name": "Cat",
+          "value": 26
+        },
+        {
+          "name": "fish",
+          "value": 19
+        },
+        {
+          "name": "things",
+          "value": 18
+        },
+        {
+          "name": "look",
+          "value": 16
+        },
+        {
+          "name": "two",
+          "value": 15
+        },
+        {
+          "name": "fun",
+          "value": 9
+        },
+        {
+          "name": "know",
+          "value": 9
+        },
+        {
+          "name": "good",
+          "value": 9
+        },
+        {
+          "name": "play",
+          "value": 6
+        }
+      ]
+
+          
            
 
         }
     },
+    mounted() {
+    // this.genLayout();
+  },
     methods:{
-         addHave(id, name) {
-            // alert(id + "번 향수 리뷰");
+        wordClickHandler(name, value, vm) {
+      console.log('wordClickHandler', name, value, vm);
+    },
+        
+        addHave(id, name) {
             this.setModal = true;
             this.selectedProd.id = id;
-            this.selectedProd.name = name;
+            
         },
         closeModal() {
             this.setModal = false;
-        }
+        },
+        modal(){
+            this.setModal = true;
+        },
+         genLayout() {
+      const cloud = require('d3-cloud');
+      cloud()
+        .words(this.words)
+        .padding(1)
+        .font('Impact')
+        .fontSize(function (d) {
+          return d.size;
+        })
+        .on('end', this.end)
+        .spiral('archimedean')
+        .start()
+        .stop();
+    },
+    end(words) {
+      const d3 = require('d3');
+      const width = 300;
+      const height = 300;
+      d3.select('#word-cloud')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .style('background', 'white')
+        .append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')') // g를 중심에서 단어들을 그리기 때문에 g를 svg 중심으로 이동
+        .selectAll('text')
+        .data(words)
+        .enter()
+        .append('text')
+        .style('font-size', (d) => {
+          return d.size + 'px';
+        })
+        .style('font-family', 'Impact')
+        .attr('text-anchor', 'middle')
+        .attr('transform', (d) => {
+          return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')';
+        })
+        .text((d) => d.text);
+    },
        
         },
     created(){

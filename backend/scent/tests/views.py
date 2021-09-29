@@ -45,33 +45,28 @@ def tests_result(request):
         cursor2.execute(strSql2)
         perfumes = cursor.fetchall()
         perfumes2 = cursor2.fetchall()
-        # print(perfumes)
+        print(perfumes)
     
         global context
+        all_accords = []
+        for i in range(5):
+            all_accords.append(perfumes[i][3].split(','))
+            all_accords.append(perfumes2[i][3].split(','))
+        accord_dic = {}
+        for i in all_accords:
+            for j in range(len(i)):
+                if i[j] not in accord_dic:
+                    accord_dic[i[j]] = 1
+                else:
+                    accord_dic[i[j]] += 1
+        print(accord_dic)
         context = {
             'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
             'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
             'perfume_id2' : [perfumes2[0][0],perfumes2[1][0],perfumes2[2][0],perfumes2[3][0],perfumes2[4][0]],
             'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
-
+            'accords':  accord_dic,
             
-
-            # 'perfume_id0' : perfumes[0][0],
-            # 'title0' : perfumes[0][1],
-
-            # 'perfume_id1' : perfumes[1][0],
-            # 'title1' : perfumes[1][1],
-
-            # 'perfume_id2' : perfumes[2][0],
-            # 'title2' : perfumes[2][1],
-
-            # 'perfume_id3' : perfumes[3][0],
-            # 'title3' : perfumes[3][1],
-
-            # 'perfume_id4' : perfumes[4][0],
-            # 'title4' : perfumes[4][1],
-
-
         }
 
         connection.commit()
@@ -86,6 +81,9 @@ def tests_result(request):
 @api_view(['GET'])
 def get_result(request):
     if request.method == 'GET':
+
+        
+            
         return Response(context,status=status.HTTP_200_OK)
     # return HttpResponse(json.dumps(context), content_type = "application/json",status=status.HTTP_200_OK)
 
