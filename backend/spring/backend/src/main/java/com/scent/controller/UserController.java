@@ -48,6 +48,27 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@PostMapping("/login")
+	@ApiOperation(value = "로그인", notes = "user_id와 password 를 받아 로그인")
+	public Map<String, Object> login(@RequestBody User user) {
+		Map<String, Object> response = new HashMap<String, Object>();
+
+		try {
+			Optional<User> oUser = userService.login(user);
+			if (oUser.isPresent()) {
+				response.put("result", SUCCESS);
+				response.put("user", oUser.get());
+			} else {
+				response.put("result", FAIL);
+				response.put("reason", "일치하는 회원정보가 없습니다. 회원 id를 확인해주세요.");
+			}
+		} catch (Exception e) {
+			response.put("result", FAIL);
+			response.put("reason", e.getMessage());
+		}
+		return response;
+	}
+	
 	@PostMapping("/join")
 	@ApiOperation(value = "회원 가입", notes = "회원가입 JWT 토근 없음.")
 	public ResponseEntity<Map<String, Object>> insertUser(@RequestBody User user) {

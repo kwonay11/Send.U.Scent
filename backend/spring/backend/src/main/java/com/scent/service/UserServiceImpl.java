@@ -16,6 +16,15 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepo;
 	
+	@Override
+	public Optional<User> login(User user) {
+		Optional<User> oUser = userRepo.findById(user.getUser_id());
+		if(!oUser.isPresent() && user.getPassword() == oUser.get().getPassword()) {
+			return oUser;
+		}
+		return null;
+	}
+
 	@Override // 회원 가입
 	public int insertUser(User user) {
 		Optional<User> oUser = userRepo.findById(user.getUser_id());
