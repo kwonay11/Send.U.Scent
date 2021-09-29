@@ -15,7 +15,10 @@ import lombok.*;
 @DynamicUpdate // 변경된 필드만 적용
 public class User {
 	@Id // 기본키 설정
-	@Column(length = 20, updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(nullable = false, unique = true, updatable = true, length = 20)
 	private String user_id;
 
 	@Column(nullable = false, updatable = true, length = 30)

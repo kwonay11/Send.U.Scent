@@ -9,6 +9,5 @@ export default axios.create({
     'Access-Control-Allow-Origin' : '*',
     'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     "Access-Control-Allow-Headers": "Origin, Content-Type",
-    "access-token": localStorage.getItem("access-token")
   }
 });

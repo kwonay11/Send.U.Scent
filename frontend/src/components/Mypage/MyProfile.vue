@@ -51,12 +51,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "MyProfile",
+  computed: {
+    ...mapState(["userInfo"])
+  },
+  created() {
+    localStorage.setItem("user_id", "soso"),
+    this.getUser()
+  },
+  methods: {
+    getUser() {
+      this.user.id = localStorage.getItem("user_id")
+      this.$store.dispatch("getUserInfo", this.user.id)
+    },
+  },
   data() {
     return {
       user: {
-        id: "User_id",
+        id: "",
         accords : ["Accord1", "Accord2", "Accord3"],
         notes: ["#Note1","#Note2","#Note2","#Note4","#Note5",],
       }
