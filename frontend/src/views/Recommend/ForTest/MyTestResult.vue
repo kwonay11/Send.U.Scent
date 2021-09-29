@@ -6,13 +6,13 @@
         <div class="title">Send you your Scent</div>
         <div class="subtitle">000님에게 어울리는 향수는,</div>
         <div class="wordcloud">
-            <vue-word-cloud :words="words">
+            <!-- <vue-word-cloud :words="words">
                 <vue-word-cloud
-  :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
-  :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-  font-family="Roboto"
-/>
-</vue-word-cloud>
+                :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
+                :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+                font-family="Roboto"
+                />
+            </vue-word-cloud> -->
         </div>
 
    
@@ -82,7 +82,7 @@ export default {
         }
     },
     mounted() {
-    this.genLayout();
+    // this.genLayout();
   },
     methods:{
         

@@ -11,42 +11,51 @@
             </splide-slide>
            </div> -->
             <splide-slide>
-              <router-link :to="`/recommend/detail/5904`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.5904.jpg" alt="Test">
-                <p>Hesperide</p>
+              <router-link :to="`/recommend/detail/52110`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.52110.jpg" alt="Test">
+                <p>Mon Paris Gold Attraction Edition</p>
+              </router-link>
+            </splide-slide>
+       
+
+            <splide-slide>
+              <router-link :to="`/recommend/detail/56712`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.56712.jpg" alt="Test">
+                <p>Coronandel</p>
               </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/13793`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.13793.jpg" alt="Test">
-                <p>Lys d'Eau</p>
+              <router-link :to="`/recommend/detail/55758`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.55758.jpg" alt="Test">
+                <p>Velvet Rose & Oud Cologne Intense</p>
               </router-link>
             </splide-slide>
             <splide-slide>
-            <router-link :to="`/recommend/detail/31236`">
-              <img src="https://fimgs.net/mdimg/perfume/375x500.31236.jpg" alt="Test">
-              <p>No 3</p>
+            <router-link :to="`/recommend/detail/54108`">
+             <img src="https://fimgs.net/mdimg/perfume/375x500.54108.jpg" alt="Test">
+              <p>Myrrhe Carmin</p>
             </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/31236`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.42664.jpg" alt="Test">
-                <p>Midori</p>
+              <router-link :to="`/recommend/detail/55775`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.55775.jpg" alt="Test">
+                <p>Saguaro Blossom & Sand</p>
               </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/13754`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.13754.jpg" alt="Test">
-                <p>No. 5 Midnight + Swim</p>
+              <router-link :to="`/recommend/detail/51935`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.51935.jpg" alt="Test">
+                <p>Homme Fresh Eau de Parfum Kenzo</p>
               </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/20971`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.20971.jpg" alt="Test">
-                <p>Love JLS</p>
+              <router-link :to="`/recommend/detail/55621`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.55621.jpg" alt="Test">
+                <p>Homme Fresh Eau de Parfum Kenzo</p>
               </router-link>
             </splide-slide>
-        </splide>
+           </splide>
+           
 
     </div>
 </template>
