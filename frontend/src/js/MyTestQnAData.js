@@ -32,11 +32,7 @@ const qnaList = [
     {
         q: '5. 끌리는 분위기는?',
         a: [
-            { answer: '꽃밭에 누워있는', type: 0 },
-            { answer: '상큼한 과일을 베어 문', type: 1 },
-            { answer: '숲 속에 서 있는', type: 2 },
-            { answer: '사탕을 한 입 가득', type: 3 },
-
+ 
             { answer: '꽃밭에 누워있는', type: 'floral' },
             { answer: '상큼한 과일을 베어 문', type: 'citrus' },
             { answer: '숲 속에 서 있는', type: 'woody' },

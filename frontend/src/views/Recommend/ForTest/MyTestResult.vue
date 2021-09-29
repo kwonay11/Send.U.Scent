@@ -68,7 +68,7 @@ export default {
        
         },
     created(){
-        axios.get(`${DJANGO_URL}/tests/getresult/`)
+        axios.get(`${DJANGO_URL}/scent/tests/getresult/`)
         .then((res)=>{
             console.log(res.data.perfume_id)
             this.perfume_id = res.data.perfume_id

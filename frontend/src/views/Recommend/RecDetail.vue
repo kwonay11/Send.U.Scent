@@ -205,7 +205,7 @@ export default {
       this.$router.push({ name: 'Perfume'})
     },
     getPerfumeInfo: async function (perfume_id) {
-      const url = DJANGO_URL + `/api/detail/${perfume_id}`
+      const url = DJANGO_URL + `/scent/api/detail/${perfume_id}`
       const res = await axios.get(url)
       if (res.status === 200) {
         return res
