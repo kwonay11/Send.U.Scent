@@ -9,6 +9,6 @@ import infiniteScroll from "vue-infinite-scroll";
 // import Vue from 'vue';
 import VueWordCloud from 'vuewordcloud';
 
-createApp(VueWordCloud.name, VueWordCloud);
 
-createApp(App).use(store).use(router).mount("#app");
+
+createApp(App).use(store).use(router).use(VueWordCloud.name, VueWordCloud).mount("#app");
