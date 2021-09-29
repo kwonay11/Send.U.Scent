@@ -33,12 +33,23 @@
 
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
+import { mapState } from 'vuex';
 export default {
   name: 'MyinfoCancel',
   components: {
     PageTitle,
   },
+  computed: {
+    ...mapState(["isLogin", "userInfo"])
+  },
+  created() {
+    this.getUser()
+  },
   methods: {
+    getUser() {
+      this.user.userid = localStorage.getItem("user_id")
+      this.user.nickname = this.userInfo.nickname
+    },
     cancelBtn() {
       this.$router.replace('/mypage'); // 뒤로 가기
     },
@@ -50,6 +61,7 @@ export default {
         this.countDownTimer();
         setTimeout(() => {
           this.$router.push('/');
+          localStorage.removeItem("user_id");
         }, 4000);
       }
     },

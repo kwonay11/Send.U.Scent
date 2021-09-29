@@ -17,7 +17,7 @@
           </span>
           <div class="input-bg">
             <input v-if="editNickname" type="text" maxlength="20" id="userNickname" :placeholder="user_nickname" 
-                  v-model="user_nickname" @keydown.space.prevent>
+                  v-model="editUser_nickname" @keydown.space.prevent>
             <input v-else type="text" maxlength="20" id="userNickname" :placeholder="user_nickname" disabled>
           </div>
         </div>
@@ -29,7 +29,7 @@
           </span>
           <div class="input-bg" v-if="editPassword">
             <input type="password" maxlength="20" id="userPwd" placeholder="변경 할 비밀번호를 입력하세요."
-                    v-model="password" @keydown.space.prevent
+                    v-model="editUser_password" @keydown.space.prevent
             >
           </div>
           <span class="warn-text" v-if="error.password">{{error.password}}</span>
@@ -59,6 +59,8 @@
 <script>
 import PV from 'password-validator';
 import http from '@/utils/http-common.js'
+import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
   created() {
     this.passwordSchema
@@ -71,12 +73,14 @@ export default {
       .has()
       .letters(),
     
-    this.getUser(),
-    localStorage.setItem("user_id", "ssafy"),
-    this.user_id = localStorage.getItem("user_id")
+    // this.$store.commit("setIsLogined", true)
+    this.getUser()
+  },
+  computed: {
+    ...mapState(["isLogin", "userInfo"])
   },
   watch: {
-    password(v) {
+    editUser_password(v) {
       this.changePwd = true; // 비번 수정함
       this.moveCheck = false; // 페이지 이동 불가
       this.onCheckPassword();
@@ -84,19 +88,16 @@ export default {
     passwordConfirm(v) {
       this.onCheckPasswordConfirm();
     },
-    user_nickname(v) {
+    editUser_nickname(v) {
       this.changeNicname = true; // 닉넴 수정함
       this.moveCheck = false; // 페이지 이동 불가
     }
   },
   methods: {
     getUser() {
-      http.get('/user/info', this.user_id)
-          .then((res) => {
-            if(res.data.result === "success") {
-              // this.user_nickname = res.data.
-            }
-          })
+      this.user_id = localStorage.getItem("user_id")
+      this.user_nickname = this.userInfo.nickname
+      this.password = this.userInfo.password
     },
     onCheckPassword() {
       if(this.editPassword) {
@@ -106,13 +107,13 @@ export default {
         this.error.password = "영문, 숫자 포함 8자리 이상이어야 합니다."
         else this.error.password = false;
 
-        if(this.password.length === 0)
+        if(this.editUser_password.length === 0)
           this.error.password = "";
       }
     },
     onCheckPasswordConfirm() {
       if(this.editPassword) {
-        if(this.password === this.passwordConfirm) { // 일치
+        if(this.editUser_password === this.passwordConfirm) { // 일치
           this.error.passwordConfirm = "";
           this.passwordChk = true;
         } else {
@@ -124,20 +125,46 @@ export default {
       }
     },
     checkForm() { // submit 전에 input 내용이 다 들어가 있는지 조건에 맞는지 확인
-      if(this.changeNicname && this.user_nickname.trim().length > 0) {
+      if(this.changeNicname && this.changeNicname) {
+        // 닉네임 수정
+        this.user_nickname = this.editUser_nickname;
         this.submitChk = 0;
-      } else if (this.changePwd && this.passwordChk) {
-        this.submitChk = 0;
+      } else if (this.changePwd && this.editUser_password) {
+        // 비밀번호 변경
+        if(this.passwordChk) {
+          this.password = this.editUser_password;
+          this.submitChk = 0;
+        } else {
+          this.submitChk = 1;
+        }
       } else if (!this.changeNicname && !this.changePwd) {
+        // 변경 사항 없음
         this.submitChk = 2;
       }else {
+        // 예외 상황
         this.submitChk = 1;
       }
     },
     goSubmit() {
       this.checkForm();
       if(this.submitChk == 0) {
-        alert("수정 완료");
+        const Form = {
+          "user_id" : this.user_id,
+          "nickname" : this.user_nickname,
+          "password" : this.password
+        };
+        http.put('/user/update', Form)
+            .then((res) => {
+              if(res.data.result === 'success') {
+                alert("수정 완료");
+                this.$router.push('/mypage');
+              } else {
+                alert("문제가 발생했습니다.");
+              }
+            })
+            .catch(() => {
+              alert("문제가 발생했습니다.");
+            })
         this.$router.push('/mypage');
       } else if(this.submitChk == 2) {
         alert("수정 사항이 없습니다.");
@@ -158,6 +185,7 @@ export default {
     },
     onEdit(v) {
       if(v === 'nickname') {
+        // console.log("click")
         if(!this.changeNicname) {
           this.editNickname = !this.editNickname;
           window.document.getElementsByClassName('.edit-icon')
@@ -194,6 +222,8 @@ export default {
   },
   data() {
     return {
+      editUser_nickname: '',
+      editUser_password: '',
       user_id: String,
       user_nickname: String,
       password: '',
