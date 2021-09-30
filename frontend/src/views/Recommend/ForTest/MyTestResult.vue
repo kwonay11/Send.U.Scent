@@ -39,6 +39,7 @@
         <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
+                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
@@ -46,7 +47,6 @@
                         <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
                         <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
                     </div>
-                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                 </div>
           
         </div>
@@ -92,6 +92,8 @@ export default {
             best_accord1:'',
             best_accord2:'',
             best_accord3:'',
+            best_accord4:'',
+            best_accord5:'',
            
            
 
@@ -139,10 +141,15 @@ export default {
             this.best_accord1 = this.sorted_list[0][0];
             this.best_accord2 = this.sorted_list[1][0];
             this.best_accord3 = this.sorted_list[2][0];
+            this.best_accord4 = this.sorted_list[3][0];
+            this.best_accord5 = this.sorted_list[4][0];
+ 
 
             this.best_accord.push(this.best_accord1)
             this.best_accord.push(this.best_accord2)
             this.best_accord.push(this.best_accord3)
+            this.best_accord.push(this.best_accord4)
+            this.best_accord.push(this.best_accord5)
 
         
             localStorage.setItem("accords", this.best_accord),
