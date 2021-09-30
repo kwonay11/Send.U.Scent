@@ -21,6 +21,7 @@
     "vue-d3-cloud": "^0.2.0",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^4.0.0-0",
+    "vue-tags-ball": "^1.2.0",
     "vue-wordcloud": "^1.1.1",
     "vuewordcloud": "^18.7.12",
     "vuex": "^4.0.0-0"

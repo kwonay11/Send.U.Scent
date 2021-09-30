@@ -10,6 +10,7 @@
           <div v-if="step === 4" class="step4"></div>
           <div v-if="step === 5" class="step5"></div>
           <div v-if="step === 6" class="step6"></div>
+          <div v-if="step === 7" class="step7"></div>
           
   
         </div>
@@ -59,7 +60,12 @@ export default {
           contents:{
             resultString: '',
 
-          }
+          },
+          // 지속성, 잔향, 계절
+          longevity:'',
+          sillage:'',
+          season:'',
+
 
       }
 
@@ -74,20 +80,38 @@ export default {
           console.log("타입",type)
           // console.log("질문 번호",this.idx)
           this.contents.resultString += type
+          if (this.step == 0){
+            this.season = type
+            localStorage.setItem("season", this.season)
+          }
+          if (this.step == 6){
+            if (type == 'longevity>=4'){
+              this.longevity = 4
+            }
+            else{  
+              this.longevity = 0
+              }
+            localStorage.setItem("longevity", this.longevity)
+          }
+          if (this.step == 7){
+            if (type == 'sillage>=2'){
+              this.sillage = 2
+            }
+            else{  
+              this.sillage = 0
+              }
+            localStorage.setItem("sillage", this.sillage)
+          }
           
           // splite기준
-          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5){
+          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5 || this.step == 6){
                 this.contents.resultString += "/"
               }
           // this.resultString.push(type)
           console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기
-            if(this.step == 6){
-              console.log("결과창으로 넘기기")
-               //백엔드에 this.resultString를 axios.push로 보내기
-              //  axios.post(`${DJANGO_URL}/tests/result/`,this.resultString)
-
+            if(this.step == 7){
                axios.post(`${DJANGO_URL}/scent/tests/result/`,this.contents)
                .then(()=>{ 
                  console.log("백엔드에 보내기 성공")
@@ -144,7 +168,7 @@ export default {
 }
 .statusbar .step0{
   z-index: 13;
-  width: 14.3%;
+  width: 12.5%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -159,7 +183,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step1{
   z-index: 13;
-  width: 28.5%;
+  width: 25%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -174,7 +198,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step2{
   z-index: 13;
-  width: 42.8%;
+  width: 37.5%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -189,7 +213,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step3{
   z-index: 13;
-  width: 57.1%;
+  width: 50%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -204,7 +228,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step4{
   z-index: 13;
-  width: 71.4%;
+  width: 62.5%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -219,7 +243,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 }
 .statusbar .step5{
   z-index: 13;
-  width: 85.7%;
+  width: 75%;
   left:-0.5vw;
     height: 2.3vh;
     position: relative;
@@ -233,6 +257,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', end
 
 }
 .statusbar .step6{
+  z-index: 13;
+  width: 87.5%;
+  left:-0.5vw;
+    height: 2.3vh;
+    position: relative;
+    margin: 1.5%;
+    background: #f7b1a5; /* Old browsers */
+background: -moz-linear-gradient(top, #f7b1a5 10%, #f19f89 37%, #ed9b87 47%, #f9a29f 63%, #f9a29f 75%, #febcc6 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f7b1a5 10%,#f19f89 37%,#ed9b87 47%,#f9a29f 63%,#f9a29f 75%,#febcc6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b1a5', endColorstr='#febcc6',GradientType=0 );
+    border-radius: 20px;
+
+}
+.statusbar .step7{
   z-index: 13;
   width: 101.5%;
   left:-0.5vw;

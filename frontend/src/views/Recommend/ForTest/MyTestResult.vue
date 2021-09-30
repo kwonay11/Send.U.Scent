@@ -3,42 +3,39 @@
     <div id="TestResultRoot">
 
     <div class="box">
-        <div class="title">Send you your Scent</div>
-        <div class="subtitle">000님에게 어울리는 향수는,</div>
+        <div class="title fadeIn">Send you your Scent</div>
+        <div class="subtitle fadeIn">000님에게 어울리는 향수에 대한
+        </div>
+        <div class="best fadeIn">
+            <p >가장 잘 맞는 향은, </p>
+            {{best_accord1}},&nbsp;{{best_accord2}},&nbsp;{{best_accord3}}
+        </div>
         <div class="wordcloud">
-            <!-- <vue-word-cloud :words="words">
-                <vue-word-cloud
-                :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
-                :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-                font-family="Roboto"
-                />
-            </vue-word-cloud> -->
+            <img src="@/assets/images/perfume3.png" alt="" class="my-2" style="width:58%;">
+            <tags-ball class="ball" v-bind:style='{"border":"0px black"}' :tags='accords_list'/>
+            <div class="ac_dec">
+                <p style="font-weight:bold">Accords</p>
 
-            <wordcloud
-            :data="defaultWords"
-            nameKey="name"
-            valueKey="value"
-            :color="myColors"
-            :showTooltip="true"
-            :wordClick="wordClickHandler">
-            </wordcloud>
-
-            
+            <div v-for="(value,idx) in sorted_list" v-bind:key="idx">
+                <div>{{value[0]}} - {{value[1]}}회</div>
+                </div>
+            </div>
+          
         </div>
 
    
    
-        <div class="dec"> 회원님이 좋아하실 만한 향수들이에요.</div>
+        <div class="dec fadeIn"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
    
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
-                <router-link to="`/recommend/detail/${value}`">
+                <router-link :to="`/recommend/detail/${value}`">
                 <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                  <div class="perfume_title">{{title[idx]}}</div>
                 </router-link>
             </div>
         </div>
-        <div class="dec2"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
+        <div class="dec2 fadeIn"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
         <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
@@ -61,8 +58,7 @@
 
 
 <script>
-import VueWordCloud from 'vuewordcloud';
-import wordcloud from 'vue-wordcloud'
+import TagsBall from 'vue-tags-ball'
 import axios from "axios"
 import ModalLike from '@/components/ModalLike.vue';
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
@@ -70,8 +66,8 @@ export default {
     name:'TestResult',
     components: {
         ModalLike,
-        [VueWordCloud.name]: VueWordCloud,
-
+        "tags-ball":TagsBall
+    
      
     },
     data() {
@@ -80,63 +76,36 @@ export default {
             title : [],
             perfume_id2 : [],
             title2 : [],
-            
+            accords : [],
+            accords_len : 0,
             setModal: false,
             selectedProd: {
                 id: Number,
                 name: String,
             },
-            myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
-      defaultWords: [{
-          "name": "Cat",
-          "value": 26
-        },
-        {
-          "name": "fish",
-          "value": 19
-        },
-        {
-          "name": "things",
-          "value": 18
-        },
-        {
-          "name": "look",
-          "value": 16
-        },
-        {
-          "name": "two",
-          "value": 15
-        },
-        {
-          "name": "fun",
-          "value": 9
-        },
-        {
-          "name": "know",
-          "value": 9
-        },
-        {
-          "name": "good",
-          "value": 9
-        },
-        {
-          "name": "play",
-          "value": 6
-        }
-      ]
+
+            accords_list : [],
+            sorted_list : [],
+
+
+            best_accord:[],
+            best_accord1:'',
+            best_accord2:'',
+            best_accord3:'',
+           
+           
+
+            
+            
+           
 
           
            
 
         }
     },
-    mounted() {
-    // this.genLayout();
-  },
+   
     methods:{
-        wordClickHandler(name, value, vm) {
-      console.log('wordClickHandler', name, value, vm);
-    },
         
         addHave(id, name) {
             this.setModal = true;
@@ -149,59 +118,41 @@ export default {
         modal(){
             this.setModal = true;
         },
-         genLayout() {
-      const cloud = require('d3-cloud');
-      cloud()
-        .words(this.words)
-        .padding(1)
-        .font('Impact')
-        .fontSize(function (d) {
-          return d.size;
-        })
-        .on('end', this.end)
-        .spiral('archimedean')
-        .start()
-        .stop();
-    },
-    end(words) {
-      const d3 = require('d3');
-      const width = 300;
-      const height = 300;
-      d3.select('#word-cloud')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height)
-        .style('background', 'white')
-        .append('g')
-        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')') // g를 중심에서 단어들을 그리기 때문에 g를 svg 중심으로 이동
-        .selectAll('text')
-        .data(words)
-        .enter()
-        .append('text')
-        .style('font-size', (d) => {
-          return d.size + 'px';
-        })
-        .style('font-family', 'Impact')
-        .attr('text-anchor', 'middle')
-        .attr('transform', (d) => {
-          return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')';
-        })
-        .text((d) => d.text);
-    },
+         
+      
+    
        
-        },
+    },
     created(){
         axios.get(`${DJANGO_URL}/scent/tests/getresult/`)
         .then((res)=>{
-            console.log(res.data.perfume_id)
+            console.log(res.data)
+            console.log("데이터 받아옴")
+            // console.log(res.data.perfume_id)
             this.perfume_id = res.data.perfume_id
             this.title = res.data.title
             this.perfume_id2 = res.data.perfume_id2
             this.title2 = res.data.title2
-            // this.items = res.data
+            this.accords = res.data.accords
+            this.sorted_list = res.data.sorted_accords
 
-            console.log(res.data)
-            console.log("데이터 받아옴")
+            this.best_accord1 = this.sorted_list[0][0];
+            this.best_accord2 = this.sorted_list[1][0];
+            this.best_accord3 = this.sorted_list[2][0];
+
+            this.best_accord.push(this.best_accord1)
+            this.best_accord.push(this.best_accord2)
+            this.best_accord.push(this.best_accord3)
+
+        
+            localStorage.setItem("accords", this.best_accord),
+
+
+            this.accords_list = Object.keys(this.accords)
+        
+           
+        
+
         })
         .catch(()=>{
             console.log("데이터 못받음")
@@ -222,7 +173,7 @@ export default {
     background-color: $sub-color;
     background-size: 100%;
     width: 100%;
-    height: 250vh;
+    height: 280vh;
 }
 .box{
   background-color: white;
@@ -252,7 +203,7 @@ export default {
 .subtitle{
     
     position: absolute;
-    top: 13%;
+    top: 10%;
     width: 100%;
     color:black;
     font-family:$kor-font-family;
@@ -265,7 +216,7 @@ export default {
 }
 .wordcloud{
     position: absolute;
-    top: 30%;
+    top: 20%;
     width: 100%;
     color:black;
 
@@ -274,7 +225,7 @@ export default {
     font-family:$kor-font-family;
     font-size:$bodytitle-font-size;
     position: absolute;
-    top: 52%;
+    top: 57%;
     width: 100%;
     color:black;
     font-weight: bold;
@@ -285,7 +236,7 @@ export default {
     font-family:$kor-font-family;
     font-size:$bodytitle-font-size;
     position: absolute;
-    top: 75%;
+    top: 78%;
     width: 100%;
     color:black;
     font-weight: bold;
@@ -295,7 +246,7 @@ export default {
 .perfume{
      display: flex;
     position: relative;
-     top: 60%;
+     top: 63%;
      width: 100%;
      height:10vh;
      padding-left: 6vw;
@@ -308,7 +259,7 @@ export default {
 .perfume2{
     display: flex;
     position: relative;
-     top: 79%;
+     top: 80%;
      width: 100%;
      height:10vh;
      padding-left: 6vw;
@@ -346,6 +297,66 @@ export default {
     
 
     
+}
+.ball{
+    width: 30%;
+    position: absolute;
+    left:36%;
+    top:41%;
+    z-index: 22;
+//     color:$main-color !important;
+//     font-family:$eng-font-family;
+}
+.ac_dec{
+    border:2px $main-color solid;
+    border-radius: 20px;
+    float:left;
+    color:$main-color;
+    font-family:$eng-font-family;
+   
+    margin-left:7%;
+    position:absolute;
+    top:23%;
+    padding: 1.3%;
+
+}
+.best{
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    color:$point-color;
+    font-family:$eng-font-family;
+    font-size:$subtitle-font-size;
+    font-weight: bold;
+    z-index: 1;
+    margin-top:2vh;
+    height:10vh;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+// 크롬은 웹킷
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+.fadeIn {
+  animation: fadeIn;
+  animation-duration: 2s;
+}
+.fadeOut {
+  animation: fadeOut;
+  animation-duration: 1s;
 }
 
 </style>

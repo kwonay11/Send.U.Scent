@@ -8,7 +8,8 @@ import infiniteScroll from "vue-infinite-scroll";
 // Vue.use(infiniteScroll);
 // import Vue from 'vue';
 import VueWordCloud from 'vuewordcloud';
+import TagsBall from 'vue-tags-ball'
 
 
 
-createApp(App).use(store).use(router).use(VueWordCloud.name, VueWordCloud).mount("#app");
+createApp(App).use(store).use(router).use(VueWordCloud.name, VueWordCloud).use(TagsBall).mount("#app");

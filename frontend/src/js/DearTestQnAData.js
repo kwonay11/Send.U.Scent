@@ -2,17 +2,17 @@ const qnaList = [
     {
         q: '님을 보면 생각나는 계절은?',
         a: [
-            { answer: '봄', type: 'spring_' },
-            { answer: '여름', type: 'summer_' },
-            { answer: '가을', type: 'autumn_' },
-            { answer: '겨울', type: 'winter_' },
+            { answer: '봄', type: 'spring' },
+            { answer: '여름', type: 'summer' },
+            { answer: '가을', type: 'autumn' },
+            { answer: '겨울', type: 'winter' },
         ]
     },
     {
         q: '님의 성별은?',
         a: [
-            { answer: '여성', type: 'female' },
-            { answer: '남성', type: 'male' },
+            { answer: '여성', type: '_female' },
+            { answer: '남성', type: '_male' },
         ]
     },
     {
@@ -48,6 +48,13 @@ const qnaList = [
             { answer: '독특한게 좋아.', type: 'rating_score<4' },
         ]
     }, // rating_score컬럼 4이상인것
+    {
+        q: '님에게 지속성에 대한 중요도는?',
+        a: [
+            { answer: '지속성이 긴게 좋지.', type: 'longevity>=4'},
+            { answer: '지속성 약한게 좋아.', type: 'longevity<4' },
+        ]
+    }, // 
     {
         q: '님에게 잔향에 대한 중요도는?',
         a: [
