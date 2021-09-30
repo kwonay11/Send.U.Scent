@@ -2,17 +2,17 @@ const qnaList = [
     {
         q: '1. 좋아하는 계절이 있나요?',
         a: [
-            { answer: '봄', type: 'spring_' },
-            { answer: '여름', type: 'summer_' },
-            { answer: '가을', type: 'autumn_' },
-            { answer: '겨울', type: 'winter_' },
+            { answer: '봄', type: 'spring' },
+            { answer: '여름', type: 'summer' },
+            { answer: '가을', type: 'autumn' },
+            { answer: '겨울', type: 'winter' },
         ]
     },
     {
         q: '2. 성별은?',
         a: [
-            { answer: '여성', type: 'female' },
-            { answer: '남성', type: 'male' },
+            { answer: '여성', type: '_female' },
+            { answer: '남성', type: '_male' },
         ]
     },
     {
@@ -53,10 +53,17 @@ const qnaList = [
     {
         q: '7. 지속성에 대한 나의 중요도는?',
         a: [
-            { answer: '지속성이 긴게 좋지.', type: 'longevity>4'},
+            { answer: '지속성이 긴게 좋지.', type: 'longevity>=4'},
             { answer: '지속성 약한게 좋아.', type: 'longevity<4' },
         ]
-    }, // rating_score컬럼 4이상인것
+    }, // 
+    {
+        q: '8. 잔향에 대한 나의 중요도는?',
+        a: [
+            { answer: '잔향이 강한게 좋을 것 같아.', type: 'sillage>=2'},
+            { answer: '잔향이 약한게 좋을 것 같아.', type: 'sillage=1' },
+        ]
+    }, // 
 
 ];
 

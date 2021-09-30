@@ -21,7 +21,8 @@ def tests_result(request):
     # # res[1] : daynight
     # # res[2] : accords
     # # res[3] : rating_score
-    # # res[4] : longevity 컬럼 이용해야함
+    # # res[4] : longevity 
+    # # res[5] : sillage 컬럼 이용해야함
     
     try:
         '''
@@ -36,7 +37,7 @@ def tests_result(request):
         cursor = connection.cursor()
         cursor2 = connection.cursor()
         # string으로 붙여줘야 sql 명령어에 입력이 됨 바로는 안됨
-        queryString = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where " +res[1]+" and "+res[3]+" and accords like '%"+res[2]+"%' and " +res[4]+" order by "+res[0]+" desc limit 5"
+        queryString = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where " +res[1]+" and "+res[3]+" and accords like '%"+res[2]+"%' and " +res[4]+" and "+res[5]+" order by "+res[0]+" desc limit 5"
         queryString2 = "select * from recommand.perfume right join recommand.season on recommand.perfume.perfume_id = recommand.season.perfume_id where accords like '%"+res[2]+"%' order by "+res[0]+" desc limit 5"
 
         strSql = queryString
@@ -59,13 +60,18 @@ def tests_result(request):
                     accord_dic[i[j]] = 1
                 else:
                     accord_dic[i[j]] += 1
-        print(accord_dic)
+        sorted_dic = sorted(accord_dic.items(), key=lambda x:x[1], reverse=True)
+        # print(accord_dic)
         context = {
             'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
             'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
             'perfume_id2' : [perfumes2[0][0],perfumes2[1][0],perfumes2[2][0],perfumes2[3][0],perfumes2[4][0]],
             'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
             'accords':  accord_dic,
+            'sorted_accords':  sorted_dic,
+            "top":[perfumes[0][8],perfumes[1][8],perfumes[2][8],perfumes[3][8],perfumes[4][8]],
+            "middle":[perfumes[0][9],perfumes[1][9],perfumes[2][9],perfumes[3][9],perfumes[4][9]],
+            "base":[perfumes[0][10],perfumes[1][10],perfumes[2][10],perfumes[3][10],perfumes[4][10]],
             
         }
 

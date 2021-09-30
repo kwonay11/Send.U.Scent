@@ -59,7 +59,12 @@ export default {
           contents:{
             resultString: '',
 
-          }
+          },
+          // 지속성, 잔향, 계절
+          longevity:'',
+          sillage:'',
+          season:'',
+
 
       }
 
@@ -74,20 +79,38 @@ export default {
           console.log("타입",type)
           // console.log("질문 번호",this.idx)
           this.contents.resultString += type
+          if (this.step == 0){
+            this.season = type
+            localStorage.setItem("season", this.season)
+          }
+          if (this.step == 6){
+            if (type == 'longevity>=4'){
+              this.longevity = 4
+            }
+            else{  
+              this.longevity = 0
+              }
+            localStorage.setItem("longevity", this.longevity)
+          }
+          if (this.step == 7){
+            if (type == 'sillage>=2'){
+              this.sillage = 2
+            }
+            else{  
+              this.sillage = 0
+              }
+            localStorage.setItem("sillage", this.sillage)
+          }
           
           // splite기준
-          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5){
+          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5 || this.step == 6){
                 this.contents.resultString += "/"
               }
           // this.resultString.push(type)
           console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기
-            if(this.step == 6){
-              console.log("결과창으로 넘기기")
-               //백엔드에 this.resultString를 axios.push로 보내기
-              //  axios.post(`${DJANGO_URL}/tests/result/`,this.resultString)
-
+            if(this.step == 7){
                axios.post(`${DJANGO_URL}/scent/tests/result/`,this.contents)
                .then(()=>{ 
                  console.log("백엔드에 보내기 성공")

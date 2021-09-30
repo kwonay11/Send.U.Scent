@@ -76,14 +76,14 @@ export default {
           this.contents.resultString += type
           
           // splite기준
-          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5){
+          if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5 || this.step == 6){
                 this.contents.resultString += "/"
               }
           // this.resultString.push(type)
           console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기
-            if(this.step == 6){
+            if(this.step == 7){
               console.log("결과창으로 넘기기")
                //백엔드에 this.resultString를 axios.push로 보내
 

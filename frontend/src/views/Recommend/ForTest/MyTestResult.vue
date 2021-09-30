@@ -3,33 +3,39 @@
     <div id="TestResultRoot">
 
     <div class="box">
-        <div class="title">Send you your Scent</div>
-        <div class="subtitle">000님에게 어울리는 향수는,</div>
+        <div class="title fadeIn">Send you your Scent</div>
+        <div class="subtitle fadeIn">000님에게 어울리는 향수에 대한
+        </div>
+        <div class="best fadeIn">
+            <p >가장 잘 맞는 향은, </p>
+            {{best_accord1}},&nbsp;{{best_accord2}},&nbsp;{{best_accord3}}
+        </div>
         <div class="wordcloud">
             <img src="@/assets/images/perfume3.png" alt="" class="my-2" style="width:58%;">
             <tags-ball class="ball" v-bind:style='{"border":"0px black"}' :tags='accords_list'/>
-            <!-- <div class="ac_dec">
+            <div class="ac_dec">
+                <p style="font-weight:bold">Accords</p>
 
-            <div v-for="(value,idx) in accords" v-bind:key="idx">
-                <div>{{idx}}:{{value}}회</div>
+            <div v-for="(value,idx) in sorted_list" v-bind:key="idx">
+                <div>{{value[0]}} - {{value[1]}}회</div>
                 </div>
-            </div> -->
+            </div>
           
         </div>
 
    
    
-        <div class="dec"> 회원님이 좋아하실 만한 향수들이에요.</div>
+        <div class="dec fadeIn"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
    
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
-                <router-link to="`/recommend/detail/${value}`">
+                <router-link :to="`/recommend/detail/${value}`">
                 <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                  <div class="perfume_title">{{title[idx]}}</div>
                 </router-link>
             </div>
         </div>
-        <div class="dec2"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
+        <div class="dec2 fadeIn"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
         <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
@@ -79,7 +85,17 @@ export default {
             },
 
             accords_list : [],
+            sorted_list : [],
 
+
+            best_accord:[],
+            best_accord1:'',
+            best_accord2:'',
+            best_accord3:'',
+           
+           
+
+            
             
            
 
@@ -118,18 +134,22 @@ export default {
             this.perfume_id2 = res.data.perfume_id2
             this.title2 = res.data.title2
             this.accords = res.data.accords
-            this.accords_len = Object.keys(this.accords).length
+            this.sorted_list = res.data.sorted_accords
+
+            this.best_accord1 = this.sorted_list[0][0];
+            this.best_accord2 = this.sorted_list[1][0];
+            this.best_accord3 = this.sorted_list[2][0];
+
+            this.best_accord.push(this.best_accord1)
+            this.best_accord.push(this.best_accord2)
+            this.best_accord.push(this.best_accord3)
+
+        
+            localStorage.setItem("accords", this.best_accord),
+
+
             this.accords_list = Object.keys(this.accords)
-            console.log(this.accords_list)
-
-            for (let i = 0; i < this.accords_len; i++) {
-
-                const name = Object.keys(this.accords)[i]
-                const count = Object.values(this.accords)[i]
-                // console.log(name)
-                // console.log(count)
-                 
-            }
+        
            
         
 
@@ -183,7 +203,7 @@ export default {
 .subtitle{
     
     position: absolute;
-    top: 13%;
+    top: 10%;
     width: 100%;
     color:black;
     font-family:$kor-font-family;
@@ -294,12 +314,49 @@ export default {
     color:$main-color;
     font-family:$eng-font-family;
    
-    margin-left:10%;
+    margin-left:7%;
     position:absolute;
-    top:50%;
-    padding: 2px;
+    top:23%;
+    padding: 1.3%;
 
 }
+.best{
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    color:$point-color;
+    font-family:$eng-font-family;
+    font-size:$subtitle-font-size;
+    font-weight: bold;
+    z-index: 1;
+    margin-top:2vh;
+    height:10vh;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+// 크롬은 웹킷
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+.fadeIn {
+  animation: fadeIn;
+  animation-duration: 2s;
+}
+.fadeOut {
+  animation: fadeOut;
+  animation-duration: 1s;
+}
 
 </style>
