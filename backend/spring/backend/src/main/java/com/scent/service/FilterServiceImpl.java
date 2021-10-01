@@ -4,60 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.scent.entity.Perfume;
-import com.scent.repo.ListOnlySeasonRepo;
+import com.scent.entity.QPerfume;
 import com.scent.repo.FilterRepo;
+import com.scent.repo.ListOnlySeasonRepo;
 
 @Service
 public class FilterServiceImpl implements FilterService {
 
 	@Autowired
-	FilterRepo filterRepo;
+	private FilterRepo filterRepo;
 
-	@Autowired
-	ListOnlySeasonRepo onlySeasonRepo;
+	@PersistenceContext // 영속성 객체를 자동으로 삽입해줌
+	private EntityManager em;
+
+	@Override
+	public List<Perfume> findChecked(String season, String daynight, String gender) {
+		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+		QPerfume perfume = QPerfume.perfume;
+		List<Perfume> list = queryFactory.selectFrom(perfume)
+				.where(perfume.season.eq(season), perfume.daynight.eq(daynight), perfume.gender.eq(gender)).fetch();
+		return list;
+	}
 
 	@Override
 	public List<Perfume> findPerfumeTitle(String title) {
-		List<Perfume> list = filterRepo.findByTitleContaining(title);
-		return list;
-
-	}
-
-	@Override
-	public List<Perfume> findPerfumeId(List<Integer> idList) {
-		List<Perfume> list = new ArrayList<Perfume>();
-		for (int i = 0; i < idList.size(); i++) {
-			Optional<Perfume> perfume = filterRepo.findById(idList.get(i));
-			System.out.println("나다1");
-			list.add(perfume.get());
-			System.out.println("나다2");
-		}
-		return list;
-
-	}
-
-	@Override
-	public List<Perfume> findSeason(String season) {
-
-		List<Perfume> list = onlySeasonRepo.findBySeason(season);
-		return list;
-
-	}
-
-	@Override
-	public List<Perfume> findDayNight(String daynight) {
-		int daynightInt = Integer.parseInt(daynight);
-		List<Perfume> list = filterRepo.findByDaynight(daynightInt);
-		return list;
-
-	}
-
-	@Override
-	public List<Perfume> findGender(String gender) {
-		List<Perfume> list = filterRepo.findByGender(gender);
+		List<Perfume> list = filterRepo.findByTitle(title);
 		return list;
 
 	}
