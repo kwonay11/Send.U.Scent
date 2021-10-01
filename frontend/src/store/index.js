@@ -17,6 +17,11 @@ export default createStore({
       state.isLogin = true;
       state.userInfo = userInfo;
     },
+    setLogout(state) {
+      state.isLogin = false;
+      state.userInfo = null;
+    },
+
   },
   actions: {
     getUserInfo({ commit }, payload) {
@@ -34,14 +39,24 @@ export default createStore({
           alert("에러 발생!");
         });
     },
+    logout({ commit }) {
+      commit("setLogout");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("accord");
+      localStorage.removeItem("longevity");
+      localStorage.removeItem("silage");
+      localStorage.removeItem("season");
+      
+    }
   },
   getters: {
-    login(state) {
-      return state.isLogin;
-    },
+    // login(state) {
+    //   return state.isLogin;
+    // },
     userInfo(state) {
       return state.userInfo;
     },
+    
   },
   modules: {
     data,

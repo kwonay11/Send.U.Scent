@@ -5,7 +5,7 @@ export default {
   //   namespaced: true,
   // data
   state: {
-    isLogin: false,
+    // isLogin: false,
     user_id: null,
     isLoginError: false,
   },
