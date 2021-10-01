@@ -42,9 +42,9 @@ export default createStore({
     logout({ commit }) {
       commit("setLogout");
       localStorage.removeItem("user_id");
-      localStorage.removeItem("accord");
+      localStorage.removeItem("accords");
       localStorage.removeItem("longevity");
-      localStorage.removeItem("silage");
+      localStorage.removeItem("sillage");
       localStorage.removeItem("season");
       
     }
