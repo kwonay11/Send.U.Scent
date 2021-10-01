@@ -20,12 +20,30 @@
 import PageTitle from '../../components/Header/PageTitle.vue';
 import MyProfile from '../../components/Mypage/MyProfile.vue';
 import MyReviews from '../../components/Mypage/MyReviews.vue';
+import { mapState } from 'vuex';
 export default {
   name: "MypageMain",
   components: { 
       PageTitle,
       MyProfile ,
       MyReviews,
+    },
+    computed: {
+      ...mapState(["userInfo"])
+    },
+    created() {
+      this.getUser()
+    },
+    methods: {
+      getUser() {
+        this.user_id = localStorage.getItem("user_id")
+        this.$store.dispatch("getUserInfo", this.user_id)
+      },
+    },
+    data() {
+      return {
+        user_id : String,
+      }
     },
 }
 </script>
