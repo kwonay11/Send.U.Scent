@@ -1,53 +1,30 @@
 // 로그인 폼
 <template>
   <div id="LoginRoot">
-    <div class="background">
-      <div class="up-box">
-        <img
-          src="../../assets/images/PageTitle_4.png"
-          style="width: 100%; height: 250px"
-        />
-      </div>
-      <div class="content-box">
-        <div class="user" id="login">
-          <div class="for-sns">
-            <div class="form-wrap">
-              <div>
-                <p>아이디</p>
-              </div>
-
-              <div>
-                <input v-model="user_id" type="text" />
-              </div>
-
-              <br />
-              <div>
-                <p>비밀번호</p>
-              </div>
-              <div>
-                <input v-model="password" type="password" />
-              </div>
-
-              <br />
-              <div class="button-div">
-                <button
-                  class="btn btn-color"
-                  @click="login({ user_id, password })"
-                >
-                  로그인
-                </button>
-                <!-- <button class="btn btn-color">
-                        <router-link to="/signup" class="btn"> 회원가입 </router-link>
-                    </button> -->
-              </div>
-              <!-- <router-link to="/signup" class="btn"> 회원가입 </router-link> -->
-              <div class="sns-login">
-                <img src="https://me2.kr/0wmie" alt="google" />
-                <img src="https://me2.kr/rh1k0" alt="naver" />
-                <img src="https://me2.kr/vxczh" alt="kakao" />
-              </div>
-            </div>
+    <page-title pageTitle="Login"/>
+    <div class="content-box mt-5">
+      <div class="form-box pt-5">
+        <div class="input-box">
+          <span class="input-label">아이디</span>
+          <div class="input-bg">
+            <input type="text" v-model="user_id" maxlength="20" id="userId">
           </div>
+        </div>
+        <div class="input-box">
+          <span class="input-label">비밀번호</span>
+          <div class="input-bg">
+            <input type="password" maxlength="20" id="userPwd"
+                    v-model="password" @keydown.space.prevent @keyup.enter="login({user_id, password})"
+            >
+          </div>
+        </div>
+        <div class="button-group mt-5">
+          <button class="submit-btn" @click="login({ user_id, password })">로그인</button>
+        </div>
+        <div class="mem-join-box mt-4">
+          <p class="mem-join-text">
+            <router-link to="/signup"> 회원가입 </router-link>
+          </p>
         </div>
       </div>
     </div>
@@ -55,8 +32,12 @@
 </template>
 
 <script>
+import PageTitle from '../../components/Header/PageTitle.vue';
 import { mapState, mapActions } from "vuex";
 export default {
+  components: {
+    PageTitle,
+  },
   data() {
     return {
       user_id: null,
@@ -66,6 +47,8 @@ export default {
   computed: {
     ...mapState(["isLogin", "isLoginError"]),
   },
+  created() {
+  },
   methods: {
     ...mapActions(["login"]),
   },
@@ -73,87 +56,83 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.background {
-  height: 800px;
-  font-family: "Do Hyeon", sans-serif;
-
-  .up-box {
-    position: absolute;
-    margin-top: 69px;
-    width: 100%;
-  }
-  .content-box {
-    .user {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      .for-sns {
-        // border: black 1px;
-        width: 600px;
-        height: 500px;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        margin: 0 auto;
-        .form-wrap {
-          width: 600px;
-          height: 400px;
-          border: 0;
-          outline: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          input {
-            background-color: #f4f6f6;
-            border-radius: 10px;
-            border: 0;
-            outline: 0;
-            width: 380px;
-          }
-        }
-
-        #password,
-        #id {
-          background-color: #f4f6f6;
-          border-radius: 10px;
-          width: 380px;
-          border: 0;
-          outline: 0;
-        }
-        .button-div {
-          display: flex;
-          .btn-color {
-            background-color: #fa9d81;
-            border-radius: 50px;
-            width: 380px;
-          }
-          button {
-            margin: 15px 10px;
-            width: 110px;
-            height: 32px;
-            font-size: 15px;
-            color: #ffffff;
-          }
-        }
-        .add-option {
-          margin: 10px 0;
-          color: rgb(192, 190, 190);
-        }
-        .sns-login {
-          width: 600px;
-          display: flex;
-          justify-content: center;
-          margin-top: 10px;
-          img {
-            width: 35px;
-            height: 35px;
-            margin: 0 5px;
-          }
-        }
-      }
-    }
-  }
+@import "../../styles/common.scss";
+span, p {
+  font-family: $kor-font-family;
+}
+#LoginRoot {
+  width: 100%;
+  min-height: 1000px;
+}
+.form-box {
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+.form-title {
+  font-size: $bodytitle-font-size;
+  font-weight: bold;
+}
+.input-box {
+  width: 90%;
+  margin: 0 auto;
+}
+.input-box:not(:first-child) {
+  margin-top: 10px;
+}
+.input-label {
+  font-size: $body-subtitle-font-size;
+  font-weight: 700;
+  color: $main-color;
+  padding: 4px 15px;
+  display: inline-block;
+}
+.input-bg {
+  background: $light-color;
+  height: 40px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+}
+.input-bg > input {
+  padding: 0 30px;
+  width: 100%;
+}
+.input-bg > input:focus {
+  border-radius: 50px;
+  border : 1px solid $main-color;
+  height: 40px;
+}
+.button-group {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+.submit-btn {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 50px;
+  font-size: $body-font-size;
+  background: $point-color;
+  color: $white-color;
+}
+.mem-join-box {
+  text-align: center;
+}
+.mem-join-text {
+  padding: 10px;
+}
+.mem-join-text > a {
+  color: $sub-point-color;
+  text-decoration: underline;
 }
 </style>
