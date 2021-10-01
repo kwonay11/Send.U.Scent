@@ -50,9 +50,9 @@ const routes = [
     component: RecAll,
     children: [
       {
-        path: "perfume",
-        name: "Perfume",
-        component: RecPerfume,
+        path: "all",
+        name: "all",
+        component: RecAll,
       },
       {
         path: "softener",

@@ -20,12 +20,7 @@
       >
         <li>
           <div class="drop-item">
-            <router-link to="/recommend">ALL</router-link>
-          </div>
-        </li>
-        <li>
-          <div class="drop-item">
-            <router-link to="/recommend/perfume">Perfume</router-link>
+            <router-link to="/recommend/all">ALL</router-link>
           </div>
         </li>
         <li>
