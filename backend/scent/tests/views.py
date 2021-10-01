@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.db import connection
 from rest_framework import status
-from django.http import JsonResponse,HttpResponse
-import json
+
 context ={}
 def tests(request):
     pass
@@ -69,9 +68,9 @@ def tests_result(request):
             'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
             'accords':  accord_dic,
             'sorted_accords':  sorted_dic,
-            "top":[perfumes[0][8],perfumes[1][8],perfumes[2][8],perfumes[3][8],perfumes[4][8]],
-            "middle":[perfumes[0][9],perfumes[1][9],perfumes[2][9],perfumes[3][9],perfumes[4][9]],
-            "base":[perfumes[0][10],perfumes[1][10],perfumes[2][10],perfumes[3][10],perfumes[4][10]],
+            # "top":[perfumes[0][8],perfumes[1][8],perfumes[2][8],perfumes[3][8],perfumes[4][8]],
+            # "middle":[perfumes[0][9],perfumes[1][9],perfumes[2][9],perfumes[3][9],perfumes[4][9]],
+            # "base":[perfumes[0][10],perfumes[1][10],perfumes[2][10],perfumes[3][10],perfumes[4][10]],
             
         }
 
@@ -87,12 +86,7 @@ def tests_result(request):
 @api_view(['GET'])
 def get_result(request):
     if request.method == 'GET':
-
-        
-            
         return Response(context,status=status.HTTP_200_OK)
-    # return HttpResponse(json.dumps(context), content_type = "application/json",status=status.HTTP_200_OK)
-
-    # return HttpResponse(json.dumps(context), content_type = "application/json",status=status.HTTP_200_OK)
+   
 
     

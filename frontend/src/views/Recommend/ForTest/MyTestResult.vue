@@ -4,7 +4,7 @@
 
     <div class="box">
         <div class="title fadeIn">Send you your Scent</div>
-        <div class="subtitle fadeIn">000님에게 어울리는 향수에 대한
+        <div class="subtitle fadeIn">회원님에게 어울리는 향수에 대한
         </div>
         <div class="best fadeIn">
             <p >가장 잘 맞는 향은, </p>
@@ -27,30 +27,31 @@
    
         <div class="dec fadeIn"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
-   
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
-                <router-link :to="`/recommend/detail/${value}`">
-                <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
-                 <div class="perfume_title">{{title[idx]}}</div>
-                </router-link>
-            </div>
+                    <router-link :to="`/recommend/detail/${value}`">
+                    <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                    <p class="perfume_title">{{title[idx]}}</p>
+                    </router-link>
+                    
+                </div>
+           
+            
         </div>
+
         <div class="dec2 fadeIn"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
-        <div class="perfume2">
+         <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
-                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
-                    <div @click="modal()">
-                        <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
-                        <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
-                    </div>
+                    
                 </div>
           
         </div>
      </div>
+
+     <go-top />
     </div>
 
     
@@ -60,12 +61,13 @@
 <script>
 import TagsBall from 'vue-tags-ball'
 import axios from "axios"
-import ModalLike from '@/components/ModalLike.vue';
+import GoTop from '@/components/GoTop.vue';
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
     components: {
-        ModalLike,
+      
+        GoTop,
         "tags-ball":TagsBall
     
      
@@ -79,10 +81,7 @@ export default {
             accords : [],
             accords_len : 0,
             setModal: false,
-            selectedProd: {
-                id: Number,
-                name: String,
-            },
+    
 
             accords_list : [],
             sorted_list : [],
@@ -95,31 +94,11 @@ export default {
             best_accord4:'',
             best_accord5:'',
            
-           
-
-            
-            
-           
-
-          
-           
 
         }
     },
    
     methods:{
-        
-        addHave(id, name) {
-            this.setModal = true;
-            this.selectedProd.id = id;
-            
-        },
-        closeModal() {
-            this.setModal = false;
-        },
-        modal(){
-            this.setModal = true;
-        },
          
       
     
@@ -137,6 +116,9 @@ export default {
             this.title2 = res.data.title2
             this.accords = res.data.accords
             this.sorted_list = res.data.sorted_accords
+            
+
+
 
             this.best_accord1 = this.sorted_list[0][0];
             this.best_accord2 = this.sorted_list[1][0];

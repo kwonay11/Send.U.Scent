@@ -4,6 +4,11 @@
     <div v-if="perfumeInfo" class="content-box">
 
       <div class="per-title">{{ perfumeInfo.title }}</div>
+      <div>
+        <img @click="Modal()" src="@/assets/icons/like2.png" alt="heart">
+        <ModalLike v-if="setModal" @flag="closeModal" :id="this.perfumeInfo.perfume_id" :name="this.perfumeInfo.title"/>
+        
+      </div>
 
       <!-- 요약(평점,브랜드,젠더,노트) -->
       <div class="prod-content-main">
@@ -120,13 +125,17 @@
       </div>
 
     </div>
+    <go-top />
   </div>
+
 </template>
 
 <script>
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
+import ModalLike from '@/components/ModalLike.vue';
+import GoTop from '../../components/GoTop.vue';
 
 import axios from 'axios'
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
@@ -137,10 +146,13 @@ export default {
     SIcon,
     SAccord,
     SNote,
+    ModalLike,
+    GoTop,
   },
   data() {
     return {
       perfumeInfo: {},
+      setModal: false,
       iconList: [
         {
           id: "longevity",
@@ -211,6 +223,12 @@ export default {
         return res
       }
     },
+    Modal(){
+      this.setModal = true;
+    },
+    closeModal() {
+            this.setModal = false;
+        },
   },
 }
 </script>
