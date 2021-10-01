@@ -96,8 +96,22 @@ export default {
   methods: {
     getUser() {
       this.user_id = localStorage.getItem("user_id")
-      this.user_nickname = this.userInfo.nickname
-      this.password = this.userInfo.password
+      // this.user_nickname = this.userInfo.nickname
+      // this.password = this.userInfo.password
+      http.get('/user/info', {params: {user_id: this.user_id}})
+          .then((res) => {
+              if(res.data.result === "success") {
+                  // commit('setUserInfo', res.data.user);
+              // console.log(this.user_nickname)
+              this.user_nickname = res.data.user.nickname
+              this.password = res.data.user.password
+              } else {
+              alert("에러가 발생했습니다.")
+              }
+          })
+          .catch(() => {
+              alert("에러 발생!")
+          })
     },
     onCheckPassword() {
       if(this.editPassword) {
