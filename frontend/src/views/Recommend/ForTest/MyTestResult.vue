@@ -62,6 +62,8 @@
 import TagsBall from 'vue-tags-ball'
 import axios from "axios"
 import GoTop from '@/components/GoTop.vue';
+import http from '../../../utils/http-common.js'
+import { mapState } from 'vuex'
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
@@ -71,6 +73,9 @@ export default {
         "tags-ball":TagsBall
     
      
+    },
+    computed: {
+        ...mapState(["isLogin"])
     },
     data() {
         return{ 
@@ -99,8 +104,41 @@ export default {
     },
    
     methods:{
-         
-      
+        updateRes() {
+            // 회원일 때만 결과 저장해서 내 정보 업데이트
+            if(this.isLogin) {
+                const accords = localStorage.getItem("accords")
+                const accord = accords.split(",")
+                const Form = {
+                    "user_id" : localStorage.getItem("user_id"),
+                    "accord1" : accord[0],
+                    "accord2" : accord[1],
+                    "accord3" : accord[2],
+                    "accord4" : accord[3],
+                    "accord5" : accord[4],
+                    "longevity" : localStorage.getItem("longevity"),
+                    "silage" : localStorage.getItem("sillage"),
+                    "season" : localStorage.getItem("season")
+                }
+                http.put('user/update/myscent', Form)
+                    .then((res) => {
+                        if(res.data.result === "success") {
+                        console.log("저장 완료")
+                        } else {
+                        console.log("저장 실패")
+                        }
+                    })
+                    .catch(() => {
+                        console.log("axios 오류")
+                    })
+            } else {
+                // 비회원일 땐 바로 결과 지워버림
+                localStorage.removeItem("accords");
+                localStorage.removeItem("longevity");
+                localStorage.removeItem("sillage");
+                localStorage.removeItem("season");
+            }
+        }
     
        
     },
@@ -146,9 +184,9 @@ export default {
         .catch(()=>{
             console.log("데이터 못받음")
 
-        })
-
-
+        }),
+    
+        this.updateRes()
     },
 }
 
