@@ -43,7 +43,8 @@ export default {
     ...mapState(["userInfo"])
   },
   created() {
-    this.getUser()
+    this.getUser(),
+    console.log(this.userInfo)
   },
   methods: {
     getUser() {
@@ -54,6 +55,8 @@ export default {
           if (res.data.result === "success") {
             this.$store.commit("setUserInfo", res.data.user);
             this.user = this.userInfo;
+            console.log("axios 요청 성공 후 user info")
+            console.log(this.user)
           } else {
             alert("에러가 발생했습니다.");
           }
