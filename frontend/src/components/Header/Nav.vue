@@ -76,36 +76,7 @@
         </li>
       </ul>
     </div>
-    <div class="menu-item">
-      <a
-        class="nav-link dropdown-toggle"
-        href="#"
-        id="navbarDarkDropdownMenuLink"
-        role="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        User
-      </a>
-
-      <ul
-        class="dropdown-menu dropdown-menu-dark mt-3"
-        aria-labelledby="navbarDarkDropdownMenuLink"
-      >
-        <li>
-          <div class="drop-item">
-            <router-link to="/signup">Signup</router-link>
-          </div>
-        </li>
-        <li>
-          <div class="drop-item">
-            <router-link to="/login">Login</router-link>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="menu-item" style="padding: 20px">
+    <div v-if="isLogin" class="menu-item" style="padding: 20px">
       <router-link to="/mypage"
         ><img
           src="@/assets/icons/mypage-btn.png"
@@ -114,16 +85,56 @@
       /></router-link>
     </div>
     <!-- 로그인 상태일 때 로그아웃 처리해야함-->
-    <div class="menu-item" style="margin-right: 2vw; padding: 20px">
-      <router-link to="/logout"
-        ><img
+    <div v-if="isLogin" class="menu-item" style="margin-right: 2vw; padding: 20px">
+      <img
           src="@/assets/icons/Logout-btn.png"
           alt="logout"
           style="width: 1.2vw"
+          @click="logoutChk()"
+      />
+    </div>
+    <div v-else class="menu-item" style="margin-right: 2vw; padding: 20px">
+      <router-link to="/login"
+        ><img
+          src="@/assets/icons/Login-btn.png"
+          alt="login"
+          style="width: 1.4vw"
       /></router-link>
     </div>
   </div>
 </template>
+
+<script>
+import { mapState, mapMutations } from 'vuex';
+export default {
+  computed: {
+    ...mapState(["isLogin", "userInfo"]),
+  },
+  created() {
+    this.loginChk()
+  },
+  methods: {
+    loginChk() {
+      if(localStorage.getItem("user_id") === null) {
+        this.$store.commit("setIsLogined", false)
+      } else {
+        this.$store.commit("setIsLogined", true)
+      }
+    },
+    logoutChk() {
+      this.$store.dispatch("logout")
+                .then(() => {
+                  if(this.$route.path !== "/")
+                    this.$router.replace("/");
+                })
+    },
+  },
+  data() {
+    return {
+    }
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 @import "../../styles/common.scss";
