@@ -1,7 +1,7 @@
 <template>
   <div id="MyProfileRoot">
     <div class="profile-box">
-      <p class="user-id">| {{user.id}}
+      <p class="user-id">| {{user_id}}
         <router-link to="/mypage/modify" class="user-edit-btn"><i class="fas fa-user-edit edit-btn"></i></router-link>
       </p>
       <div class="scents-box">
@@ -9,39 +9,23 @@
         <table class="accords-table">
           <th>
             <td colspan="2" class="accords-1">
-              {{user.accords[0]}}
+              {{user.accord1}}
             </td>
           </th>
           <tr>
             <td class="accords-2">
-              {{user.accords[1]}}
+              {{user.accord2}}
             </td>
             <td class="accords-3">
-              {{user.accords[2]}}
-            </td>
-          </tr>
-        </table>
-        <!-- notes -->
-        <table class="notes-table">
-          <th>
-            <td colspan="2" class="notes-1">
-              {{user.notes[0]}}
-            </td>
-          </th>
-          <tr>
-            <td class="notes-2">
-              {{user.notes[1]}}
-            </td>
-            <td class="notes-3">
-              {{user.notes[2]}}
+              {{user.accord3}}
             </td>
           </tr>
           <tr>
-            <td class="notes-4">
-              {{user.notes[3]}}
+            <td class="accords-4">
+              {{user.accord4}}
             </td>
-            <td class="notes-5">
-              {{user.notes[4]}}
+            <td class="accords-4">
+              {{user.accord5}}
             </td>
           </tr>
         </table>
@@ -52,28 +36,40 @@
 
 <script>
 import { mapState } from 'vuex';
+import http from '../../utils/http-common.js'
 export default {
   name: "MyProfile",
   computed: {
     ...mapState(["userInfo"])
   },
   created() {
-    localStorage.setItem("user_id", "soso"),
     this.getUser()
   },
   methods: {
     getUser() {
-      this.user.id = localStorage.getItem("user_id")
-      this.$store.dispatch("getUserInfo", this.user.id)
+      this.user_id = localStorage.getItem("user_id")
+      http
+        .get("/user/info", { params: { user_id: this.user_id } })
+        .then((res) => {
+          if (res.data.result === "success") {
+            this.$store.commit("setUserInfo", res.data.user);
+            this.user = this.userInfo;
+          } else {
+            alert("에러가 발생했습니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러 발생!");
+        });
+    },
+    infoChk() {
+      // if()
     },
   },
   data() {
     return {
-      user: {
-        id: "",
-        accords : ["Accord1", "Accord2", "Accord3"],
-        notes: ["#Note1","#Note2","#Note2","#Note4","#Note5",],
-      }
+      user: {},
+      user_id: String,
     }
   }
 
@@ -134,7 +130,7 @@ export default {
 .accords-table, .notes-table {
   display: inline-block;
   // border: 1px solid black;
-  width: 40%;
+  width: 60%;
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -144,7 +140,7 @@ export default {
   align-items: center;
 }
 tr,th {
-  height: 50px;
+  height: 60px;
 }
 td {
   width: 40vw;
@@ -154,16 +150,17 @@ td {
 .accords-table, .notes-table > tr > td {
   text-align: center;
 }
-.accords-1, .notes-1 {
+.accords-1 {
+  font-size: 2.5em;
+}
+.accords-2 {
+  font-size: 2.0em;
+}
+.accords-3 {
   font-size: 1.7em;
 }
-.accords-2, .notes-4 {
-  font-size: 1.2em;
-}
-.notes-2 {
-  font-size: 1.5em;
-}
-.notes-3 {
+.accords-4 {
   font-size: 1.3em;
+  color: gray;
 }
 </style>

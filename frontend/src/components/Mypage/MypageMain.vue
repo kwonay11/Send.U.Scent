@@ -20,6 +20,7 @@
 import PageTitle from '../../components/Header/PageTitle.vue';
 import MyProfile from '../../components/Mypage/MyProfile.vue';
 import MyReviews from '../../components/Mypage/MyReviews.vue';
+import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
 export default {
   name: "MypageMain",

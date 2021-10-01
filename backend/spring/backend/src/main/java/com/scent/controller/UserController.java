@@ -121,8 +121,23 @@ public class UserController {
 
 		return response;
 	}
+	
+	@PutMapping("/update/myscent")
+	@ApiOperation(value = "테스트 결과 취향 저장 및 갱신", notes = "해당 유저의 테스트 결과를 저장한다.")
+	public Map<String, Object> UpdateRes(@RequestBody User user) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		if (userService.updateRes(user.getUser_id(), user.getAccord1(), user.getAccord2(), user.getAccord3(), user.getAccord4(), user.getAccord5(), user.getLongevity(), user.getSilage(), user.getSeason()) > 0) {
+			response.put("result", SUCCESS);
+		} else {
+			response.put("result", FAIL);
+			response.put("reason", "일치하는 회원정보가 없습니다. 사용자 id를 확인해주세요.");
+		}
+		
+		return response;
+	}
 
-	@DeleteMapping("/delete/{user_id}")
+	@DeleteMapping("/delete}")
 	@ApiOperation(value = "회원 탈퇴", notes = "해당 유저의 정보를 삭제한다.")
 	public Map<String, Object> DeleteUser(@RequestParam String user_id) {
 		Map<String, Object> response = new HashMap<String, Object>();

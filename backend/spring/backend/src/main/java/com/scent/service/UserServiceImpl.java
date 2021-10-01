@@ -63,4 +63,17 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
+	@Override
+	public int updateRes(String user_id, String accord1, String accord2, String accord3, String accord4, String accord5,
+			Integer longevity, Integer silage, String season) {
+		Optional<User> oUser = userRepo.findById(user_id);
+		if(oUser.isPresent()) {
+			User user = oUser.get(); 
+			user.updateRes(user_id, accord1, accord2, accord3, accord4, accord5, longevity, silage, season);
+			userRepo.save(user);
+			return 1;
+		}
+		return 0;
+	}
+
 }
