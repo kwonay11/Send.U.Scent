@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +22,39 @@ import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" })
 @RestController
-@RequestMapping(value = "/filter")
+@RequestMapping(value = "/listPage")
 public class FilterController {
 
 	@Autowired
 	FilterService filterService;
+	
+	@GetMapping(value = "/default")
+	@ApiOperation(value = "defalut 리스트", notes = "500개의 평점 4.0 이상 가져오기")
+	public ResponseEntity<List<Map<String, Object>>> defaultlist (HttpServletResponse response) {
+		List<Perfume> list = filterService.showAllList();
+		List<Map<String, Object>> searchList = new ArrayList<>();
+
+		if (!list.isEmpty()) {
+			for (int i = 0; i < list.size(); i++) {
+				Map<String, Object> map = new HashMap<>();
+				int perfId = list.get(i).getId();
+				String perfTitle = list.get(i).getTitle();
+				String perfAccord = list.get(i).getAccords();
+				float perfScore = list.get(i).getRatingscore();				
+				map.put("perfume_id", perfId);
+				map.put("title", perfTitle);
+				map.put("accords", perfAccord);
+				map.put("score", perfScore);				
+				searchList.add(map);
+			}
+		} else {
+			System.out.println("해당 향수 없음");
+		}
+		return new ResponseEntity<List<Map<String, Object>>>(searchList, HttpStatus.OK);
+	}
 
 	@GetMapping(value = "/search/{title}")
-	@ApiOperation(value = "향수 이름,브랜드 검색", notes = "검색어 포함하는 향수 다 가져오기")
+	@ApiOperation(value = "향수 이름 검색", notes = "검색어 포함하는 향수 다 가져오기")
 	public ResponseEntity<List<Map<String, Object>>> searchTitle(@PathVariable("title") String title,
 			HttpServletResponse response) {
 		List<Perfume> list = filterService.findPerfumeTitle(title);
@@ -56,10 +79,10 @@ public class FilterController {
 
 //	@GetMapping(value = "/array/{season}/{daynight}/{gender}")
 	@GetMapping("filter")	
-	@ApiOperation(value = "시간 성별 계절 ", notes = "")
-	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2( @RequestParam(value="daynight",required=false,defaultValue="") String daynight,
-			@RequestParam(value="gender",required=false,defaultValue="") String gender,
-			@RequestParam(value="season",required=false,defaultValue="") String season,
+	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
+	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2( @RequestParam(value="daynight",required=false) String daynight,
+			@RequestParam(value="gender",required=false) String gender,
+			@RequestParam(value="season",required=false) String season,
 			HttpServletResponse response) {
 
 		List<Perfume> list = filterService.findChecked(season, daynight, gender);

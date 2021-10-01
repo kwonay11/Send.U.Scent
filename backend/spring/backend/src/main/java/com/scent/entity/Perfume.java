@@ -61,13 +61,13 @@ public class Perfume {
 	private String base;
 
 	@Column(name = "rating_score")
-	private float rating_score;
+	private float ratingscore;
 
 	@Column(name = "votes")
 	private int votes;
 
 	public Perfume(int id, String title, String brand, String accords, String season, String gender, String longevity,
-			int sillage, String daynight, String top, String middle, String base, float rating_score, int votes) {
+			int sillage, String daynight, String top, String middle, String base, float ratingscore, int votes) {
 		this.id = id;
 		this.title = title;
 		this.brand = brand;
@@ -80,7 +80,7 @@ public class Perfume {
 		this.top = top;
 		this.middle = middle;
 		this.base = base;
-		this.rating_score = rating_score;
+		this.ratingscore = ratingscore;
 		this.votes = votes;
 	}
 
