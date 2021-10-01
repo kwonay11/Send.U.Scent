@@ -4,7 +4,7 @@
         <div class="black-bg">
             <div class="modal-box p-3">
                 <div class="modal-top">
-                    <p class="modal-title">관심목록에 추가하시겠습니까?</p>
+                    <p class="modal-title">관심 목록에 추가하시겠습니까?</p>
                 </div>
                 <div class="modal-middle">
                     <p class="perfume-name">" {{this.name}} "</p>
@@ -33,7 +33,7 @@ export default {
             },
         addBtn() {
             console.log(this.prodInfo);
-            swal(`${this.name}향수를 관심 향수 목록으로 이동`);
+            swal(`${this.name}를 관심 향수 목록으로 이동`);
             this.$emit("flag", false);
         },
     },
@@ -66,19 +66,19 @@ export default {
 }
 .black-bg {
   width: 100%;
-  height: 576%;
-  min-height: 100px;
+  height: 100%;
+  min-height: 1300px;
   position: relative;
-  top: -150%;
-  left: -1.22%;
-  background-color: rgba(0, 0, 0, 0.151);
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
   z-index: 10;
 }
 .modal-box {
   width: 370px;
   height: 260px;
   position: relative;
-  top: 40%;
+  top: 18%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
