@@ -42,11 +42,6 @@
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
-                    <div @click="modal()">
-                        <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
-                        <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
-                    </div>
-                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                 </div>
           
         </div>
@@ -60,12 +55,10 @@
 <script>
 import TagsBall from 'vue-tags-ball'
 import axios from "axios"
-import ModalLike from '@/components/ModalLike.vue';
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'DearTestResult',
     components: {
-        ModalLike,
         "tags-ball":TagsBall
     
      
@@ -290,7 +283,7 @@ export default {
      width:59%;
     color:black;
     font-family:$eng-font-family;
-    font-size:$detail-font-size;
+    font-size:$body-font-size;
  
     display:block;
    
