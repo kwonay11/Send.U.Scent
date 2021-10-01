@@ -65,7 +65,13 @@
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
 			<version>${querydsl.version}</version>
-		</dependency>			
+		</dependency>
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<version>${querydsl.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -82,7 +88,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-		<!-- jpa 동적 쿼리 사용을 위한 plugin -->			
+			<!-- jpa 동적 쿼리 사용을 위한 plugin -->
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>apt-maven-plugin</artifactId>
@@ -96,20 +102,12 @@
 							<outputDirectory>target/generated-sources/java</outputDirectory>
 							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 							<options>
-							<querydsl.entityAccessors>true</querydsl.entityAccessors>
+								<querydsl.entityAccessors>true</querydsl.entityAccessors>
 							</options>
 						</configuration>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.querydsl</groupId>
-						<artifactId>querydsl-apt</artifactId>
-						<version>${querydsl.version}</version> 
-						<scope>provided</scope>
-					</dependency>
-				</dependencies>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 
