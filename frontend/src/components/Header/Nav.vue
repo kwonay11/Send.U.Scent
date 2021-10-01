@@ -18,14 +18,14 @@
         class="dropdown-menu dropdown-menu-dark mt-3"
         aria-labelledby="navbarDarkDropdownMenuLink"
       >
-        <li>
+        <!-- <li>
           <div class="drop-item">
             <router-link to="/recommend/all">ALL</router-link>
           </div>
-        </li>
+        </li> -->
         <li>
           <div class="drop-item">
-            <router-link to="/recommend/softener">Softener</router-link>
+            <router-link to="/recommend/perfume">Perfume</router-link>
           </div>
         </li>
         <li>
