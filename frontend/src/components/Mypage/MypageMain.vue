@@ -38,7 +38,19 @@ export default {
     methods: {
       getUser() {
         this.user_id = localStorage.getItem("user_id")
-        this.$store.dispatch("getUserInfo", this.user_id)
+        // this.$store.dispatch("getUserInfo", this.user_id)
+        http
+        .get("/user/info", { params: { user_id: this.user_id } })
+        .then((res) => {
+          if (res.data.result === "success") {
+            this.$store.commit("setUserInfo", res.data.user);
+          } else {
+            alert("에러가 발생했습니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러 발생!");
+        });
       },
     },
     data() {
