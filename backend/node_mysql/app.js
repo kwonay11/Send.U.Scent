@@ -69,6 +69,14 @@ app.get("/api/users", (req, res) => {
         res.send(rows);
     });
 })
+app.get("/suscent/api/notices", (req, res) => {
+    connection.query('SELECT * FROM notice', function(err, rows) {
+        if(err) throw err;
+
+        console.log('The solution is: ', rows);
+        res.send(rows);
+    });
+})
 
 /**
  * @path {GET} http://localhost:8888/api/users/user?user_id=1
