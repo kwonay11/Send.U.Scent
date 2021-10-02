@@ -25,9 +25,21 @@
               </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/55758`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.55758.jpg" alt="Test">
-                <p>Velvet Rose & Oud Cologne Intense</p>
+              <router-link :to="`/recommend/detail/11465`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.11465.jpg" alt="Test">
+                <p>Caprifoglio (Honeysuckle)</p>
+              </router-link>
+            </splide-slide>
+            <splide-slide>
+              <router-link :to="`/recommend/detail/55613`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.55613.jpg" alt="Test">
+                <p>Do Son Limited Edition</p>
+              </router-link>
+            </splide-slide>
+            <splide-slide>
+              <router-link :to="`/recommend/detail/276`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.276.jpg" alt="Test">
+                <p>CK One</p>
               </router-link>
             </splide-slide>
             <splide-slide>
@@ -37,9 +49,9 @@
             </router-link>
             </splide-slide>
             <splide-slide>
-              <router-link :to="`/recommend/detail/55775`">
-                <img src="https://fimgs.net/mdimg/perfume/375x500.55775.jpg" alt="Test">
-                <p>Saguaro Blossom & Sand</p>
+              <router-link :to="`/recommend/detail/42828`">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.42828.jpg" alt="Test">
+                <p>Sel Santal</p>
               </router-link>
             </splide-slide>
             <splide-slide>
@@ -54,6 +66,9 @@
                 <p>Homme Fresh Eau de Parfum Kenzo</p>
               </router-link>
             </splide-slide>
+            
+       
+              
            </splide>
            
 
