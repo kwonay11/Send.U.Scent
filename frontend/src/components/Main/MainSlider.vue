@@ -9,7 +9,7 @@
             <h4>나를 표현하는 또 다른 방법<br>
                 당신은 특별하니까,<br>
                 맞춤 추천으로 조금 더 특별하게.</h4>
-            <div class="gorecommend"><router-link to="/recommend">바로 보기</router-link></div>
+            <div class="gorecommend"><router-link to="/recommend/perfume">바로 보기</router-link></div>
         </div>
 
 
@@ -21,7 +21,7 @@
             <h4>나를 표현하는 또 다른 방법<br>
                 당신은 특별하니까,<br>
                 맞춤 추천으로 조금 더 특별하게.</h4>
-            <div class="gorecommend"><router-link to="/recommend"><span>바로 보기</span></router-link></div>
+            <div class="gorecommend"><router-link to="/recommend/perfume"><span>바로 보기</span></router-link></div>
         </div>
         </splide-slide>
         <splide-slide>
@@ -31,7 +31,7 @@
             <h4>나를 표현하는 또 다른 방법<br>
                 당신은 특별하니까,<br>
                 맞춤 추천으로 조금 더 특별하게.</h4>
-            <div class="gorecommend"><router-link to="/recommend">바로 보기</router-link></div>
+            <div class="gorecommend"><router-link to="/recommend/perfume">바로 보기</router-link></div>
         </div>
         </splide-slide>
     </splide>
