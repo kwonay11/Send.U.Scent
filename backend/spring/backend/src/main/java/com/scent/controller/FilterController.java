@@ -78,7 +78,7 @@ public class FilterController {
 	}
 
 //	@GetMapping(value = "/array/{season}/{daynight}/{gender}")
-	@GetMapping("filter")	
+	@GetMapping("/filter")	
 	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
 	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2( @RequestParam(value="daynight",required=false) String daynight,
 			@RequestParam(value="gender",required=false) String gender,
