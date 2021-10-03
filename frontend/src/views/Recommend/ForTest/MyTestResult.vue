@@ -4,7 +4,7 @@
 
     <div class="box">
         <div class="title fadeIn">Send you your Scent</div>
-        <div class="subtitle fadeIn">000님에게 어울리는 향수에 대한
+        <div class="subtitle fadeIn">회원님에게 어울리는 향수에 대한
         </div>
         <div class="best fadeIn">
             <p >가장 잘 맞는 향은, </p>
@@ -27,30 +27,31 @@
    
         <div class="dec fadeIn"> 회원님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
-   
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
-                <router-link :to="`/recommend/detail/${value}`">
-                <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
-                 <div class="perfume_title">{{title[idx]}}</div>
-                </router-link>
-            </div>
+                    <router-link :to="`/recommend/detail/${value}`">
+                    <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
+                    <p class="perfume_title">{{title[idx]}}</p>
+                    </router-link>
+                    
+                </div>
+           
+            
         </div>
+
         <div class="dec2 fadeIn"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
-        <div class="perfume2">
+         <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
-                        <ModalLike v-if="setModal" @flag="closeModal" :id="`${value}`" :name="`${title2[idx]}`"/>
                     <img class="img" :src="`https://fimgs.net/mdimg/perfume/375x500.${value}.jpg`" alt="perfume-image">
                     <p class="perfume_title">{{title2[idx]}}</p>
                     </router-link>
-                    <div @click="modal()">
-                        <img v-if="!setModal" src="@/assets/icons/heart-on-btn.png" alt="hert-on">
-                        <img v-else src="@/assets/icons/heart-off-btn.png" alt="hert-off">
-                    </div>
+                    
                 </div>
           
         </div>
      </div>
+
+     <go-top />
     </div>
 
     
@@ -60,15 +61,21 @@
 <script>
 import TagsBall from 'vue-tags-ball'
 import axios from "axios"
-import ModalLike from '@/components/ModalLike.vue';
+import GoTop from '@/components/GoTop.vue';
+import http from '../../../utils/http-common.js'
+import { mapState } from 'vuex'
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
 export default {
     name:'TestResult',
     components: {
-        ModalLike,
+      
+        GoTop,
         "tags-ball":TagsBall
     
      
+    },
+    computed: {
+        ...mapState(["isLogin"])
     },
     data() {
         return{ 
@@ -79,10 +86,7 @@ export default {
             accords : [],
             accords_len : 0,
             setModal: false,
-            selectedProd: {
-                id: Number,
-                name: String,
-            },
+    
 
             accords_list : [],
             sorted_list : [],
@@ -95,33 +99,46 @@ export default {
             best_accord4:'',
             best_accord5:'',
            
-           
-
-            
-            
-           
-
-          
-           
 
         }
     },
    
     methods:{
-        
-        addHave(id, name) {
-            this.setModal = true;
-            this.selectedProd.id = id;
-            
-        },
-        closeModal() {
-            this.setModal = false;
-        },
-        modal(){
-            this.setModal = true;
-        },
-         
-      
+        updateRes() {
+            // 회원일 때만 결과 저장해서 내 정보 업데이트
+            if(this.isLogin) {
+                const accords = localStorage.getItem("accords")
+                const accord = accords.split(",")
+                const Form = {
+                    "user_id" : localStorage.getItem("user_id"),
+                    "accord1" : accord[0],
+                    "accord2" : accord[1],
+                    "accord3" : accord[2],
+                    "accord4" : accord[3],
+                    "accord5" : accord[4],
+                    "longevity" : localStorage.getItem("longevity"),
+                    "silage" : localStorage.getItem("sillage"),
+                    "season" : localStorage.getItem("season")
+                }
+                http.put('user/update/myscent', Form)
+                    .then((res) => {
+                        if(res.data.result === "success") {
+                        console.log("저장 완료")
+                        } else {
+                        console.log("저장 실패")
+                        }
+                    })
+                    .catch(() => {
+                        console.log("axios 오류")
+                    })
+            } else {
+                // 비회원일 땐 바로 결과 지워버림
+                localStorage.removeItem("accords");
+                localStorage.removeItem("longevity");
+                localStorage.removeItem("sillage");
+                localStorage.removeItem("season");
+            }
+        }
     
        
     },
@@ -137,6 +154,9 @@ export default {
             this.title2 = res.data.title2
             this.accords = res.data.accords
             this.sorted_list = res.data.sorted_accords
+            
+
+
 
             this.best_accord1 = this.sorted_list[0][0];
             this.best_accord2 = this.sorted_list[1][0];
@@ -164,9 +184,9 @@ export default {
         .catch(()=>{
             console.log("데이터 못받음")
 
-        })
-
-
+        }),
+    
+        this.updateRes()
     },
 }
 

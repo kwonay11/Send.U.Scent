@@ -33,6 +33,7 @@
 
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
+import http from "../../utils/http-common.js";
 import { mapState } from 'vuex';
 export default {
   name: 'MyinfoCancel',
@@ -58,6 +59,12 @@ export default {
       if(ans) {
         this.cancelYes = true;
         // 여기에 회원 탈퇴 axios
+        http.delete('/user/delete', {params: {user_id: this.user.userid}})
+            .then((res) => {
+              if(res.data.result === "success") {
+                this.$store.dispatch("logout")
+              }
+            })
         this.countDownTimer();
         setTimeout(() => {
           this.$router.push('/');
@@ -77,8 +84,8 @@ export default {
   data() {
     return {
       user: {
-        userid: 'User_ID',
-        nickname: '김싸피',
+        userid: String,
+        nickname: String,
       },
       cancelYes: false,
       timeCnt: 3,

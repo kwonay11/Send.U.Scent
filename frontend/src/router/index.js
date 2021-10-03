@@ -1,6 +1,3 @@
-// import Router from "vue-router";
-// import Vue from "vue";
-
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 // Recommend 메뉴

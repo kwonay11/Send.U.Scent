@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,18 +14,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Builder
+//@Data
+//@Builder
 @Getter
-@Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "perfume")
+@Entity(name = "filter_perfm")
 public class Perfume {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "perfume_id")
+	@Column(name = "filter_perfume_id")
 	private int id;
 
 	@Column(name = "title")
@@ -36,6 +36,9 @@ public class Perfume {
 	@Column(name = "accords")
 	private String accords;
 
+	@Column(name = "season")
+	private String season;
+
 	@Column(name = "gender")
 	private String gender;
 
@@ -46,7 +49,7 @@ public class Perfume {
 	private int sillage;
 
 	@Column(name = "daynight")
-	private int daynight;
+	private String daynight;
 
 	@Column(name = "top")
 	private String top;
@@ -58,9 +61,27 @@ public class Perfume {
 	private String base;
 
 	@Column(name = "rating_score")
-	private float rating_score;
+	private float ratingscore;
 
 	@Column(name = "votes")
 	private int votes;
+
+	public Perfume(int id, String title, String brand, String accords, String season, String gender, String longevity,
+			int sillage, String daynight, String top, String middle, String base, float ratingscore, int votes) {
+		this.id = id;
+		this.title = title;
+		this.brand = brand;
+		this.accords = accords;
+		this.season = season;
+		this.gender = gender;
+		this.longevity = longevity;
+		this.sillage = sillage;
+		this.daynight = daynight;
+		this.top = top;
+		this.middle = middle;
+		this.base = base;
+		this.ratingscore = ratingscore;
+		this.votes = votes;
+	}
 
 }

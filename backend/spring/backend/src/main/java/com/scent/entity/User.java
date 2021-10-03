@@ -17,7 +17,7 @@ public class User {
 	@Id // 기본키 설정
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(nullable = false, unique = true, updatable = true, length = 20)
 	private String user_id;
 
@@ -30,10 +30,46 @@ public class User {
 	@Column(nullable = true, updatable = false)
 	@ColumnDefault("false")
 	private boolean admin;
+
+	@Column(nullable = true, updatable = true, length = 20)
+	private String accord1;
 	
+	@Column(nullable = true, updatable = true, length = 20)
+	private String accord2;
+	
+	@Column(nullable = true, updatable = true, length = 20)
+	private String accord3;
+	
+	@Column(nullable = true, updatable = true, length = 20)
+	private String accord4;
+	
+	@Column(nullable = true, updatable = true, length = 20)
+	private String accord5;
+	
+	@Column(nullable = true, updatable = true)
+	private Integer longevity;
+	
+	@Column(nullable = true, updatable = true)
+	private Integer silage;
+	
+	@Column(nullable = true, updatable = true, length = 20)
+	private String season;
+
 	public void update(String password, String nickname) {
 		this.password = password;
 		this.nickname = nickname;
+	}
+	
+	public void updateRes(String user_id, String accord1, String accord2, String accord3, String accord4, String accord5, Integer longevity, Integer silage, String season) {
+		this.user_id = user_id;
+		this.accord1 = accord1;
+		this.accord2 = accord2;
+		this.accord3 = accord3;
+		this.accord4 = accord4;
+		this.accord5 = accord5;
+		this.longevity = longevity;
+		this.silage = silage;
+		this.season = season;
 	}
 
 }

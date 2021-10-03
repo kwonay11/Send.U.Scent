@@ -12,7 +12,7 @@
             </li>
         </ul> -->
         <div class="item-img">
-            <img src="" alt="향수 이미지">
+            <img :src="`${this.ImgUrl}`" alt="향수 이미지">
         </div>
         <span class="item-name">{{this.name}}</span>
     </div>
@@ -32,9 +32,14 @@ export default {
         }
     },
     mounted() {
+        console.log('심플',this.id)
+        console.log(this.ImgUrl)
         // this.lineLen = this.prodList.length/5;
         // console.log(this.lineLen);
     },
+    created() {
+        
+    }
 }
 </script>
 
