@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from django.db import connection
 from django.http import JsonResponse, HttpResponse
+import random
 import pandas as pd
 import numpy as np
 
@@ -124,7 +125,43 @@ def rec2(request):
             dic[k] = v/total
         sdic = sorted(dic.items(), key=lambda x : x[1], reverse=True)
 
-
+        strSql = f"""SELECT longevity, silage, season FROM recommand.user where user_id='{user_id}'"""
+        cursor.execute(strSql)
+        userInfo = cursor.fetchall()
+        query = f"""SELECT perfume.perfume_id, title FROM perfume INNER JOIN onlyseason ON perfume.perfume_id = onlyseason.perfume_id where accords like '%{sdic[0][0]}%' and accords like '%{sdic[1][0]}%' and accords like '%{sdic[2][0]}%'"""
+        if userInfo[0][0] != None:
+            if userInfo[0][0] == 4:
+                ql = " and longevity >= 3"
+            else:
+                ql = " and longevity <= 3"
+            if userInfo[0][1] == 2:
+                qs = " and sillage >= 3"
+            else:
+                qs = " and sillage <= 3"
+            query = query+ql+qs+ f""" and season='{userInfo[0][2]}';"""
+        cursor.execute(query)
+        datas = cursor.fetchall()
+        if len(datas) < 11:
+            for i in range(len(datas)):
+                perfume_info = {
+                    'perfume_id': datas[i][0],
+                    'title': datas[i][1],
+                }
+                resdata.append(perfume_info)
+        else:
+            out = random.sample(datas, 10)
+            for i in range(10):
+                perfume_info = {
+                    'perfume_id': out[i][0],
+                    'title': out[i][1],
+                }
+                resdata.append(perfume_info)
+        context = {
+            'reccList': resdata,
+        }
+        connection.commit()
+        connection.close()
+        return JsonResponse(context, status = 200)
     except:
         connection.rollback()
         return HttpResponse(status = 404)
