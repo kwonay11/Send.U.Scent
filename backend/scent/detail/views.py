@@ -62,7 +62,29 @@ def detail(request, perfume_id):
 
 @api_view(['GET'])
 def review(request, perfume_id):
-    pass
+    try:
+        cursor = connection.cursor()
+        strSql = f"SELECT * FROM recommand.userhave WHERE perfume_id={perfume_id} ORDER BY id DESC;"
+        cursor.execute(strSql)
+        reviews = cursor.fetchall()
+        datas = []
+        for data in reviews:
+            query = f"SELECT user.user_id FROM user WHERE id={data[2]};"
+            cursor.execute(query)
+            user_id = cursor.fetchall()
+            row = {
+                'id': data[0],
+                'user_id': user_id[0][0],
+                'review': data[3],
+                'score': data[4],
+            }
+            datas.append(row)
+        connection.commit()
+        connection.close()
+        return JsonResponse({'reviews': datas}, status = 200)
+    except:
+        connection.rollback()
+        return HttpResponse(status = 404)
 
 
 @api_view(['GET'])
