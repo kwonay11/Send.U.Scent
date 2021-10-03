@@ -1,75 +1,67 @@
 // 상품 리스트 + 필터
 <template>
     <div id="ProdListViewRoot">
-    <div class="filter-box">
-      <div class="inner-box">
-        <br />
-        <div>
-        <form v-on:submit="onSubmitForm">
-          <input type="text" v-model="contents.title"> 
-          <button>검색</button> 
-        </form>
-          <!-- <button @click='searchArr()'>이름 검색</button> -->
-        </div>
-        <br />
-        <div id="text-line">
-          <br />
-          <label id="text-line2">Filter</label>
-
-          <div class="filter">
-            <br />
-            <label id="title">|계절별</label>
-            <br />
-            <div class="filter-check">
-              <input type="checkbox" value="spring" v-model="season" />
-              <label for="spring">봄</label>
-              <br />
-              <input type="checkbox" value="summer" v-model="season" />
-              <label for="summer">여름</label>
-              <br />
-              <input type="checkbox" value="autumn" v-model="season" />
-              <label for="autumn">가을</label>
-              <br />
-              <input type="checkbox" value="winter" v-model="season" />
-              <label for="winter">겨울</label>
-            </div>
-            <br />
-            <label id="title">|시간별</label>
-            <br />
-            <div class="filter-check">
-              <input type="checkbox" value="1" v-model="daynight" />
-              <label for="night">밤</label>
-              <br />
-              <input type="checkbox" value="2" v-model="daynight" />
-              <label for="day">낮</label>
-            </div>       
-            <br />
-            <br />
-            <label id="title">|성별</label>
-            <br />
-            <div class="filter-check">
-              <input type="checkbox" value="men" v-model="gender"/>
-              <label for="male">남성</label>
-              <br />
-              <input type="checkbox" value="women" v-model="gender"
-              />
-              <label for="female">여성</label>
-            </div>
-            <!-- <button @click='checkArr()'>check</button>      -->
-            <button @click='checkArr()'>check</button>                
+      <div class="filter-box">
+        <div class="inner-box">
+          <div>
+          <form v-on:submit="onSubmitForm">
+            <input type="text" v-model="contents.title"> 
+            <button>검색</button> 
+          </form>
           </div>
-          <br />
-          <!-- <span>체크한 이름: {{ checkedNames }}</span> -->
+          <div id="text-line">
+            <label id="text-line2">Filter</label>
+            <div class="filter">
+              <label id="title">|계절별</label>
+              <div class="filter-check">
+                <input type="checkbox" value="spring" v-model="season" />
+                <label for="spring">봄</label>
+                <br />
+                <input type="checkbox" value="summer" v-model="season" />
+                <label for="summer">여름</label>
+                <br />
+                <input type="checkbox" value="autumn" v-model="season" />
+                <label for="autumn">가을</label>
+                <br />
+                <input type="checkbox" value="winter" v-model="season" />
+                <label for="winter">겨울</label>
+              </div>
+              <br />
+              <label id="title">|시간별</label>
+              <br />
+              <div class="filter-check">
+                <input type="checkbox" value="1" v-model="daynight" />
+                <label for="night">밤</label>
+                <br />
+                <input type="checkbox" value="2" v-model="daynight" />
+                <label for="day">낮</label>
+              </div>       
+              <br />
+              <br />
+              <label id="title">|성별</label>
+              <br />
+              <div class="filter-check">
+                <input type="checkbox" value="men" v-model="gender"/>
+                <label for="male">남성</label>
+                <br />
+                <input type="checkbox" value="women" v-model="gender"
+                />
+                <label for="female">여성</label>
+              </div>
+              <button @click='checkArr()'>check</button>                
+            </div>
+            <br />
+          </div>
         </div>
       </div>
-    </div>
-      <prod-list-multi :results="results"/>
+    <prod-list-multi :results="results"/>
   </div>          
 </template>
 
 <script >
 import axios from "axios";
 import ProdListMulti from './ProdListMulti.vue';
+//import { API_BASE_URL } from "../utils/config.js";
 export default {
   name: "ProdListView",
   props: {
@@ -90,7 +82,6 @@ export default {
     };
   },
   methods: {
-    //버튼 만들어서 누르면 넘기기
     checkArr(){
         axios
         .get(
@@ -98,11 +89,8 @@ export default {
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
-            // console.log("체크박스");
-            // console.log(res);
-            // console.log("받음");
+            console.log(res);
             this.results = res.data;
-            // console.log(this.results);
           });
     },
     searchArr(){
@@ -129,7 +117,7 @@ export default {
             console.log("받음");
             //this.$router.push({ name: "RecPerfume" });
           });
-      },
+    },
   },
   created(){
         axios
@@ -137,8 +125,8 @@ export default {
             `http://localhost:8080/sus/listPage/default`
         )          
         .then((res) => {
+            this.results = res.data;         
             console.log(res);
-            this.results = res.data;
             console.log(this.results);
           });
     },
@@ -164,7 +152,6 @@ export default {
   font-size: 20px;
 }
 >>>>>>> Stashed changes
-
 #text-line {
   float: left;
 }
