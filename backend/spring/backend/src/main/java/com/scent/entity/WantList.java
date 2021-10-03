@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -33,8 +34,16 @@ public class WantList {
 //		@JoinColumn(name = "perfume_id")
 //		private Perfume perfume;
 		
-		@ManyToOne
-		@JoinColumn(name = "user_id")
-		private User user;
+//		@ManyToOne
+//		@JoinColumn(name = "user_id")
+//		private User user;
 		
+		@Column(nullable = false, updatable = false)
+		private int user_id;
+		
+		@Column(nullable = false, updatable = false)
+		private int perfume_id;
+		
+//		@Transient
+		private String title;
 }
