@@ -137,7 +137,7 @@ def rec2(request):
             if userInfo[0][1] == 2:
                 qs = " and sillage >= 3"
             else:
-                qs = " and sillage <= 3"
+                qs = " and sillage <= 2"
             query = query+ql+qs+ f""" and season='{userInfo[0][2]}';"""
         cursor.execute(query)
         datas = cursor.fetchall()
