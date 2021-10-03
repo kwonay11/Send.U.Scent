@@ -1,5 +1,8 @@
 package com.scent.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -54,6 +57,9 @@ public class User {
 	
 	@Column(nullable = true, updatable = true, length = 20)
 	private String season;
+	
+//	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+//	private List<HaveList> havelist = new ArrayList<HaveList>();
 
 	public void update(String password, String nickname) {
 		this.password = password;

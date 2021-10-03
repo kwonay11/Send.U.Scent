@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,10 +29,12 @@ public class WantList {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
 		
-		@Column(nullable = false)
-		private int perfume_id;
+//		@ManyToOne
+//		@JoinColumn(name = "perfume_id")
+//		private Perfume perfume;
 		
-		@Column(nullable = false)
-		private int user_id;
+		@ManyToOne
+		@JoinColumn(name = "user_id")
+		private User user;
 		
 }
