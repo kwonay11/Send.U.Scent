@@ -114,9 +114,14 @@
 
 
       <!-- 리뷰 -->
-      <div class="line"></div>
-        <div>리뷰리뷰</div>
-      <div class="line"></div>
+      <div v-if="reviewList.length===0">
+        <div class="line"></div>
+      </div>
+      <div v-else>
+        <div class="line"></div>
+          <MyReviews ctitle="AllReviews" :reviewList="reviewList" />
+        <div class="line"></div>
+      </div>
 
 
       <!-- 뒤로가기 버튼 -->
@@ -134,6 +139,7 @@
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
+import MyReviews from '../../components/Mypage/MyReviews.vue';
 import ModalLike from '@/components/ModalLike.vue';
 import GoTop from '../../components/GoTop.vue';
 
@@ -146,6 +152,7 @@ export default {
     SIcon,
     SAccord,
     SNote,
+    MyReviews,
     ModalLike,
     GoTop,
   },
@@ -190,6 +197,7 @@ export default {
           number: 82,
         },
       ],
+      reviewList: [],
     }
   },
   created() {
@@ -211,15 +219,36 @@ export default {
     .catch((err) => {
       this.$router.push({ name: 'Page404'})
     })
+
+    this.getReviews(perfume_id)
+    .then((res) => {
+      console.log('성공')
+      console.log(res.data.reviews)
+      console.log('성공')
+
+      this.reviewList = res.data.reviews
+    })
+    .catch((err) => {
+      console.error(err)
+      console.log('에러')
+    })
   },
   methods: {
     goBack() {
       this.$router.push({ name: 'Perfume'})
     },
     getPerfumeInfo: async function (perfume_id) {
-      const url = DJANGO_URL + `/scent/api/detail/${perfume_id}`
+      const url = DJANGO_URL + `/api/detail/${perfume_id}`
       const res = await axios.get(url)
       if (res.status === 200) {
+        return res
+      }
+    },
+    getReviews: async function (perfume_id) {
+      const url = DJANGO_URL + `/api/detail/${perfume_id}/review`
+      const res = await axios.get(url)
+      if (res.status === 200) {
+        console.log(res)
         return res
       }
     },
