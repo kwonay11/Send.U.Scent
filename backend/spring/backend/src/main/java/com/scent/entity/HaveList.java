@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -28,10 +30,18 @@ public class HaveList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "perfume_id", insertable = false, updatable = false)
+//	@Column(nullable = false)
+//	private Perfume perfume;
+	
+	@Column(nullable = false, updatable = false)
 	private int perfume_id;
 	
-	@Column(nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+//	private User user;
+	@Column(nullable = false, updatable = false)
 	private int user_id;
 	
 	@Column(nullable = true, updatable = true, length = 100)
@@ -39,4 +49,9 @@ public class HaveList {
 	
 	@Column(nullable = true, updatable = true, columnDefinition = "float default 0.0")
 	private float score;
+	
+	public void insertRev(String review, float score) {
+		this.review = review;
+		this.score = score;
+	}
 }
