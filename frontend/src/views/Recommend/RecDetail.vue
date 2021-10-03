@@ -64,6 +64,13 @@
       <div class="line"></div>
 
 
+      <!-- 향수간 유사도 기반 추천 향수 -->
+      <div v-if="reccList.length>0">
+        <RecSlider :reccList="reccList" />
+        <div class="line"></div>
+      </div>
+
+
       <!-- 상세설명(accord, note) -->
       <div class="d-desc">
         이미지로 분위기를 느껴보세요
@@ -139,7 +146,8 @@
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
-import MyReviews from '../../components/Mypage/MyReviews.vue';
+import MyReviews from '@/components/Mypage/MyReviews.vue'
+import RecSlider from '@/components/Recommend/RecSlider.vue'
 import ModalLike from '@/components/ModalLike.vue';
 import GoTop from '../../components/GoTop.vue';
 
@@ -153,6 +161,7 @@ export default {
     SAccord,
     SNote,
     MyReviews,
+    RecSlider,
     ModalLike,
     GoTop,
   },
@@ -198,6 +207,14 @@ export default {
         },
       ],
       reviewList: [],
+      reccList: [],
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.path != from.path) {
+        this.$router.go();
+      }
     }
   },
   created() {
@@ -222,11 +239,19 @@ export default {
 
     this.getReviews(perfume_id)
     .then((res) => {
+      this.reviewList = res.data.reviews
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+
+    this.getReccList(perfume_id)
+    .then((res) => {
       console.log('성공')
-      console.log(res.data.reviews)
+      console.log(res.data.reccList)
       console.log('성공')
 
-      this.reviewList = res.data.reviews
+      this.reccList = res.data.reccList
     })
     .catch((err) => {
       console.error(err)
@@ -246,6 +271,13 @@ export default {
     },
     getReviews: async function (perfume_id) {
       const url = DJANGO_URL + `/api/detail/${perfume_id}/review`
+      const res = await axios.get(url)
+      if (res.status === 200) {
+        return res
+      }
+    },
+    getReccList: async function (perfume_id) {
+      const url = DJANGO_URL + `/api/detail/rec1/${perfume_id}`
       const res = await axios.get(url)
       if (res.status === 200) {
         console.log(res)
