@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scent.entity.Perfume;
+import com.scent.entity.perfmFilter;
 import com.scent.service.FilterService;
 
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +28,10 @@ public class FilterController {
 
 	@Autowired
 	FilterService filterService;
-	
+
 	@GetMapping(value = "/default")
 	@ApiOperation(value = "defalut 리스트", notes = "500개의 평점 4.0 이상 가져오기")
-	public ResponseEntity<List<Map<String, Object>>> defaultlist (HttpServletResponse response) {
+	public ResponseEntity<List<Map<String, Object>>> defaultlist(HttpServletResponse response) {
 		List<Perfume> list = filterService.showAllList();
 		List<Map<String, Object>> searchList = new ArrayList<>();
 
@@ -40,11 +41,11 @@ public class FilterController {
 				int perfId = list.get(i).getId();
 				String perfTitle = list.get(i).getTitle();
 				String perfAccord = list.get(i).getAccords();
-				float perfScore = list.get(i).getRatingscore();				
+				float perfScore = list.get(i).getRatingscore();
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
-				map.put("score", perfScore);				
+				map.put("score", perfScore);
 				searchList.add(map);
 			}
 		} else {
@@ -78,16 +79,16 @@ public class FilterController {
 	}
 
 //	@GetMapping(value = "/array/{season}/{daynight}/{gender}")
-	@GetMapping("filter")	
+	@GetMapping("/filter")
 	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
-	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2( @RequestParam(value="daynight",required=false) String daynight,
-			@RequestParam(value="gender",required=false) String gender,
-			@RequestParam(value="season",required=false) String season,
-			HttpServletResponse response) {
+	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2(
+			@RequestParam(value = "daynight", required = false) String daynight,
+			@RequestParam(value = "gender", required = false) String gender,
+			@RequestParam(value = "season", required = false) String season, HttpServletResponse response) {
 
 		List<Perfume> list = filterService.findChecked(season, daynight, gender);
 		List<Map<String, Object>> searchList = new ArrayList<>();
-		
+
 		// list -> idList기반으로 Perfume객체 찾아와서 담기
 		if (!list.isEmpty()) {
 			for (int i = 0; i < list.size(); i++) {
@@ -97,13 +98,13 @@ public class FilterController {
 				String perfAccord = list.get(i).getAccords();
 				String perfGender = list.get(i).getGender();
 				String perfDaynight = list.get(i).getDaynight();
-				String perfSeason = list.get(i).getSeason();				
+				String perfSeason = list.get(i).getSeason();
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
 				map.put("gender", perfGender);
 				map.put("daynight", perfDaynight);
-				map.put("season", perfSeason);				
+				map.put("season", perfSeason);
 				searchList.add(map);
 			}
 		} else {
@@ -111,6 +112,43 @@ public class FilterController {
 		}
 		return new ResponseEntity<List<Map<String, Object>>>(searchList, HttpStatus.OK);
 	}
-
+//	@GetMapping("/filter/list")	
+//	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
+//	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2(List<String> filter,
+//			HttpServletResponse response) {
+//		
+//		System.out.println("여기");
+//		String season = filter.get(0);
+//		String daynight = filter.get(1);
+//		String gender = filter.get(2);
+//		
+//		System.out.print(season+""+daynight+""+gender);
+//		
+//		List<Perfume> list = filterService.findChecked(season, daynight, gender);
+//		List<Map<String, Object>> searchList = new ArrayList<>();
+//		
+//		// list -> idList기반으로 Perfume객체 찾아와서 담기
+//		if (!list.isEmpty()) {
+//			for (int i = 0; i < list.size(); i++) {
+//				Map<String, Object> map = new HashMap<>();
+//				int perfId = list.get(i).getId();
+//				String perfTitle = list.get(i).getTitle();
+//				String perfAccord = list.get(i).getAccords();
+//				String perfGender = list.get(i).getGender();
+//				String perfDaynight = list.get(i).getDaynight();
+//				String perfSeason = list.get(i).getSeason();				
+//				map.put("perfume_id", perfId);
+//				map.put("title", perfTitle);
+//				map.put("accords", perfAccord);
+//				map.put("gender", perfGender);
+//				map.put("daynight", perfDaynight);
+//				map.put("season", perfSeason);				
+//				searchList.add(map);
+//			}
+//		} else {
+//			System.out.println("해당 향수 없음");
+//		}
+//		return new ResponseEntity<List<Map<String, Object>>>(searchList, HttpStatus.OK);
+//	}	
 
 }
