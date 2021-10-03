@@ -71,3 +71,28 @@ def rec1(request, perfume_id):
 
     item_sim = cosine_similarity(dfr, dfr)
     item_sim_df = pd.DataFrame(data=item_sim, index=dfr.index, columns=dfr.index)
+
+    test = item_sim_df[perfume_id].sort_values(ascending=False)[:11]
+    res = test.index.tolist()
+    try:
+        cursor = connection.cursor()
+        resdata = []
+        for i in res:
+            if i == perfume_id: continue
+            strSql = f"SELECT recommand.perfume.perfume_id, title FROM recommand.perfume WHERE recommand.perfume.perfume_id={i};"
+            cursor.execute(strSql)
+            datas = cursor.fetchall()
+            perfume_info = {
+                'perfume_id': datas[0][0],
+                'title': datas[0][1],
+            }
+            resdata.append(perfume_info)
+        context = {
+            'reccList': resdata,
+        }
+        connection.commit()
+        connection.close()
+        return JsonResponse(context, status = 200)
+    except:
+        connection.rollback()
+        return HttpResponse(status = 404)
