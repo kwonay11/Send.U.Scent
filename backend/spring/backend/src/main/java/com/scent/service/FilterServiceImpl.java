@@ -1,5 +1,6 @@
 package com.scent.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -39,7 +40,9 @@ public class FilterServiceImpl implements FilterService {
 
 	@Override
 	public List<Perfume> findPerfumeTitle(String title) {
-		List<Perfume> list = filterRepo.findByTitleContaining(title);
+		List<Perfume> list = new ArrayList<Perfume>();
+		list.addAll(filterRepo.findByTitleContaining(title));
+		list.addAll(filterRepo.findByBrandContaining(title));
 		return list;
 
 	}

@@ -1,20 +1,19 @@
 // 전체 리스트 페이지
 <template>
+  <div id="RecAllRoot"> 
     <div id="ProdListViewRoot">
       <div class="title-box">
-            <span>Perfume</span>     
+          <span>Perfume</span>     
       </div>
       <div>
         <prod-list-view/>
-      </div>           
-      <div id="RecAllRoot"> 
+      </div>
       </div> 
     </div>                                            
 </template>
 
 <script>
 import ProdListView from '@/components/Recommend/ProdListView.vue'
-
 
 export default {
     name: "RecPerfume",

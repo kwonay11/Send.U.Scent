@@ -42,10 +42,12 @@ public class FilterController {
 				String perfTitle = list.get(i).getTitle();
 				String perfAccord = list.get(i).getAccords();
 				float perfScore = list.get(i).getRatingscore();
+				String perfBrand = list.get(i).getBrand();
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
 				map.put("score", perfScore);
+				map.put("brand", perfBrand);
 				searchList.add(map);
 			}
 		} else {
@@ -55,7 +57,7 @@ public class FilterController {
 	}
 
 	@GetMapping(value = "/search/{title}")
-	@ApiOperation(value = "향수 이름 검색", notes = "검색어 포함하는 향수 다 가져오기")
+	@ApiOperation(value = "향수 이름 또는 브랜드 검색", notes = "검색어 포함하는 향수 다 가져오기")
 	public ResponseEntity<List<Map<String, Object>>> searchTitle(@PathVariable("title") String title,
 			HttpServletResponse response) {
 		List<Perfume> list = filterService.findPerfumeTitle(title);
@@ -67,9 +69,11 @@ public class FilterController {
 				int perfId = list.get(i).getId();
 				String perfTitle = list.get(i).getTitle();
 				String perfAccord = list.get(i).getAccords();
+				String perfBrand = list.get(i).getBrand();
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
+				map.put("brand", perfBrand);
 				searchList.add(map);
 			}
 		} else {
