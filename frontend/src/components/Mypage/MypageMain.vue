@@ -11,7 +11,7 @@
           <router-link to="/mypage/wantlist" >관심 목록</router-link>
         </div>
       </div>
-      <my-reviews />
+      <!-- <my-reviews ctitle="MyReviews" :reviewList="reviewList" /> -->
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
 import MyProfile from '../../components/Mypage/MyProfile.vue';
-import MyReviews from '../../components/Mypage/MyReviews.vue';
+// import MyReviews from '../../components/Mypage/MyReviews.vue';
 import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
 export default {
@@ -27,7 +27,7 @@ export default {
   components: { 
       PageTitle,
       MyProfile ,
-      MyReviews,
+      // MyReviews,
     },
     computed: {
       ...mapState(["userInfo"])

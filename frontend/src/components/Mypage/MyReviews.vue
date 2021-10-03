@@ -1,17 +1,19 @@
 <template>
   <div id="MyReivewsRoot">
     <div class="my-reviews-box">
-      <p class="title">| 내가 남긴 한줄평</p>
+      <p v-if="ctitle==='MyReviews'" class="title">| 내가 남긴 한줄평</p>
+      <p v-if="ctitle==='AllReviews'" class="title">| 이 향수를 가지고 있는 회원님들의 한줄평</p>
       <div class="reviews-area mb-5">
         <div class="reviews-list" 
               v-for="(review, index) in reviewList" :key="index">
           <div class="reviews-info">
             <i class="fas fa-comment comment-icon"></i>
-            <span class="review-name-score">{{review.perfume_name}} / {{review.score}} 점 </span>
+            <span v-if="ctitle==='MyReviews'" class="review-name-score">{{review.perfume_name}} / {{review.score}} 점 </span>
+            <span v-if="ctitle==='AllReviews'" class="review-name-score">{{review.user_id}} / {{review.score}} 점 </span>
           </div>
           <div class="reviews-desc mt-1">
-            <span class="review-desc">" {{review.desc}} "</span>
-            <button class="delte-btn" @click="DeleteBtn(review.review_id)"><i class="fas fa-trash-alt"></i></button>
+            <span class="review-desc">" {{review.review}} "</span>
+            <button v-if="ctitle==='MyReviews'" class="delte-btn" @click="DeleteBtn(review.id)"><i class="fas fa-trash-alt"></i></button>
           </div>
         </div>
       </div>
@@ -22,6 +24,10 @@
 <script>
 export default {
   name: "MyReivews",
+  props: {
+    ctitle: String,
+    reviewList: Array,
+  },
   methods: {
     DeleteBtn(e) {
       alert(e + " 리뷰를 삭제합니다.");
@@ -29,38 +35,38 @@ export default {
   },
   data() {
     return {
-      reviewList : [
-        {
-          review_id: 1,
-          perfume_name : "perfumeName1",
-          score : 3,
-          desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-        },
-        {
-          review_id: 2,
-          perfume_name : "perfumeName2",
-          score : 4,
-          desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-        },
-        {
-          review_id: 3,
-          perfume_name : "perfumeName3",
-          score : 4,
-          desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-        },
-        {
-          review_id: 4,
-          perfume_name : "perfumeName4",
-          score : 4,
-          desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-        },
-        {
-          review_id: 5,
-          perfume_name : "perfumeName5",
-          score : 4,
-          desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-        },
-      ]
+      // reviewList : [
+      //   {
+      //     review_id: 1,
+      //     perfume_name : "perfumeName1",
+      //     score : 3,
+      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
+      //   },
+      //   {
+      //     review_id: 2,
+      //     perfume_name : "perfumeName2",
+      //     score : 4,
+      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
+      //   },
+      //   {
+      //     review_id: 3,
+      //     perfume_name : "perfumeName3",
+      //     score : 4,
+      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
+      //   },
+      //   {
+      //     review_id: 4,
+      //     perfume_name : "perfumeName4",
+      //     score : 4,
+      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
+      //   },
+      //   {
+      //     review_id: 5,
+      //     perfume_name : "perfumeName5",
+      //     score : 4,
+      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
+      //   },
+      // ]
     }
   },
 }
