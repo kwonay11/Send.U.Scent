@@ -96,3 +96,35 @@ def rec1(request, perfume_id):
     except:
         connection.rollback()
         return HttpResponse(status = 404)
+
+
+@api_view(['POST'])
+def rec2(request):
+    user_id = request.data.get('user_id')
+    try:
+        cursor = connection.cursor() 
+        strSql = f"""SELECT h.perfume_id, h.score FROM userhave h JOIN user u ON u.id = h.user_id WHERE u.user_id='{user_id}'"""
+        cursor.execute(strSql)
+        userScore = cursor.fetchall()
+
+        resdata = []
+
+        dic = {}
+        total = 0
+        for i, v in userScore:
+            strSqlp = f"SELECT recommand.perfume.accords FROM recommand.perfume WHERE recommand.perfume.perfume_id={i};"
+            cursor.execute(strSqlp)
+            datas = cursor.fetchall()
+            accords = datas[0][0].split(",")
+            for accord in accords:
+                dic[accord] = dic.get(accord,0)+v
+                total += 1
+
+        for k,v in dic.items():
+            dic[k] = v/total
+        sdic = sorted(dic.items(), key=lambda x : x[1], reverse=True)
+
+
+    except:
+        connection.rollback()
+        return HttpResponse(status = 404)
