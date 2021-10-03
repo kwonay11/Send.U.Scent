@@ -7,7 +7,8 @@
         <div>
         <form v-on:submit="onSubmitForm">
           <input type="text" v-model="contents.title"> 
-          <button>검색</button> </form>
+          <button>검색</button> 
+        </form>
           <!-- <button @click='searchArr()'>이름 검색</button> -->
         </div>
         <br />
@@ -55,38 +56,28 @@
               <label for="female">여성</label>
             </div>
             <!-- <button @click='checkArr()'>check</button>      -->
-             <button @click='checkArr()'>check</button>                
+            <button @click='checkArr()'>check</button>                
           </div>
           <br />
           <!-- <span>체크한 이름: {{ checkedNames }}</span> -->
         </div>
       </div>
     </div>
-        <div id="ProdListViewRoot">
-        
-        </div>
-    <!-- <div class="perfume-list">
-      <div class="card-list">
-        <div class="card">
-          <div class="img">
-            <img src="" alt="" />
-          </div>
-          <div>
-            <p>향수이름</p>
-            <p>향수 accord</p>
-            <p>향수 note</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
+      <prod-list-multi :results="results"/>
   </div>          
 </template>
 
 <script >
 import axios from "axios";
-import ProdListOneVue from './ProdListOne.vue';
+import ProdListMulti from './ProdListMulti.vue';
 export default {
   name: "ProdListView",
+  props: {
+    result: Array,
+  },
+  components:{
+    ProdListMulti
+  },
   data() {
     return {
     contents:{
@@ -95,8 +86,7 @@ export default {
     daynight:[],
     gender: [],
     season: [],
-    
-    
+    results:[],
     };
   },
   methods: {
@@ -108,9 +98,11 @@ export default {
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
-            console.log(res);
-            console.log("받음");
-            this.$router.push(ProdListOneVue);
+            // console.log("체크박스");
+            // console.log(res);
+            // console.log("받음");
+            this.results = res.data;
+            // console.log(this.results);
           });
     },
     searchArr(){
@@ -139,6 +131,17 @@ export default {
           });
       },
   },
+  created(){
+        axios
+        .get(
+            `http://localhost:8080/sus/listPage/default`
+        )          
+        .then((res) => {
+            console.log(res);
+            this.results = res.data;
+            console.log(this.results);
+          });
+    },
 };
 </script>
 
@@ -181,23 +184,5 @@ input {
   box-sizing: border-box;
   border-radius: 10px;
   border: 4px solid white;
-}
-.perfume-list {
-  // 상위 요소의 너비보다 하위 요소의 너비가 더 클 경우 줄바꿈
-  flex-wrap: wrap;
-  margin: 20px 20px 20px 25%;
-  width: 100%;
-  height: 100%;
-  //float: left;
-}
-.perfume-list .card-list .card {
-  border: 1px solid #eee;
-  border-radius: 5px;
-  height: 350px;
-  width: 250px;
-  padding: 5px;
-  margin: 20px 20px 20px 20px;
-  background-color: #e5e5e5;
-  font-family: NanumGothic;
 }
 </style>
