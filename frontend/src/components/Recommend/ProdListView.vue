@@ -85,7 +85,7 @@ export default {
     checkArr(){
         axios
         .get(
-            `http://localhost:8080/sus/listPage/filter`,
+            `${API_BASE_URL}/listPage/filter`,
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
@@ -96,7 +96,7 @@ export default {
     searchArr(){
         axios
         .get(
-            [`http://localhost:8080/sus/listPage/filter/${title}`,this.title]
+            [`${API_BASE_URL}/listPage/filter/${title}`,this.title]
         )          
         .then((res) => {
             console.log(res);
@@ -110,7 +110,7 @@ export default {
         console.log(this.contents.title);
         axios
         .get(
-            `http://localhost:8080/sus/listPage/filter/${this.contents.title}`
+            `${API_BASE_URL}/listPage/filter/${this.contents.title}`
         )          
         .then((res) => {
             console.log(res);
@@ -122,7 +122,7 @@ export default {
   created(){
         axios
         .get(
-            `http://localhost:8080/sus/listPage/default`
+            `${API_BASE_URL}/listPage/default`
         )          
         .then((res) => {
             this.results = res.data;         
