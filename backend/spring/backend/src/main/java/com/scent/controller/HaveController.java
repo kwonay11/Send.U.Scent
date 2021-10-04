@@ -92,7 +92,7 @@ public class HaveController {
 	}
 
 	@PutMapping("/update")
-	@ApiOperation(value = "리뷰 등록", notes = "목록 id, 리뷰 내용, 별점을 저장한다.")
+	@ApiOperation(value = "리뷰 등록", notes = "목록 id를 받아 리뷰 내용, 별점을 저장한다.")
 	public Map<String, Object> updateRev(@RequestBody HaveList hlist) {
 		Map<String, Object> response = new HashMap<String, Object>();
 
@@ -112,10 +112,24 @@ public class HaveController {
 	}
 	
 	@DeleteMapping("/delete")
-	@ApiOperation(value = "가지고 있는 목록 삭제")
+	@ApiOperation(value = "가지고 있는 목록 삭제", notes = "해당 목록의 고유 id를 받아 목록에서 제거한다.")
 	public Map<String, Object> deleteList(@RequestParam int id) {
 		Map<String, Object> response = new HashMap<String, Object>();
 
+		if (haveService.deleteList(id) > 0) {
+			response.put("result", SUCCESS);
+		} else {
+			response.put("result", FAIL);
+			response.put("reason", "일치하는 목록이 없습니다.");
+		}
+		return response;
+	}
+
+	@PutMapping("/deleteRev")
+	@ApiOperation(value = "리뷰 삭제", notes = "해당 목록의 고유 id를 받아 리뷰와 평점을 초기화 한다.")
+	public Map<String, Object> deleteRev(@RequestParam int id) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		
 		if (haveService.deleteRev(id) > 0) {
 			response.put("result", SUCCESS);
 		} else {

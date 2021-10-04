@@ -52,11 +52,25 @@ public class HaveServiceImpl implements HaveService{
 	}
 
 	@Override // 목록 삭제
-	public int deleteRev(int id) {
+	public int deleteList(int id) {
 		Optional<HaveList> oHl = haveRepo.findById(id);
 		if(oHl.isPresent()) {
 			haveRepo.delete(oHl.get());
 			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteRev(int id) {
+		Optional<HaveList> oHl = haveRepo.findById(id);
+		if(oHl.isPresent()) {
+			HaveList hl = oHl.get();
+			if(hl.getReview() != null) {
+				hl.insertRev(null, 0);
+				haveRepo.save(hl);
+				return 1;
+			}
 		}
 		return 0;
 	}
