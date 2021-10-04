@@ -59,7 +59,7 @@ public class WantController {
 		List<WantList> wl = wantService.getList(user_id);
 		if (!wl.isEmpty()) {
 			response.put("result", SUCCESS);
-			response.put("havelist", wl);
+			response.put("wantlist", wl);
 		} else {
 			response.put("result", FAIL);
 			response.put("reason", "등록된 목록이 없습니다.");
