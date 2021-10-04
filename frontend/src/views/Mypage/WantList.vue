@@ -67,12 +67,9 @@ export default {
         },
         addHave(perfume_id, title) {
             // alert(id + "번 향수 리뷰");
-            console.log("추가하려는 향수 번호" + perfume_id)
             for (let i = 0; i < this.haveList.length; i++) {
-                console.log("i : " + i)
                 if(perfume_id === this.haveList[i].perfume_id) {
                     // 보유 목록에 이미 있으면
-                    console.log("겹친 향수 번호" + this.haveList[i].perfume_id)
                     alert("이미 보유 중인 향수입니다.")
                     return;
                 }

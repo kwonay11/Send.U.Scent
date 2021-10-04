@@ -8,11 +8,11 @@
         <div class="line"></div>
       </div> -->
       <!-- 향수간 유사도 기반 추천 향수 -->
-      <div v-if="reccList.length>0" class="rec-box">
+      <div v-if="reccList.length>0" class="rec-box mb-5">
         <RecSlider :reccList="reccList" />
         <div class="line"></div>
       </div>
-      <p class="body-title">회원님이 가진 향수에요</p>
+      <p class="body-title mt-2">회원님이 가진 향수에요</p>
       <div class="have-list">
         <ul class="item-list">
           <li class="item m-3"  v-for="(item, index) in haveList" :key="index">
@@ -37,7 +37,7 @@ import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import ReviewModal from '../../components/ModalReview.vue';
 import GoTop from '../../components/GoTop.vue';
-// import RecSlider from '../../components/Recommend/RecSlider.vue'
+import RecSlider from '../../components/Recommend/RecSlider.vue'
 import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
 
@@ -50,7 +50,7 @@ export default {
     Prod,
     ReviewModal,
     GoTop,
-    // RecSlider,
+    RecSlider,
   },
   created() {
     this.user_No = this.userInfo.id;
@@ -88,7 +88,7 @@ export default {
         })
       },
       getRecList() {
-        axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
+        axios.post(`${DJANGO_URL}/scent/api/detail/rec2/`, { "user_id" : this.user_id})
               .then((res) => {
                 this.reccList = res.data.reccList
                 console.log(this.reccList)
@@ -141,7 +141,7 @@ span, p{
     margin: 0 auto;
 }
 .item {
-    width: 120px;
+    width: 150px;
     display: inline-block;
 }
 .btn-box {
