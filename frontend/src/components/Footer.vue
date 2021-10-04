@@ -3,8 +3,7 @@
     <div id="FooterRoot">
         <div class="footer-box">
             <p class="logo">Send.U.Scent</p>
-            <p class="info"><router-link to="/about">서비스소개 &nbsp;|&nbsp; 팀소개&nbsp;| &nbsp;</router-link>
-            사이트맵</p>
+            <p class="info"><router-link to="/about">서비스소개</router-link></p>
             <p class="team">Developed by TEAM. C204</p>
         </div>
     </div>
