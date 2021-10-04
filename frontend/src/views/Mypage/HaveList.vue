@@ -88,7 +88,7 @@ export default {
         })
       },
       getRecList() {
-        axios.post(`${DJANGO_URL}/scent/api/detail/rec2/`, { "user_id" : this.user_id})
+        axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
               .then((res) => {
                 this.reccList = res.data.reccList
                 console.log(this.reccList)
