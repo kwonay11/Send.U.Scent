@@ -39,13 +39,13 @@ public class HaveList {
 //	@Column(nullable = false)
 //	private Perfume perfume;
 	
-	@Column(nullable = false, updatable = false)
+	@Column(nullable = false, updatable = true)
 	private int perfume_id;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 //	private User user;
-	@Column(nullable = false, updatable = false)
+	@Column(nullable = false, updatable = true)
 	private int user_id;
 	
 	@Column(nullable = true, updatable = true, length = 100)
@@ -54,7 +54,7 @@ public class HaveList {
 	@Column(nullable = true, updatable = true, columnDefinition = "float default 0.0")
 	private float score;
 	
-	@Column(table = "perfume")
+	@Column(table = "perfume", updatable = false, nullable = true)
 	private String title;
 	
 	public void insertRev(String review, float score) {
