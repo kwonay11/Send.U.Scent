@@ -54,7 +54,7 @@ public class HaveList {
 	@Column(nullable = true, updatable = true, columnDefinition = "float default 0.0")
 	private float score;
 	
-	@Column(table = "perfume", updatable = false, nullable = true)
+	@Column(table = "perfume")
 	private String title;
 	
 	public void insertRev(String review, float score) {
