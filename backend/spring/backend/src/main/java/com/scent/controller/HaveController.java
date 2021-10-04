@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -125,11 +126,10 @@ public class HaveController {
 		return response;
 	}
 
-	@PutMapping("/deleteRev")
+	@PutMapping("/deleteRev/{id}")
 	@ApiOperation(value = "리뷰 삭제", notes = "해당 목록의 고유 id를 받아 리뷰와 평점을 초기화 한다.")
-	public Map<String, Object> deleteRev(@RequestParam int id) {
+	public Map<String, Object> deleteRev(@PathVariable("id") int id) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		
 		if (haveService.deleteRev(id) > 0) {
 			response.put("result", SUCCESS);
 		} else {
