@@ -57,7 +57,7 @@
             <splide-slide>
               <router-link :to="`/recommend/detail/51935`">
                 <img src="https://fimgs.net/mdimg/perfume/375x500.51935.jpg" alt="Test">
-                <p>Homme Fresh Eau de Parfum Kenzo</p>
+                <p>Rose Goldea Jacky Tsai Edition</p>
               </router-link>
             </splide-slide>
             <splide-slide>
