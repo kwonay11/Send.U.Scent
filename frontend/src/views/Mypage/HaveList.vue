@@ -124,9 +124,18 @@ span, p{
 #HaveListRoot {
   width: 100%;
   height: 100%;
+  min-height: 1300px;
   position: absolute;
   top: 0;
   left: 0;
+  overflow: auto;
+  /* for Firefox */
+    scrollbar-width: none;
+    /* for IE, Edge */
+    -ms-overflow-style: none;
+}
+#HaveListRoot::-webkit-scrollbar {
+    display: none;
 }
 .rec-box {
   min-height: 200px;
