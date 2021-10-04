@@ -117,7 +117,7 @@ export default {
        
     },
     created(){
-        axios.get(`${DJANGO_URL}/scent/tests/getresult/`)
+        axios.get(`${DJANGO_URL}/tests/getresult/`)
         .then((res)=>{
             console.log(res.data)
             console.log("데이터 받아옴")

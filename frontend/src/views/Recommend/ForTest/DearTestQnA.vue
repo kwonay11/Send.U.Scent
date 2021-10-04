@@ -88,7 +88,7 @@ export default {
               console.log("결과창으로 넘기기")
                //백엔드에 this.resultString를 axios.push로 보내
 
-               axios.post(`${DJANGO_URL}/scent/tests/result/`,this.contents)
+               axios.post(`${DJANGO_URL}/tests/result/`,this.contents)
                .then(()=>{ 
                  console.log("백엔드에 보내기 성공")
                  this.$router.push({name: "DearTestResult" , query : {name: this.name}});
