@@ -31,6 +31,8 @@ export default {
     ],
     created() {
         this.user_No = this.userInfo.id;
+        this.prodInfo.perfume_id = this.id;
+        this.prodInfo.perfume_name = this.name;
     },
     computed: {
         ...mapState(["userInfo"])
@@ -59,8 +61,7 @@ export default {
         
     },
     mounted() {
-        this.prodInfo.perfume_id = this.id;
-        this.prodInfo.perfume_name = this.name;
+        
     },
     data() {
         return {

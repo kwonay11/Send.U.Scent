@@ -12,7 +12,7 @@
           </div>
           <div class="reviews-info" v-if="ctitle==='MyReviews' && review.review !== null">
             <i class="fas fa-comment comment-icon"></i>
-            <span class="review-name-score">{{review.title}} / {{review.score}}.0 점 </span>
+            <span class="review-name-score" @click="goToDetail(review.perfume_id)">{{review.title}} / {{review.score}}.0 점 </span>
           </div>
           <div v-if="ctitle==='AllReviews'" class="reviews-desc mt-1">
             <span class="review-desc">" {{review.review}} "</span>
@@ -53,6 +53,9 @@ export default {
               console.log({...error})
             })
       }
+    },
+    goToDetail(v) {
+      this.$router.push(`/recommend/detail/${v}`)
     },
   },
   data() {

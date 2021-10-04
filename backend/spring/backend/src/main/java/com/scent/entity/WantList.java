@@ -47,6 +47,6 @@ public class WantList {
 		@Column(nullable = false, updatable = false)
 		private int perfume_id;
 		
-		@Column(table = "perfume", updatable = false)
+		@Column(table = "perfume")
 		private String title;
 }
