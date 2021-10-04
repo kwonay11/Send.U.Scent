@@ -11,7 +11,7 @@
           <router-link to="/mypage/wantlist" >관심 목록</router-link>
         </div>
       </div>
-      <!-- <my-reviews ctitle="MyReviews" :reviewList="reviewList" /> -->
+      <my-reviews ctitle="MyReviews" :reviewList="reviewList" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
 import MyProfile from '../../components/Mypage/MyProfile.vue';
-// import MyReviews from '../../components/Mypage/MyReviews.vue';
+import MyReviews from '../../components/Mypage/MyReviews.vue';
 import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
 export default {
@@ -27,13 +27,13 @@ export default {
   components: { 
       PageTitle,
       MyProfile ,
-      // MyReviews,
+      MyReviews,
     },
     computed: {
       ...mapState(["userInfo"])
     },
     created() {
-      this.getUser()
+      this.getUser();
     },
     methods: {
       getUser() {
@@ -44,6 +44,8 @@ export default {
         .then((res) => {
           if (res.data.result === "success") {
             this.$store.commit("setUserInfo", res.data.user);
+            this.user_No = res.data.user.id;
+            this.getList()
           } else {
             alert("에러가 발생했습니다.");
           }
@@ -52,10 +54,26 @@ export default {
           alert("에러 발생!");
         });
       },
+      getList() {
+        http
+        .get("/have/list", { params: { user_id : this.user_No}})
+        .then((res) => {
+          if(res.data.result === "success") {
+            this.reviewList = res.data.havelist
+          } else {
+            alert("데이터를 불러오는데 문제가 발생했습니다.")
+          }
+        })
+        .catch(() => {
+          alert("데이터를 불러오는데 문제가 발생했습니다.")
+        })
+      },
     },
     data() {
       return {
+        user_No: Number,
         user_id : String,
+        reviewList: [],
       }
     },
 }

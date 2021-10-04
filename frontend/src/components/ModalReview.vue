@@ -20,7 +20,7 @@
         <div class="modal-bottom">
           <div class="button-group">
             <button class="cancel-btn" @click="closeBtn">취소</button>
-            <button class="add-btn" @click="addBtn">추가</button>
+            <button class="add-btn" :disabled="isActive" @click="addBtn">추가</button>
           </div>
         </div>
       </div>
@@ -29,18 +29,48 @@
 </template>
 
 <script>
+import http from '../utils/http-common.js'
 export default {
   props: [
     "id",
     "name",
   ],
+  watch: {
+    review: {
+      deep: true,
+      handler : 'checkForm'
+    },
+  },
   methods: {
+    checkForm() {
+      // 최소 3자 이상 등록 가능
+      if(this.review.desc.length > 3) {
+        this.isActive = false
+      } else {
+        this.isActive = true
+      }
+    },
     closeBtn() {
       this.$emit("flag", false);
     },
     addBtn() {
-      console.log(this.review);
-      alert(this.name + " 향수 리뷰 등록");
+      const Form = {
+        "id" : this.id,
+        "review" : this.review.desc,
+        "score" : this.review.score
+      }
+      http.put('/have/update', Form)
+          .then((res) => {
+            if(res.data.result === "success") {
+              alert(this.name + " 향수의 리뷰가 등록되었습니다.")
+              this.$router.go()
+            } else {
+              alert("등록 중 문제가 발생했습니다.")
+            }
+          })
+          .catch(() => {
+            alert("등록 중 문제가 발생했습니다.")
+          })
       this.$emit("flag", false);
     },
     score(e) {
@@ -89,6 +119,7 @@ export default {
         score: 0,
         desc: '',
       },
+      isActive: true,
     }
   },
 }
@@ -209,5 +240,4 @@ export default {
 	border-radius: 50px;
 	background: $point-color;
 }
-
 </style>
