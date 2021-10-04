@@ -1,33 +1,31 @@
 // 상품 리스트 + 필터
 <template>
     <div id="ProdListViewRoot">
+    <page-title pageTitle="Perfume"/>
       <div class="filter-box">
         <div class="inner-box">
-          <div>
           <form v-on:submit="onSubmitForm">
-            <input type="text" v-model="contents.title"> 
-            <button>검색</button> 
+            <input class="search-bar" type="text" v-model="contents.title"> 
+            <button class="button">
+            <img src="../../assets/icons/find.png"/>            
+            </button>
           </form>
-          </div>
-          <div id="text-line">
-            <label id="text-line2">Filter</label>
             <div class="filter">
-              <label id="title">|계절별</label>
+              <label class="title">|계절별</label>
               <div class="filter-check">
-                <input type="checkbox" value="spring" v-model="season" />
+                <input type="checkbox" value="spring" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
                 <label for="spring">봄</label>
                 <br />
-                <input type="checkbox" value="summer" v-model="season" />
+                <input type="checkbox" value="summer" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
                 <label for="summer">여름</label>
                 <br />
-                <input type="checkbox" value="autumn" v-model="season" />
+                <input type="checkbox" value="autumn" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
                 <label for="autumn">가을</label>
                 <br />
-                <input type="checkbox" value="winter" v-model="season" />
+                <input type="checkbox" value="winter" onClick="setCheckBoxAsRadio(season, this);" v-model="season" />
                 <label for="winter">겨울</label>
               </div>
-              <br />
-              <label id="title">|시간별</label>
+              <label class="title">|시간별</label>
               <br />
               <div class="filter-check">
                 <input type="checkbox" value="1" v-model="daynight" />
@@ -36,38 +34,39 @@
                 <input type="checkbox" value="2" v-model="daynight" />
                 <label for="day">낮</label>
               </div>       
-              <br />
-              <br />
-              <label id="title">|성별</label>
+              <label class="title">|성별</label>
               <br />
               <div class="filter-check">
                 <input type="checkbox" value="men" v-model="gender"/>
-                <label for="male">남성</label>
+                <label for="male">For him</label>
                 <br />
-                <input type="checkbox" value="women" v-model="gender"
-                />
-                <label for="female">여성</label>
+                <input type="checkbox" value="women" v-model="gender"/>
+                <label for="female">For her</label>
+                <br />                
+                <input type="checkbox" value="women,men" v-model="gender"/>
+                <label for="female">For unisex</label>                
               </div>
-              <button @click='checkArr()'>check</button>                
+              <br />             
+              <button class="filter-btn" @click='checkArr()'>check</button>                
             </div>
             <br />
           </div>
-        </div>
       </div>
     <prod-list-multi :results="results"/>
   </div>          
 </template>
 
 <script >
-import axios from "axios";
 import ProdListMulti from './ProdListMulti.vue';
-//import { API_BASE_URL } from "../utils/config.js";
+import http from "../../utils/http-common.js";
+import PageTitle from '@/components/Header/PageTitle.vue';
 export default {
   name: "ProdListView",
   props: {
     result: Array,
   },
   components:{
+    PageTitle,    
     ProdListMulti
   },
   data() {
@@ -82,35 +81,48 @@ export default {
     };
   },
   methods: {
+  // 체크박스 하나만 체크되도록.
+    setCheckBoxAsRadio(targetObj, inObj){
+    var len = targetObj.length;
+    
+    if(len>1){ // 객체가 배열이라면. 배열이 아니면 그냥 체크박스로 작동
+      for(var i=0; i<len; i++){
+      if(targetObj[i] != inObj)
+        targetObj[i].checked = false;
+      }
+    }
+    }, 
     checkArr(){
-        axios
+        console.log(this.gender[0]);      
+        http
         .get(
-            `${API_BASE_URL}/listPage/filter`,
+            `/listPage/filter`,
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
+          
             console.log(res);
             this.results = res.data;
           });
     },
-    searchArr(){
-        axios
-        .get(
-            [`${API_BASE_URL}/listPage/filter/${title}`,this.title]
-        )          
-        .then((res) => {
-            console.log(res);
-            console.log("받음");
-            //this.$router.push({ name: "RecPerfume" });
-          });
-    },    
+    // searchArr(){
+    //     http
+    //     .get(
+    //         `/listPage/filter/${title}`,this.title
+    //     )          
+    //     .then((res) => {
+    //         console.log(res);
+    //         console.log("받음");
+    //         //this.$router.push({ name: "RecPerfume" });
+    //       });
+    // },    
     onSubmitForm(e){ 
       // form의 새로 고침 막기 
       e.preventDefault(); 
         console.log(this.contents.title);
-        axios
+        http
         .get(
-            `${API_BASE_URL}/listPage/filter/${this.contents.title}`
+            `/listPage/search/${this.contents.title}`
         )          
         .then((res) => {
             console.log(res);
@@ -118,58 +130,75 @@ export default {
             //this.$router.push({ name: "RecPerfume" });
           });
     },
-  },
-  created(){
-        axios
+    defaultList(){
+        http
         .get(
-            `${API_BASE_URL}/listPage/default`
+            `/listPage/default`
         )          
         .then((res) => {
             this.results = res.data;         
             console.log(res);
             console.log(this.results);
           });
-    },
+    },    
+  },
+  created(){
+    this.defaultList();
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
+
+#ProdListViewRoot {
+  font-family: $kor-font-family;
+  color: $black-color;
+}
 .filter-box {
+  width: 20%;
+  height: 79%;   
   float: left;
-  font-family: NanumGothic;
-  background-color: #f8f4f4;
+  font-family: $kor-font-family;
+  background-color: white;;
 }
 .filter-box .inner-box {
-  margin: 20px 20px 20px 40px;
-  float: left;
+  width: 40%;  
+  height: 70%;  
+  margin-top: 10%;
+  margin-left: 25%;
 }
-.filter-check {
+input.search-bar {
+  width: 150px;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 4px solid black;
+  border-width: 1px;  
+  float: left;
+  position: relative;
+  top: 1.5px;
+  background-color: white; 
+}
+.button{
+  // display:inline-block;
+  border: #f8f4f4;
+}
+.filter{
+  float:left;
+}
+.title {
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+}
+.filter-check{
   font-size: 15px;
 }
-#title {
-  margin: 20px 0 20px 0;
-  font-size: 20px;
-}
->>>>>>> Stashed changes
-#text-line {
-  float: left;
-}
-#text-line2 {
-  font-size: 25px;
-  float: left;
-}
-input {
-  background: white;
-  box-sizing: border-box;
+
+.filter-btn{
   border-radius: 10px;
-  border: 4px solid white;
-  float: left;
+  border: #f8f4f4;
 }
-#search-bar {
-  background: white;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 4px solid white;
-}
+
+
 </style>

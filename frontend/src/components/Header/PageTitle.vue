@@ -31,6 +31,8 @@ export default {
                 this.pageUrl = require("@/assets/images/PageTitle_3.png");
             } else if(this.page === "Login" || this.page === "SignUp") {
                 this.pageUrl = require("@/assets/images/PageTitle_4.png");
+            }   else if(this.page === "Perfume") {
+                this.pageUrl = require("@/assets/images/PageTitle_5.png");
             }
         },
     },
