@@ -7,12 +7,12 @@
             <div class="have-list">
                 <ul class="item-list">
                     <li class="item m-3"  v-for="(item, index) in wantList" :key="index">
-                    <Prod :id="item.id" :imgUrl="item.imgUrl" :name="item.name" @click="addHave(item.id, item.name)"/>
+                    <Prod :id="item.id" :perfume_id="item.perfume_id" :name="item.title" @click.prevent="addHave(item.perfume_id, item.title)"/>
                     </li>
                 </ul>
             </div>
         </div>
-        <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.name"/>
+        <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.title"/>
         <go-top />
     </div>
 </template>
@@ -22,6 +22,8 @@ import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import Modal from '../../components/Modal.vue';
 import GoTop from '../../components/GoTop.vue';
+import http from '../../utils/http-common.js'
+import { mapState } from 'vuex';
 export default {
     name: "WantList",
     components: {
@@ -30,77 +32,70 @@ export default {
         Modal,
         GoTop,
     },
+    computed: {
+        ...mapState(["userInfo"])
+    },
+    created() {
+        this.user_No = this.userInfo.id;
+        this.getList();
+        this.getHaveList();
+    },
     methods: {
-        addHave(id, name) {
+        getList() {
+            http
+            .get("/like/list", { params: { user_id : this.user_No}})
+            .then((res) => {
+                if(res.data.result === "success") {
+                this.wantList = res.data.wantlist
+                // console.log(this.haveList)
+                } else {
+                alert("!데이터를 불러오는데 문제가 발생했습니다.")
+                }
+            })
+        },
+        getHaveList() {
+            http
+            .get("/have/list", { params: { user_id : this.user_No}})
+            .then((res) => {
+            if(res.data.result === "success") {
+                this.haveList = res.data.havelist
+                // console.log(this.haveList)
+            } else {
+                alert("!데이터를 불러오는데 문제가 발생했습니다.")
+            }
+            })
+        },
+        addHave(perfume_id, title) {
             // alert(id + "번 향수 리뷰");
+            console.log("추가하려는 향수 번호" + perfume_id)
+            for (let i = 0; i < this.haveList.length; i++) {
+                console.log("i : " + i)
+                if(perfume_id === this.haveList[i].perfume_id) {
+                    // 보유 목록에 이미 있으면
+                    console.log("겹친 향수 번호" + this.haveList[i].perfume_id)
+                    alert("이미 보유 중인 향수입니다.")
+                    return;
+                }
+            }
             this.setModal = true;
-            this.selectedProd.id = id;
-            this.selectedProd.name = name;
+            this.selectedProd.id = perfume_id;
+            this.selectedProd.title = title;
+            console.log(this.selectedProd)
         },
         closeModal() {
             this.setModal = false;
         }
     },
     data() {
-    return {
-        setModal: false,
-        selectedProd: {
-            id: Number,
-            name: String,
-        },
-        wantList : [
-            {
-                id: 1,
-                imgUrl: '',
-                name: 'Perfume_1'
+        return {
+            setModal: false,
+            selectedProd: {
+                id: Number,
+                title: String,
             },
-            {
-                id: 2,
-                imgUrl: '',
-                name: 'Perfume_2'
-            },
-            {
-                id: 3,
-                imgUrl: '',
-                name: 'Perfume_3'
-            },
-            {
-                id: 4,
-                imgUrl: '',
-                name: 'Perfume_4'
-            },
-            {
-                id: 5,
-                imgUrl: '',
-                name: 'Perfume_5'
-            },
-            {
-                id: 6,
-                imgUrl: '',
-                name: 'Perfume_6'
-            },
-            {
-                id: 7,
-                imgUrl: '',
-                name: 'Perfume_7'
-            },
-            {
-                id: 8,
-                imgUrl: '',
-                name: 'Perfume_8'
-            },
-            {
-                id: 9,
-                imgUrl: '',
-                name: 'Perfume_9'
-            },
-            {
-                id: 10,
-                imgUrl: '',
-                name: 'Perfume_10'
-            },
-        ]
-    }
+            wantList : [],
+            haveList: [],
+        }
     },
 }
 </script>

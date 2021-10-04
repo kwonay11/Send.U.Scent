@@ -21,20 +21,42 @@
 </template>
 
 <script>
+import http from '../utils/http-common.js'
+import { mapState } from 'vuex';
 export default {
     props: [
         "id",
         "name",
+        "perfume_id"
     ],
+    created() {
+        this.user_No = this.userInfo.id;
+    },
+    computed: {
+        ...mapState(["userInfo"])
+    },
     methods: {
         closeBtn() {
             this.$emit("flag", false);
             },
         addBtn() {
-            console.log(this.prodInfo);
-            alert(this.name + " 향수를 보유 향수로 이동");
+            const Form = {
+                "user_id" : this.userInfo.id,
+                "perfume_id" : this.perfume_id
+            }
+            console.log(Form)
+            http.post('/have/insert', Form)
+                .then((res) => {
+                    if(res.data.result === "success") {
+                        alert(this.name + " 향수를 보유 향수에 추가했습니다.");
+                        this.$router.go()
+                    } else {
+                        alert("데이터를 처리하는 중 문제가 발생했습니다.")
+                    }
+                })
             this.$emit("flag", false);
         },
+        
     },
     mounted() {
         this.prodInfo.perfume_id = this.id;
