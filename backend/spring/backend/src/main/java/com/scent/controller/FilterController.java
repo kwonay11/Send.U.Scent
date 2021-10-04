@@ -82,7 +82,6 @@ public class FilterController {
 		return new ResponseEntity<List<Map<String, Object>>>(searchList, HttpStatus.OK);
 	}
 
-//	@GetMapping(value = "/array/{season}/{daynight}/{gender}")
 	@GetMapping("/filter")
 	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
 	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2(
@@ -103,12 +102,14 @@ public class FilterController {
 				String perfGender = list.get(i).getGender();
 				String perfDaynight = list.get(i).getDaynight();
 				String perfSeason = list.get(i).getSeason();
+				String perfBrand = list.get(i).getBrand();				
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
 				map.put("gender", perfGender);
 				map.put("daynight", perfDaynight);
 				map.put("season", perfSeason);
+				map.put("brand", perfBrand);
 				searchList.add(map);
 			}
 		} else {
