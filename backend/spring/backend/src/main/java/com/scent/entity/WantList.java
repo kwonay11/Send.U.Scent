@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "userlike")
+@SecondaryTable(name = "perfume", pkJoinColumns = @PrimaryKeyJoinColumn(name = "perfume_id"))
 @DynamicInsert
 @DynamicUpdate
 public class WantList {
@@ -44,6 +47,6 @@ public class WantList {
 		@Column(nullable = false, updatable = false)
 		private int perfume_id;
 		
-//		@Transient
+		@Column(table = "perfume")
 		private String title;
 }

@@ -12,7 +12,7 @@ import com.scent.entity.HaveList;
 @Repository
 public interface HaveRepo extends JpaRepository<HaveList, Integer>{
 	
-	@Query(value = "select * from userhave where user_id = ?", nativeQuery = true)
+	@Query(value = "select u.id, u.perfume_id, p.title, u.user_id, u.review, u.score from userhave u join perfume p on u.perfume_id = p.perfume_id where user_id = ?", nativeQuery = true)
 	List<HaveList> findByUserId(int user_id); // 해당 id의 유저가 쓴 목록 조회
 	
 	@Query(value = "select * from userhave where user_id = ? and perfume_id = ?", nativeQuery = true)
