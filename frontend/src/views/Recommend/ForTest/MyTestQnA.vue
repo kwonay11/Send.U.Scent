@@ -112,7 +112,7 @@ export default {
             
             // 마지막 문항이면 결과로 넘기기
             if(this.step == 7){
-               axios.post(`${DJANGO_URL}/scent/tests/result/`,this.contents)
+               axios.post(`${DJANGO_URL}/tests/result/`,this.contents)
                .then(()=>{ 
                  console.log("백엔드에 보내기 성공")
                  this.$router.push({name: "MyTestResult"});
