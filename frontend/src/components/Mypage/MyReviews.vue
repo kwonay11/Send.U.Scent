@@ -6,14 +6,20 @@
       <div class="reviews-area mb-5">
         <div class="reviews-list" 
               v-for="(review, index) in reviewList" :key="index">
-          <div class="reviews-info">
+          <div class="reviews-info" v-if="ctitle==='AllReviews'">
             <i class="fas fa-comment comment-icon"></i>
-            <span v-if="ctitle==='MyReviews'" class="review-name-score">{{review.perfume_name}} / {{review.score}} 점 </span>
-            <span v-if="ctitle==='AllReviews'" class="review-name-score">{{review.user_id}} / {{review.score}} 점 </span>
+            <span class="review-name-score">{{review.user_id}} / {{review.score}} 점 </span>
           </div>
-          <div class="reviews-desc mt-1">
+          <div class="reviews-info" v-if="ctitle==='MyReviews' && review.review !== null">
+            <i class="fas fa-comment comment-icon"></i>
+            <span class="review-name-score">{{review.title}} / {{review.score}}.0 점 </span>
+          </div>
+          <div v-if="ctitle==='AllReviews'" class="reviews-desc mt-1">
             <span class="review-desc">" {{review.review}} "</span>
-            <button v-if="ctitle==='MyReviews'" class="delte-btn" @click="DeleteBtn(review.id)"><i class="fas fa-trash-alt"></i></button>
+          </div>
+          <div v-if="ctitle==='MyReviews' && review.review !== null " class="reviews-desc mt-1">
+            <span class="review-desc">" {{review.review}} "</span>
+            <button class="delte-btn" @click="DeleteBtn(review.title, review.id)"><i class="fas fa-trash-alt"></i></button>
           </div>
         </div>
       </div>
@@ -22,6 +28,7 @@
 </template>
 
 <script>
+import http from '../../utils/http-common.js'
 export default {
   name: "MyReivews",
   props: {
@@ -29,44 +36,28 @@ export default {
     reviewList: Array,
   },
   methods: {
-    DeleteBtn(e) {
-      alert(e + " 리뷰를 삭제합니다.");
+    DeleteBtn(e, v) {
+      const review_id = v
+      if(confirm(e + " 리뷰를 삭제하시겠습니까?")) {
+        http.put(`/have/deleteRev/${review_id}`)
+            .then((res) => {
+              if(res.data.result === "success") {
+                alert(e + " 향수에 대한 리뷰가 삭제되었습니다.")
+                this.$router.go()
+              } else {
+                alert("데이터를 처리하던 중 문제가 발생했습니다.")
+              }
+            })
+            .catch((error) => {
+              // alert("데이터를 처리하던 중 문제가 발생했습니다.")
+              console.log({...error})
+            })
+      }
     },
   },
   data() {
     return {
-      // reviewList : [
-      //   {
-      //     review_id: 1,
-      //     perfume_name : "perfumeName1",
-      //     score : 3,
-      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-      //   },
-      //   {
-      //     review_id: 2,
-      //     perfume_name : "perfumeName2",
-      //     score : 4,
-      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-      //   },
-      //   {
-      //     review_id: 3,
-      //     perfume_name : "perfumeName3",
-      //     score : 4,
-      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-      //   },
-      //   {
-      //     review_id: 4,
-      //     perfume_name : "perfumeName4",
-      //     score : 4,
-      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-      //   },
-      //   {
-      //     review_id: 5,
-      //     perfume_name : "perfumeName5",
-      //     score : 4,
-      //     desc : "향이 어쩌구 저쩌구... 최대 글자 50자 제한.. 쌍따옴표로 묶인 형태로 표시",
-      //   },
-      // ]
+      
     }
   },
 }

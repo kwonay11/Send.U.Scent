@@ -1,18 +1,8 @@
 // 추천 및 내가 가진, 관심 목록에 들어갈 향수 정보 하나
 <template>
     <div id="SimpleProdRoot">
-        <!-- <ul class="item-list" v-for="(i, index) in this.lineLen" :key="index">
-            <li class="item m-3" v-for="(item, idx) in prodList" :key="idx"> -->
-        <!-- <ul class="item-list">
-            <li class="item m-3"  v-for="(item, index) in prodList" :key="index">
-                <div class="item-img">
-                    <img src="" alt="향수 이미지">
-                </div>
-                <span class="item-name">{{item.name}}</span>
-            </li>
-        </ul> -->
         <div class="item-img">
-            <img :src="`${this.ImgUrl}`" alt="향수 이미지">
+            <img :src="`https://fimgs.net/mdimg/perfume/375x500.${this.perfume_id}.jpg`" :alt="this.name">
         </div>
         <span class="item-name">{{this.name}}</span>
     </div>
@@ -23,27 +13,26 @@ export default {
     props : [
         // "prodList",
         "id",
-        "ImgUrl",
         "name",
+        "perfume_id",
     ],
     data() {
         return {
-            // lineLen: 0,
         }
     },
     mounted() {
-        console.log('심플',this.id)
-        console.log(this.ImgUrl)
-        // this.lineLen = this.prodList.length/5;
-        // console.log(this.lineLen);
+
     },
     created() {
-        
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/common.scss";
+* {
+  font-family: $kor-font-family;
+}
 #SimpleProdRoot {
     width: 100%;
 }
@@ -65,6 +54,6 @@ export default {
     height: 100%;
 }
 .item-name {
-    
+    font-size: $body-font-size;
 }
 </style>
