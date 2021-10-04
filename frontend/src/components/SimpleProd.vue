@@ -35,6 +35,12 @@ export default {
 }
 #SimpleProdRoot {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 .item-list {
     width: 800px;
@@ -45,7 +51,7 @@ export default {
     display: inline-block;
 }
 .item-img {
-    width: 120px;
+    width: 110px;
     height: 130px;
     background-color: gray;
 }
