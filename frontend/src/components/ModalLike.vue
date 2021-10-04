@@ -22,18 +22,37 @@
 
 <script>
 import swal from 'sweetalert';
+import http from '../utils/http-common.js'
+import { mapState } from 'vuex';
 export default {
     props: [
         "id",
         "name",
     ],
+    computed: {
+        ...mapState(["userInfo"])
+    },
+    created() {
+        this.user_id = this.userInfo.id;
+    },
     methods: {
         closeBtn() {
             this.$emit("flag", false);
             },
         addBtn() {
-            console.log(this.prodInfo);
-            swal(`${this.name}를 관심 향수 목록으로 이동`);
+            const Form = {
+                "user_id" : this.user_id,
+                "perfume_id" : this.prodInfo.perfume_id
+            }
+            http.post('/like/insert', Form)
+                .then((res) => {
+                    if(res.data.result === "success") {
+                        console.log(this.prodInfo);
+                        swal(`${this.name}를 관심 향수 목록으로 이동`);
+                    } else {
+                        swal("데이터 처리 중 문제가 발생했습니다.");
+                    }
+                })
             this.$emit("flag", false);
         },
     },
@@ -46,7 +65,8 @@ export default {
             prodInfo : {
                 perfume_id: Number,
                 perfume_name: String,
-            }
+            },
+            user_id : Number,
         }
     },
 }
