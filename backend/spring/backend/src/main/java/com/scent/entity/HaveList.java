@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -22,6 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "userhave")
+@SecondaryTable(name = "perfume", pkJoinColumns = @PrimaryKeyJoinColumn(name = "perfume_id"))
 @DynamicInsert
 @DynamicUpdate
 public class HaveList {
@@ -49,6 +53,9 @@ public class HaveList {
 	
 	@Column(nullable = true, updatable = true, columnDefinition = "float default 0.0")
 	private float score;
+	
+	@Column(table = "perfume")
+	private String title;
 	
 	public void insertRev(String review, float score) {
 		this.review = review;
