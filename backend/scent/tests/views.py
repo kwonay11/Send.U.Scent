@@ -62,8 +62,10 @@ def tests_result(request):
         sorted_dic = sorted(accord_dic.items(), key=lambda x:x[1], reverse=True)
         # print(accord_dic)
         context = {
-            'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
-            'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
+            # 'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
+            'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],5534],
+            # 'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
+            'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],'Artisan'],
             'perfume_id2' : [perfumes2[0][0],perfumes2[1][0],perfumes2[2][0],perfumes2[3][0],perfumes2[4][0]],
             'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
             'accords':  accord_dic,
@@ -88,5 +90,3 @@ def get_result(request):
     if request.method == 'GET':
         return Response(context,status=status.HTTP_200_OK)
    
-
-    
