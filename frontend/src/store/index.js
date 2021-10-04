@@ -3,6 +3,7 @@ import data from "./modules/data";
 import app from "./modules/app";
 import user from "./modules/user";
 import http from "../utils/http-common.js";
+import createPersistedState from 'vuex-persistedstate'
 
 export default createStore({
   state: {
@@ -63,4 +64,5 @@ export default createStore({
     app,
     user,
   },
+  plugins: [createPersistedState(),]
 });
