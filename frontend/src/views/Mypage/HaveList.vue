@@ -14,9 +14,16 @@
       </div>
       <p class="body-title mt-2">회원님이 가진 향수에요</p>
       <div class="have-list">
-        <ul class="item-list">
+        <ul v-if="!error" class="item-list">
           <li class="item m-3"  v-for="(item, index) in haveList" :key="index">
             <Prod :id="item.id" :name="item.title" :perfume_id="item.perfume_id" @click="writeReview(item.id, item.title, item.review)"/>
+          </li>
+        </ul>
+        <ul v-if="error" class="item-list">
+          <li class="error mt-5">
+            💌가지고 있는 향수를 저희에게도 알려주세요~<br>
+            관심 목록에서 구매하신 향수를 추가하거나, <br>
+            오른쪽의 (+) 버튼을 통해 추가 할 수 있어요!😉
           </li>
         </ul>
       </div>
@@ -83,24 +90,31 @@ export default {
             this.haveList = res.data.havelist
             // console.log(this.haveList)
           } else {
-            alert("!데이터를 불러오는데 문제가 발생했습니다.")
+            const reason = res.data.reason
+            if(reason === "등록된 목록이 없습니다.")
+              this.error = true;
+            else
+              alert("!데이터를 불러오는데 문제가 발생했습니다.")
           }
         })
       },
       getRecList() {
-        axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
-              .then((res) => {
-                this.reccList = res.data.reccList
-                console.log(this.reccList)
-              })
-              .catch((err) => {
-                console.log(err)
-              })
+        if(!this.error) {
+          axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
+                .then((res) => {
+                  this.reccList = res.data.reccList
+                  console.log(this.reccList)
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+        }
       },
   },
   data() {
     return {
       setModal: false,
+      error: false,
       selectedProd: {
         id: Number,
         title: String,
@@ -152,6 +166,16 @@ span, p{
 .item {
     width: 150px;
     display: inline-block;
+}
+.error {
+    height: 200px;
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center
 }
 .btn-box {
   position: fixed;
