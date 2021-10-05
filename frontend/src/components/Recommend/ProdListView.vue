@@ -97,7 +97,7 @@ export default {
         console.log(this.gender[0]);      
         http
         .get(
-            `localhost:8080/sus/listPage/filter`,
+            `/listPage/filter`,
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
