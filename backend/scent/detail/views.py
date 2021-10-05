@@ -64,10 +64,11 @@ def detail(request, perfume_id):
 def review(request, perfume_id):
     try:
         cursor = connection.cursor()
-        strSql = f"SELECT * FROM recommand.userhave WHERE perfume_id={perfume_id} ORDER BY id DESC;"
+        strSql = f"""SELECT * FROM recommand.userhave WHERE perfume_id={perfume_id} and LENGTH(review) > 3 ORDER BY id DESC;"""
         cursor.execute(strSql)
         reviews = cursor.fetchall()
         datas = []
+        # if reviews:
         for data in reviews:
             query = f"SELECT user.user_id FROM user WHERE id={data[2]};"
             cursor.execute(query)

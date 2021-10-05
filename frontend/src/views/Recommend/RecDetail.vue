@@ -247,15 +247,10 @@ export default {
 
     this.getReccList(perfume_id)
     .then((res) => {
-      console.log('성공')
-      console.log(res.data.reccList)
-      console.log('성공')
-
       this.reccList = res.data.reccList
     })
     .catch((err) => {
       console.error(err)
-      console.log('에러')
     })
   },
   methods: {
@@ -280,7 +275,6 @@ export default {
       const url = DJANGO_URL + `/api/detail/rec1/${perfume_id}`
       const res = await axios.get(url)
       if (res.status === 200) {
-        console.log(res)
         return res
       }
     },
@@ -288,8 +282,8 @@ export default {
       this.setModal = true;
     },
     closeModal() {
-            this.setModal = false;
-        },
+      this.setModal = false;
+    },
   },
 }
 </script>
