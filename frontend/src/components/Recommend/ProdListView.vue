@@ -7,7 +7,8 @@
           <form v-on:submit="onSubmitForm">
             <input class="search-bar" type="text" v-model="contents.title"> 
             <button class="button">
-            <img src="../../assets/icons/find.png"/>            
+            <img class="find"
+             src="../../assets/icons/find.png"/>            
             </button>
           </form>
             <div class="filter">
@@ -157,28 +158,37 @@ export default {
 }
 .filter-box {
   width: 20%;
-  height: 79%;   
+  height: 87.8%;   
   float: left;
+  padding-left:1vh;
+  padding-top:2vh;
   font-family: $kor-font-family;
-  background-color: white;;
+  background-color: #f8f4f4;
 }
 .filter-box .inner-box {
   width: 40%;  
   height: 70%;  
   margin-top: 10%;
   margin-left: 25%;
+  background-color: #f8f4f4;
 }
 input.search-bar {
-  width: 150px;
+  width: 180px;
   height: 30px;
   box-sizing: border-box;
   border-radius: 10px;
-  border: 4px solid black;
+  border: 4px solid $main-color;
   border-width: 1px;  
   float: left;
   position: relative;
   top: 1.5px;
   background-color: white; 
+}
+.find{
+  position: absolute;
+  top:1;
+  width:1.5%;
+  
 }
 .button{
   // display:inline-block;

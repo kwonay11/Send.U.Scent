@@ -48,7 +48,7 @@ export default {
 @import "../../styles/common.scss";
 #PageTitleRoot {
     width: 100%;
-    height: 100%;
+    height: 10%;
     position: absolute;
     top: 0;
     left: 0;

@@ -90,7 +90,7 @@ export default {
     font-family: $kor-font-family;
     padding: 30px;
     margin: 10px 350px 10px 250px;  
-    background-color: #f8f4f4;
+    background-color: white;
 }
 .perfume-container{
     width: 1100px;
@@ -98,7 +98,7 @@ export default {
     font-family: $kor-font-family;
     padding: 30px;
     margin: 10px 200px 10px 150px;  
-    background-color: #f8f4f4;
+    
 }
 // .perfume-list{
 //     font-family: $kor-font-family;
