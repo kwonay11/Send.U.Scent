@@ -11,4 +11,5 @@ public interface FilterRepo extends JpaRepository<Perfume, Integer>,QuerydslPred
 	List<Perfume> findByTitleContaining(String title);
 	List<Perfume> findByBrandContaining(String brand);
 	List<Perfume> findTop500ByOrderByRatingscoreDesc();
+	List<Perfume> findById(int id);
 }

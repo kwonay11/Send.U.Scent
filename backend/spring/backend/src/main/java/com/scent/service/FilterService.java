@@ -13,5 +13,7 @@ public interface FilterService {
 	List<Perfume> findPerfumeBrand(String brand);
 
 	List<Perfume> showAllList();
+	
+	List<Perfume> findGrace();
 
 }
