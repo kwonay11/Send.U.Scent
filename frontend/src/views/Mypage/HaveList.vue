@@ -84,7 +84,6 @@ export default {
         .then((res) => {
           if(res.data.result === "success") {
             this.haveList = res.data.havelist
-            // console.log(this.haveList)
           } else {
             const reason = res.data.reason
             if(reason === "등록된 목록이 없습니다.")
@@ -99,7 +98,6 @@ export default {
           axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
                 .then((res) => {
                   this.reccList = res.data.reccList
-                  // console.log(this.reccList)
                 })
                 .catch((err) => {
                   console.log(err)
