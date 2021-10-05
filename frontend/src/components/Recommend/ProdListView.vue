@@ -3,14 +3,14 @@
     <div id="ProdListViewRoot">
     <page-title pageTitle="Perfume"/>
       <div class="filter-box">
-        <div class="inner-box">
-          <form v-on:submit="onSubmitForm">
-            <input class="search-bar" type="text" v-model="contents.title"> 
+          <div v-on:submit="onSubmitForm">
+            <input class="search-bar" type="text" placeholder="이름 or 브랜드" v-model="contents.title"> 
             <button class="button">
-            <img class="find"
+            <img class="find" 
              src="../../assets/icons/find.png"/>            
             </button>
-          </form>
+          </div>
+        <div class="inner-box">
             <div class="filter">
               <label class="title">|계절별</label>
               <div class="filter-check">
@@ -161,45 +161,53 @@ export default {
   height: 87.8%;   
   float: left;
   padding-left:1vh;
-  padding-top:2vh;
   font-family: $kor-font-family;
   background-color: #f8f4f4;
+  padding-top: 4%;
 }
 .filter-box .inner-box {
+  
   width: 40%;  
   height: 70%;  
   margin-top: 10%;
-  margin-left: 25%;
+  margin-left: 20%;
   background-color: #f8f4f4;
 }
 input.search-bar {
-  width: 180px;
+  width: 200px;
   height: 30px;
   box-sizing: border-box;
   border-radius: 10px;
   border: 4px solid $main-color;
   border-width: 1px;  
-  float: left;
+  // float: left;
+
   position: relative;
-  top: 1.5px;
+  top: 15px;
   background-color: white; 
+
+}
+input::placeholder{
+  font-size:$detail-font-size;
+  font-family: $kor-font-family;
 }
 .find{
   position: absolute;
-  top:1;
-  width:1.5%;
-  
+  float: right;
+  width:1.8%;
 }
 .button{
-  // display:inline-block;
   border: #f8f4f4;
 }
 .filter{
   float:left;
 }
 .title {
+  font-family: $kor-font-family;
+  color:$main-color;
   margin: 20px 0 10px 0;
-  font-size: 18px;
+  font-size: $body-font-size;
+  font-weight: bold;
 }
 .filter-check{
   font-size: 15px;
@@ -207,7 +215,11 @@ input.search-bar {
 
 .filter-btn{
   border-radius: 10px;
-  border: #f8f4f4;
+  background-color:$point-color;
+  color:white;
+  border-width: 2px;
+  border-color :white;
+
 }
 
 
