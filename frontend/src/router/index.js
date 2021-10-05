@@ -16,6 +16,7 @@ import DearTestResult from "../views/Recommend/ForTest/DearTestResult.vue";
 import Notice from "../views/Community/Notice.vue";
 import QnA from "../views/Community/QnA.vue";
 import BoardWrite from "@/components/Board/WriteForm.vue";
+import BoardListView from "@/components/Board/BoardListView.vue";
 import BoardRead from "@/components/Board/BoardReadForm.vue";
 // Mypage 메뉴
 import Mypage from "../views/Mypage/Mypage.vue";
@@ -99,6 +100,12 @@ const routes = [
     component: Notice,
     children: [
       {
+        // 공지사항 게시글 목록
+        path: "",
+        name: "BoardListView",
+        component: BoardListView,
+      },
+      {
         // 공지사항 게시글 하나 읽기
         path: ":id",
         name: "NoticeRead",
@@ -118,6 +125,11 @@ const routes = [
       },
     ],
   },
+  // {
+  //   path: "/notice/:id",
+  //   name: "NoticeRead",
+  //   component: BoardRead,
+  // },
   {
     path: "/qna",
     name: "Qna",
