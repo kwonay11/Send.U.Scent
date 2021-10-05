@@ -99,7 +99,7 @@ export default {
           axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
                 .then((res) => {
                   this.reccList = res.data.reccList
-                  console.log(this.reccList)
+                  // console.log(this.reccList)
                 })
                 .catch((err) => {
                   console.log(err)
@@ -156,7 +156,7 @@ span, p{
   font-weight: bold;
 }
 .item-list {
-    width: 800px;
+    width: 910px;
     margin: 0 auto;
 }
 .item {

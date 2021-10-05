@@ -181,11 +181,11 @@ export default {
     font-weight: bold;
 }
 .item-list {
-    width: 800px;
+    width: 910px;
     margin: 0 auto;
 }
 .item {
-    width: 120px;
+    width: 150px;
     display: inline-block;
 }
 .error {
