@@ -61,11 +61,12 @@ export default {
           if(res.data.result === "success") {
             this.reviewList = res.data.havelist
           } else {
-            alert("데이터를 불러오는데 문제가 발생했습니다.")
+            const reason = res.data.reason
+            if(reason === "등록된 목록이 없습니다.")
+              return;
+            else
+              alert("데이터를 불러오는데 문제가 발생했습니다.")
           }
-        })
-        .catch(() => {
-          alert("데이터를 불러오는데 문제가 발생했습니다.")
         })
       },
     },
