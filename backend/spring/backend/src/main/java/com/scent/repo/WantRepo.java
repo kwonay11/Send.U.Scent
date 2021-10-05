@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,7 @@ public interface WantRepo extends JpaRepository<WantList, Integer>{
 		@Query(value = "select * from userlike where user_id = ? and perfume_id = ?", nativeQuery = true)
 		Optional<WantList> findByPerfume(int user_id, int perfume_id);
 		
+		@Modifying
 		@Query(value = "delete from userlike where id = ?", nativeQuery = true)
 		void deleteById(int id);
 }

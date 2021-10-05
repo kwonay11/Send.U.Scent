@@ -55,7 +55,7 @@ public class HaveServiceImpl implements HaveService{
 	public int deleteList(int id) {
 		Optional<HaveList> oHl = haveRepo.findById(id);
 		if(oHl.isPresent()) {
-			haveRepo.delete(oHl.get());
+			haveRepo.deleteById(id);
 			return 1;
 		}
 		return 0;

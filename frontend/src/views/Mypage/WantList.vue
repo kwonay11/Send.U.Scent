@@ -7,7 +7,7 @@
             <div class="have-list">
                 <ul v-if="!error" class="item-list">
                     <li class="item m-3"  v-for="(item, index) in wantList" :key="index">
-                    <Prod :id="item.id" :perfume_id="item.perfume_id" :name="item.title" @click.prevent="addHave(item.perfume_id, item.title)"/>
+                    <Prod :id="item.id" :perfume_id="item.perfume_id" :name="item.title" listIs="like" @click.stop="addHave(item.perfume_id, item.title)"/>
                     </li>
                 </ul>
                 <ul v-if="error" class="item-list">
@@ -181,11 +181,11 @@ export default {
     font-weight: bold;
 }
 .item-list {
-    width: 800px;
+    width: 910px;
     margin: 0 auto;
 }
 .item {
-    width: 120px;
+    width: 150px;
     display: inline-block;
 }
 .error {
