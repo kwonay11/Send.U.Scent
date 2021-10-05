@@ -17,14 +17,15 @@
                         <div class="card" v-for="p in paginatedData" :key="p.no">    
                         <router-link :to="`/recommend/detail/${p.perfume_id}`" style="color:black">
                             <img class="img"  :src="`https://fimgs.net/mdimg/perfume/375x500.${p.perfume_id}.jpg`" alt="perfume-image">
-                            <p>{{ p.title }}</p>
-                            <p>{{ p.brand }}</p>                    
+                            <br/>
+                            <p class="title-txt">{{ p.title }}</p>
+                            <p class="brand-txt">{{ p.brand }}</p>                    
                         </router-link>
                         </div>
                     </div>                  
                 </div> 
-                <div>
-                <div></div>
+                <br />
+            </div>  
                 <div class="btn-cover">
                     <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
                         이전
@@ -35,9 +36,7 @@
                     </button>
                 </div>
                 </div>                   
-            </div>  
-        </div>      
-    </div>    
+        </div>   
 </template>
 
 <script>
@@ -97,10 +96,10 @@ export default {
 }
 .perfume-container{
     width: 1100px;
-    height: 100%;
+    height: 70%;
     font-family: $kor-font-family;
     padding: 30px;
-    margin: 10px 200px 10px 150px;  
+    margin: 2px 200px 10px 110px;  
     
 }
 
@@ -131,8 +130,11 @@ export default {
     
 }
 .btn-cover {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   text-align: center;
+  height: 650px;
+  margin-right: 12%;
+//   right: 10%;
 }
 .btn-cover .page-btn {
   width: 5rem;
@@ -142,6 +144,7 @@ export default {
   background-color:$point-color;  
   border:none;
   color:white; 
+
 }
 .btn-cover .page-btn2 {
   width: 5rem;
@@ -151,9 +154,15 @@ export default {
   background-color:$point-color;  
   border:none;
   color:white;
+  
 }
 .btn-cover .page-count {
   padding: 0 1rem;
 }
-
+.title-txt{
+    font-weight: bold;
+}
+.brand-txt{
+    font-size: $smallest-font-size;
+}
 </style>
