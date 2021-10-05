@@ -25,6 +25,7 @@ import MyinfoModify from "@/components/Mypage/MyinfoModify.vue";
 import MyinfoCancel from "@/components/Mypage/MyinfoCancel.vue";
 import HaveList from "../views/Mypage/HaveList.vue";
 import WantList from "../views/Mypage/WantList.vue";
+import MyHaveAdd from '@/components/Mypage/MyHaveAdd.vue';
 // 에러 페이지
 import Page404 from "../views/404.vue";
 
@@ -185,6 +186,11 @@ const routes = [
         path: "havelist",
         name: "HaveList",
         component: HaveList,
+      },
+      {
+        path: "haveadd",
+        name: "HaveAdd",
+        component: MyHaveAdd,
       },
       {
         path: "wantlist",
