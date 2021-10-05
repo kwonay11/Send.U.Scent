@@ -30,10 +30,10 @@
               <br />
               <div class="filter-check">
                 <input type="checkbox" value="1" v-model="daynight" />
-                <label for="night">밤&#127774;</label>
+                <label for="night">낮&#127774;</label>
                 <br />
                 <input type="checkbox" value="2" v-model="daynight" />
-                <label for="day">낮&#127769;</label>
+                <label for="day">밤&#127769;</label>
               </div>       
               <label class="title">|성별</label>
               <br />
