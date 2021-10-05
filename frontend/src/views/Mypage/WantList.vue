@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <!-- <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.title"/> -->
+        <!-- 모달 -->
         <div id="ModalRoot" v-if="setModal">
         <div class="black-bg">
             <div class="modal-box p-3">
@@ -35,7 +35,7 @@
                 <div class="modal-bottom">
                     <div class="button-group">
                         <button class="cancel-btn" @click="closeBtn">취소</button>
-                        <button class="add-btn" @click="addBtn">추가</button>
+                        <button class="add-btn" @click="addBtn(this.selectedProd.title)">추가</button>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,6 @@
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
-// import Modal from '../../components/Modal.vue';
 import GoTop from '../../components/GoTop.vue';
 import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
@@ -75,8 +74,7 @@ export default {
             .get("/like/list", { params: { user_id : this.user_No}})
             .then((res) => {
                 if(res.data.result === "success") {
-                this.wantList = res.data.wantlist
-                // console.log(this.haveList)
+                    this.wantList = res.data.wantlist
                 } else {
                     const reason = res.data.reason
                     if(reason === "등록된 목록이 없습니다.")
@@ -92,7 +90,6 @@ export default {
             .then((res) => {
             if(res.data.result === "success") {
                 this.haveList = res.data.havelist
-                // console.log(this.haveList)
             } else {
                 const reason = res.data.reason
                 if(reason === "등록된 목록이 없습니다.")
@@ -103,7 +100,6 @@ export default {
             })
         },
         addHave(perfume_id, title) {
-            // alert(id + "번 향수 리뷰");
             for (let i = 0; i < this.haveList.length; i++) {
                 if(perfume_id === this.haveList[i].perfume_id) {
                     // 보유 목록에 이미 있으면
@@ -114,7 +110,6 @@ export default {
             this.setModal = true;
             this.selectedProd.id = perfume_id;
             this.selectedProd.title = title;
-            console.log(this.selectedProd)
         },
         closeModal() {
             this.setModal = false;
@@ -122,16 +117,15 @@ export default {
         closeBtn() {
             this.setModal = false;
         },
-        addBtn() {
+        addBtn(v) {
             const Form = {
                 "user_id" : this.userInfo.id,
                 "perfume_id" : this.selectedProd.id
             }
-            console.log(Form)
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        alert(this.name + " 향수를 보유 향수에 추가했습니다.");
+                        alert( v + " 향수를 보유 향수에 추가했습니다.");
                         this.closeBtn()
                         this.$router.go()
                     } else {

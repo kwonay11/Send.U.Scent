@@ -16,11 +16,19 @@
                 <i class="fas fa-minus-square"></i>
             </button>
         </div>
-        <!-- 공통 -->
-        <div class="item-img">
-            <img :src="`https://fimgs.net/mdimg/perfume/375x500.${this.perfume_id}.jpg`" :alt="this.name">
+        <!-- 보유 향수 검색일 때 -->
+        <div v-if="listIs === 'search'">
+            <div class="item-img">
+                <img :src="`https://fimgs.net/mdimg/perfume/375x500.${this.perfume_id}.jpg`" :alt="this.name">
+            </div>
+            <span class="item-name" @click.stop="goToDetail(this.perfume_id)">{{this.name}}</span>
         </div>
-        <span class="item-name" @click.stop="goToDetail(this.perfume_id)">{{this.name}}</span>
+        <div v-else>
+            <div class="item-img">
+                <img :src="`https://fimgs.net/mdimg/perfume/375x500.${this.perfume_id}.jpg`" :alt="this.name">
+            </div>
+            <span class="item-name" @click.stop="goToDetail(this.perfume_id)">{{this.name}}</span>
+        </div>
     </div>
 </template>
 
@@ -43,7 +51,6 @@ export default {
             http.delete('/like/delete', { params : {id : id}})
                 .then((res) => {
                     if(res.data.result === "success") {
-                        console.log(name + " 향수를 관심목록에서 삭제했습니다.")
                         this.likeActive = false
                     } else {
                         alert("데이터를 처리하던 중 문제가 발생했습니다.")
@@ -58,7 +65,6 @@ export default {
             http.post('/like/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        console.log(v + " 향수를 관심목록에서 추가했습니다.")
                         this.likeActive = true
                         this.$router.go()
                     } else {
@@ -116,7 +122,7 @@ span, p {
 .item-img {
     width: 110px;
     height: 130px;
-    // background-color: gray;
+    margin: 0 auto;
 }
 .item-img > img {
     width: 100%;
