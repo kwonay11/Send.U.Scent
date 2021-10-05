@@ -75,7 +75,6 @@ export default {
             .then((res) => {
                 if(res.data.result === "success") {
                     this.wantList = res.data.wantlist
-                    // this.$store.commit("setUserWant", res.data.wantlist);
                 } else {
                     const reason = res.data.reason
                     if(reason === "등록된 목록이 없습니다.")
