@@ -29,22 +29,23 @@ export default {
 
 #ProdListViewRoot {
   width: 100%;
-  height: 120vh;
-  top: 0;
+  height: 150vh;
+  margin-top: 7%;
   left: 0;
   font-family: $kor-font-family;
   color: $black-color;
 }
-.title-box {
-  width: 100%;
-  height: 20%;
-  top:10;
-}
+// .title-box {
+//   width: 100%;
+//   height: 20%;
+//   top:10;
+// }
 .filter-content {
+
   width: 30%;
-  height: 80%;
+  height: 100%;
   top: 40vh;
-  background-color: #f8f4f4;  
+
 }
 
 </style>
