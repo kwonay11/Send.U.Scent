@@ -89,7 +89,7 @@
       </div>
 
       <div class="d-content">
-        <div class="d-title">
+        <div class="d-title" v-if="perfumeInfo.top_list.length!==0">
           <strong>Top Notes</strong>
         </div>
         <ul>
@@ -99,7 +99,7 @@
         </ul>
       </div>
       <div class="d-content">
-        <div class="d-title">
+        <div class="d-title" v-if="perfumeInfo.middle_list.length!==0">
           <strong>Middle Notes</strong>
         </div>
         <ul>
@@ -109,7 +109,7 @@
         </ul>
       </div>
       <div class="d-content">
-        <div class="d-title">
+        <div class="d-title" v-if="perfumeInfo.base_list.length!==0">
           <strong>Base Notes</strong>
         </div>
         <ul>
