@@ -5,9 +5,19 @@
             <div class="content-box mt-5 my-3">
                 <p class="body-title">회원님이 관심을 가진 향수에요</p>
             <div class="have-list">
-                <ul class="item-list">
+                <ul v-if="!error" class="item-list">
                     <li class="item m-3"  v-for="(item, index) in wantList" :key="index">
                     <Prod :id="item.id" :perfume_id="item.perfume_id" :name="item.title" @click.prevent="addHave(item.perfume_id, item.title)"/>
+                    </li>
+                </ul>
+                <ul v-if="error" class="item-list">
+                    <li class="error mt-5">
+                        😉회원님이 관심 갖는 향수는 어떤 게 있나요?<br>
+                        향수 정보에서 하트💖를 통해 추가 할 수 있어요~<br>
+                        <span class="mt-3 recLink">
+                            <router-link to="/recommend/mytest">테스트로 추천 받기</router-link> | 
+                            <router-link to="/recommend/perfume">향수 구경 하기</router-link>
+                        </span>
                     </li>
                 </ul>
             </div>
@@ -68,7 +78,11 @@ export default {
                 this.wantList = res.data.wantlist
                 // console.log(this.haveList)
                 } else {
-                alert("!데이터를 불러오는데 문제가 발생했습니다.")
+                    const reason = res.data.reason
+                    if(reason === "등록된 목록이 없습니다.")
+                        return;
+                    else 
+                        alert("!데이터를 불러오는데 문제가 발생했습니다.")
                 }
             })
         },
@@ -80,7 +94,11 @@ export default {
                 this.haveList = res.data.havelist
                 // console.log(this.haveList)
             } else {
-                alert("!데이터를 불러오는데 문제가 발생했습니다.")
+                const reason = res.data.reason
+                if(reason === "등록된 목록이 없습니다.")
+                    this.error = true;
+                else
+                    alert("!데이터를 불러오는데 문제가 발생했습니다.")
             }
             })
         },
@@ -125,6 +143,7 @@ export default {
     data() {
         return {
             setModal: false,
+            error: false,
             selectedProd: {
                 id: Number,
                 title: String,
@@ -169,7 +188,24 @@ export default {
     width: 120px;
     display: inline-block;
 }
-
+.error {
+    height: 200px;
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center
+}
+.recLink, .recLink > a {
+    color: $point-color;
+    font-size: $body-font-size;
+}
+.recLink > a:hover {
+    color: $heart-color;
+    font-weight: bold;
+}
 
 // 모달
 #ModalRoot {
