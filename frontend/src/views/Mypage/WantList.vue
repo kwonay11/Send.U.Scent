@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <!-- <Modal v-if="setModal" @flag="closeModal" :id="this.selectedProd.id" :name="this.selectedProd.title"/> -->
+        <!-- 모달 -->
         <div id="ModalRoot" v-if="setModal">
         <div class="black-bg">
             <div class="modal-box p-3">
@@ -49,7 +49,6 @@
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
-// import Modal from '../../components/Modal.vue';
 import GoTop from '../../components/GoTop.vue';
 import http from '../../utils/http-common.js'
 import { mapState } from 'vuex';
@@ -101,7 +100,6 @@ export default {
             })
         },
         addHave(perfume_id, title) {
-            // alert(id + "번 향수 리뷰");
             for (let i = 0; i < this.haveList.length; i++) {
                 if(perfume_id === this.haveList[i].perfume_id) {
                     // 보유 목록에 이미 있으면
@@ -124,7 +122,6 @@ export default {
                 "user_id" : this.userInfo.id,
                 "perfume_id" : this.selectedProd.id
             }
-            console.log(Form)
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
