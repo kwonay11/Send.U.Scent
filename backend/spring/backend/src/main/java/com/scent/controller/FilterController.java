@@ -89,7 +89,11 @@ public class FilterController {
 			@RequestParam(value = "gender", required = false) String gender,
 			@RequestParam(value = "season", required = false) String season, HttpServletResponse response) {
 
-		List<Perfume> list = filterService.findChecked(season, daynight, gender);
+		List<Perfume> list = new ArrayList<Perfume>();
+		list.addAll(filterService.findGrace());
+		System.out.println(filterService.findGrace().get(0));
+		list.addAll(filterService.findChecked(season, daynight, gender));
+		
 		List<Map<String, Object>> searchList = new ArrayList<>();
 
 		// list -> idList기반으로 Perfume객체 찾아와서 담기
