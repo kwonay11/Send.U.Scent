@@ -2,22 +2,18 @@
   <div id="MypageMainRoot">
     <page-title pageTitle="Notice" />
     <div class="content-box mt-5 my-3">
-      <BoardListView />
-
-      <my-reviews />
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import PageTitle from "../../components/Header/PageTitle.vue";
-import BoardListView from "../../components/Board/BoardListView.vue";
 
 export default {
   name: "MypageMain",
   components: {
     PageTitle,
-    BoardListView,
   },
 };
 </script>
