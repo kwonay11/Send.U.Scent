@@ -14,7 +14,9 @@
       <tbody>
         <tr :key="i" v-for="(notice, i) in notices" class="mylist">
           <td class="list">{{ i + 1 }}</td>
-          <td class="list">{{ notice.title }}</td>
+          <td class="list" @mouseover="shape" @click="goread(i)">
+            {{ notice.title }}
+          </td>
           <td class="list">{{ notice.createdDate.anua }}</td>
         </tr>
       </tbody>
@@ -29,6 +31,13 @@ export default {
     return {
       notices: [],
     };
+  },
+  methods: {
+    shape() {},
+    goread(i) {
+      console.log("고");
+      this.$router.push("/notice/" + i);
+    },
   },
   beforeCreate() {
     console.log("공지사항 목록들 디스패치");
@@ -53,6 +62,7 @@ thead {
   border-bottom: 1px solid black;
 }
 table {
+  cursor: pointer;
   border-collapse: collapse;
   width: 100%;
 }

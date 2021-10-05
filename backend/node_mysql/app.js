@@ -98,11 +98,8 @@ app.get("/api/users/user", (req, res) => {
         // console.log('login is : ', user);
         res.send(user);
     });
-
-    //filter라는 함수는 자바스크립트에서 배열 함수이다. 필터링을 할때 많이 사용된다 필터링한 데이터를 새로운 배열로 반환한다.
-
-    // res.json({ok: false, user: user})
 })
+
 
 
 /**
@@ -135,6 +132,32 @@ app.post("/suscent/api/login/", (req, res) => {
                 "code": 200,
                 "user_id": results[0].user_id,
                 "success": "user login sucessfully"
+            });
+        })
+    })
+})
+app.get("/suscent/api/notice/:id", (req, res) => {
+    console.log('notice')
+    // console.log(req.params)
+    // console.log(req.params.id)
+    let notice_id = req.params.id
+    console.log(notice_id)
+    connection.query('SELECT * FROM notice', function(err, rows) {
+        if(err) throw err;
+        console.log('res')
+        console.log(rows)
+    
+        connection.query('SELECT * FROM notice WHERE id = ?', [notice_id], function(error, results, fields) {
+
+            console.log('The solution is: ', results);
+            
+            res.send({
+                "code": 200,
+                "id": results[0].id,
+                "title": results[0].title,
+                "contents": results[0].contents,
+                "user": results[0].user,
+                "success": "get notice sucessfully"
             });
         })
     })
