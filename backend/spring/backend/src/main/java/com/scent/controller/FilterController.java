@@ -82,7 +82,6 @@ public class FilterController {
 		return new ResponseEntity<List<Map<String, Object>>>(searchList, HttpStatus.OK);
 	}
 
-//	@GetMapping(value = "/array/{season}/{daynight}/{gender}")
 	@GetMapping("/filter")
 	@ApiOperation(value = "시간,성별,계절 입력 ", notes = "체크박스 값으로 필터링")
 	public ResponseEntity<List<Map<String, Object>>> listCheckedOpt2(
@@ -90,7 +89,11 @@ public class FilterController {
 			@RequestParam(value = "gender", required = false) String gender,
 			@RequestParam(value = "season", required = false) String season, HttpServletResponse response) {
 
-		List<Perfume> list = filterService.findChecked(season, daynight, gender);
+		List<Perfume> list = new ArrayList<Perfume>();
+		list.addAll(filterService.findGrace());
+		System.out.println(filterService.findGrace().get(0));
+		list.addAll(filterService.findChecked(season, daynight, gender));
+		
 		List<Map<String, Object>> searchList = new ArrayList<>();
 
 		// list -> idList기반으로 Perfume객체 찾아와서 담기
@@ -103,12 +106,14 @@ public class FilterController {
 				String perfGender = list.get(i).getGender();
 				String perfDaynight = list.get(i).getDaynight();
 				String perfSeason = list.get(i).getSeason();
+				String perfBrand = list.get(i).getBrand();				
 				map.put("perfume_id", perfId);
 				map.put("title", perfTitle);
 				map.put("accords", perfAccord);
 				map.put("gender", perfGender);
 				map.put("daynight", perfDaynight);
 				map.put("season", perfSeason);
+				map.put("brand", perfBrand);
 				searchList.add(map);
 			}
 		} else {

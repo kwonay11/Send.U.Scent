@@ -2,26 +2,41 @@
 <template>
     <div id="ProdOneRoot">
         <div class="perfume-page">
-            <div class="perfume-list"> 
-                <div class="card-list">
-                    <div class="card" v-for="p in paginatedData" :key="p.no">    
-                        <img class="img"  :src="`https://fimgs.net/mdimg/perfume/375x500.${p.perfume_id}.jpg`" alt="perfume-image">
-                        <p>{{ p.title }}</p>
-                        <p>{{ p.season }}</p>                    
-                    </div>
-                </div>                  
-            </div>                
-            <div class="btn-cover">
-                <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-                    이전
+            <div class="perfume-container"> 
+                <!-- <div class="accord-filter">
+                    <div>ALL</div>
+                    <a>ALL | </a>
+                    <a>시트러스 | </a>
+                    <a>우디 | </a>
+                    <a>머스크 | </a>
+                    <a>플로랄  </a>                
+                </div> -->
+                <div class="perfume-list"> 
+                    <div class="card-list">
+                        
+                        <div class="card" v-for="p in paginatedData" :key="p.no">    
+                        <router-link :to="`/recommend/detail/${p.perfume_id}`" style="color:black">
+                            <img class="img"  :src="`https://fimgs.net/mdimg/perfume/375x500.${p.perfume_id}.jpg`" alt="perfume-image">
+                            <br/>
+                            <p class="title-txt">{{ p.title }}</p>
+                            <p class="brand-txt">{{ p.brand }}</p>                    
+                        </router-link>
+                        </div>
+                    </div>                  
+                </div> 
+                <br />
+            </div>  
+                <div class="btn-cover">
+                    <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                        이전
+                        </button>
+                        <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+                        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn2" >
+                            다음
                     </button>
-                    <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-                    <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-                        다음
-                </button>
-            </div>    
-        </div>    
-    </div>    
+                </div>
+                </div>                   
+        </div>   
 </template>
 
 <script>
@@ -36,7 +51,7 @@ export default {
         pageSize:{
             type: Number,
             required:false,
-            default: 12
+            default: 10
         },
     },
     methods: {
@@ -71,35 +86,83 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
-.perfume-list{
+.perfume-page{
     width: 100%;
-    height: 700px;
+    height: 1100px;
+    font-family: $kor-font-family;
+    padding: 30px;
+    margin: 10px 350px 10px 250px;  
+    background-color: white;
 }
+.perfume-container{
+    width: 1100px;
+    height: 70%;
+    font-family: $kor-font-family;
+    padding: 30px;
+    margin: 2px 200px 10px 110px;  
+    
+}
+
+// .perfume-list{
+//     font-family: $kor-font-family;
+//     width: 1300px;
+//     padding: 20px;
+//     margin: 10px;
+// }
 .card{
     float: left;
-    width:200px;
-    height: 320px;
-    margin: 10px;
+    width:160px;
+    height: 300px;
+    margin: 20px;
     padding: 10px;
+    font-family: $eng-font-family;
+    font-size: $detail-font-size;
+    // border-color:$main-color;
+    border:none;
+
 }
 
 .img{
-    width:150px;
-    height:220px;
-    display : block ;
+    width:120px;
+    height:200px;
+    display: block;
     margin : 0 auto ;
+    
 }
 .btn-cover {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   text-align: center;
+  height: 650px;
+  margin-right: 12%;
+//   right: 10%;
 }
 .btn-cover .page-btn {
   width: 5rem;
   height: 2rem;
   letter-spacing: 0.5px;
+  border-radius: 10px;
+  background-color:$point-color;  
+  border:none;
+  color:white; 
+
+}
+.btn-cover .page-btn2 {
+  width: 5rem;
+  height: 2rem;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
+  background-color:$point-color;  
+  border:none;
+  color:white;
+  
 }
 .btn-cover .page-count {
   padding: 0 1rem;
 }
-
+.title-txt{
+    font-weight: bold;
+}
+.brand-txt{
+    font-size: $smallest-font-size;
+}
 </style>

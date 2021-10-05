@@ -31,6 +31,8 @@ export default {
                 this.pageUrl = require("@/assets/images/PageTitle_3.png");
             } else if(this.page === "Login" || this.page === "SignUp") {
                 this.pageUrl = require("@/assets/images/PageTitle_4.png");
+            }   else if(this.page === "Perfume") {
+                this.pageUrl = require("@/assets/images/PageTitle_5.png");
             }
         },
     },
@@ -46,7 +48,7 @@ export default {
 @import "../../styles/common.scss";
 #PageTitleRoot {
     width: 100%;
-    height: 100%;
+    height: 10%;
     position: absolute;
     top: 0;
     left: 0;

@@ -5,7 +5,7 @@
     <div class="content-box mt-5 my-3">
       <!-- 향수간 유사도 기반 추천 향수 -->
       <div v-if="reccList.length>0" class="rec-box mb-5">
-        <RecSlider :reccList="reccList" />
+        <RecSlider :reccList="reccList" ctitle="haveList" />
         <div class="line"></div>
       </div>
       <p class="body-title mt-2">회원님이 가진 향수에요</p>
