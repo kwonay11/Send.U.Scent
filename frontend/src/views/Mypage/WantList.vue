@@ -35,7 +35,7 @@
                 <div class="modal-bottom">
                     <div class="button-group">
                         <button class="cancel-btn" @click="closeBtn">취소</button>
-                        <button class="add-btn" @click="addBtn">추가</button>
+                        <button class="add-btn" @click="addBtn(this.selectedProd.title)">추가</button>
                     </div>
                 </div>
             </div>
@@ -75,8 +75,7 @@ export default {
             .get("/like/list", { params: { user_id : this.user_No}})
             .then((res) => {
                 if(res.data.result === "success") {
-                this.wantList = res.data.wantlist
-                // console.log(this.haveList)
+                    this.wantList = res.data.wantlist
                 } else {
                     const reason = res.data.reason
                     if(reason === "등록된 목록이 없습니다.")
@@ -92,7 +91,6 @@ export default {
             .then((res) => {
             if(res.data.result === "success") {
                 this.haveList = res.data.havelist
-                // console.log(this.haveList)
             } else {
                 const reason = res.data.reason
                 if(reason === "등록된 목록이 없습니다.")
@@ -114,7 +112,6 @@ export default {
             this.setModal = true;
             this.selectedProd.id = perfume_id;
             this.selectedProd.title = title;
-            console.log(this.selectedProd)
         },
         closeModal() {
             this.setModal = false;
@@ -122,7 +119,7 @@ export default {
         closeBtn() {
             this.setModal = false;
         },
-        addBtn() {
+        addBtn(v) {
             const Form = {
                 "user_id" : this.userInfo.id,
                 "perfume_id" : this.selectedProd.id
@@ -131,7 +128,7 @@ export default {
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        alert(this.name + " 향수를 보유 향수에 추가했습니다.");
+                        alert( v + " 향수를 보유 향수에 추가했습니다.");
                         this.closeBtn()
                         this.$router.go()
                     } else {

@@ -43,7 +43,7 @@ export default {
             http.delete('/like/delete', { params : {id : id}})
                 .then((res) => {
                     if(res.data.result === "success") {
-                        console.log(name + " 향수를 관심목록에서 삭제했습니다.")
+                        // console.log(name + " 향수를 관심목록에서 삭제했습니다.")
                         this.likeActive = false
                     } else {
                         alert("데이터를 처리하던 중 문제가 발생했습니다.")
@@ -58,7 +58,7 @@ export default {
             http.post('/like/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        console.log(v + " 향수를 관심목록에서 추가했습니다.")
+                        // console.log(v + " 향수를 관심목록에서 추가했습니다.")
                         this.likeActive = true
                         this.$router.go()
                     } else {
