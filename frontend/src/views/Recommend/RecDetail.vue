@@ -66,7 +66,7 @@
 
       <!-- 향수간 유사도 기반 추천 향수 -->
       <div v-if="reccList.length>0">
-        <RecSlider :reccList="reccList" />
+        <RecSlider :reccList="reccList" ctitle="recDetail" />
         <div class="line"></div>
       </div>
 
