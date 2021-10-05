@@ -1,6 +1,11 @@
 // 추천 및 내가 가진, 관심 목록에 들어갈 향수 정보 하나
 <template>
     <div id="SimpleProdRoot">
+        <div class="like-btn-group" v-if="listIs==='like'">
+        <button class="like-on-btn" @click.stop="cancelLike(this.id)">
+            <img src="@/assets/icons/heart-on-btn.png">
+        </button>
+        </div>
         <div class="item-img">
             <img :src="`https://fimgs.net/mdimg/perfume/375x500.${this.perfume_id}.jpg`" :alt="this.name">
         </div>
@@ -9,22 +14,25 @@
 </template>
 
 <script>
+import http from '../utils/http-common.js'
 export default {
     props : [
         // "prodList",
         "id",
         "name",
         "perfume_id",
+        "listIs",
     ],
+    methods: {
+        cancelLike(v) {
+            alert(v + " 리스트 삭제")
+            // http.
+        }
+    },
     data() {
         return {
         }
     },
-    mounted() {
-
-    },
-    created() {
-    }
 }
 </script>
 
@@ -53,7 +61,7 @@ export default {
 .item-img {
     width: 110px;
     height: 130px;
-    background-color: gray;
+    // background-color: gray;
 }
 .item-img > img {
     width: 100%;
@@ -61,5 +69,19 @@ export default {
 }
 .item-name {
     font-size: $body-font-size;
+}
+.like-btn-group {
+    position: relative;
+    right: -40px;
+    top: 20px;
+}
+.like-on-btn {
+    background: none;
+    border: none;
+    width: 35px;
+    height: 25px;
+}
+.like-on-btn > img {
+    width: 100%;
 }
 </style>
