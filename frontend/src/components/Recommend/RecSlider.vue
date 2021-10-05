@@ -1,7 +1,8 @@
 //추천 향수 슬라이드
 <template>
   <div id="RecPerFumeRoot">
-    <h3>이 향수와 가장 유사한 다른 향수들</h3>
+    <h3 v-if="ctitle==='recDetail'">이 향수와 가장 유사한 다른 향수들</h3>
+    <h3 v-if="ctitle==='haveList'">회원님이 평가한 향수를 바탕으로 추천해드려요</h3>
     <splide :options="options">
       <splide-slide v-for="(item,idx) in reccList" v-bind:key="idx">
         <div @click="goDetail(item.perfume_id)" style="cursor: pointer;">
@@ -20,6 +21,7 @@ import '@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
 export default {
   name: "RecSilder",
   props: {
+    ctitle: String,
     reccList: Array,
   },
   components: {
