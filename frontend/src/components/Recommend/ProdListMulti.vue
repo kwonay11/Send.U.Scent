@@ -73,6 +73,7 @@ export default {
         아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
         이런식으로 if 문 없이 고칠 수도 있다!
         */
+        sessionStorage.setItem("page",page);
         return page;
         },
         paginatedData () {
@@ -87,8 +88,8 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
 .perfume-page{
-    width: 100%;
-    height: 1100px;
+    width: 80%;
+    height: 1000px;
     font-family: $kor-font-family;
     padding: 30px;
     margin: 10px 350px 10px 250px;  
@@ -130,10 +131,12 @@ export default {
     
 }
 .btn-cover {
-  margin-top: 3rem;
-  text-align: center;
-  height: 650px;
-  margin-right: 12%;
+    width: 100%;
+    margin-top: 3rem;
+    text-align: center;
+    height: 50px;
+    padding-left: 12%;
+    //margin-right: 1.2%;
 //   right: 10%;
 }
 .btn-cover .page-btn {
