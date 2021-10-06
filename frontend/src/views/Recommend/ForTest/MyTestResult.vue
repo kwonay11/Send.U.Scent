@@ -123,9 +123,9 @@ export default {
                 http.put('user/update/myscent', Form)
                     .then((res) => {
                         if(res.data.result === "success") {
-                        console.log("저장 완료")
+                            console.log("저장 완료")
                         } else {
-                        console.log("저장 실패")
+                            console.log("저장 실패")
                         }
                     })
                     .catch(() => {
@@ -177,17 +177,14 @@ export default {
 
             this.accords_list = Object.keys(this.accords)
         
-           
-        
-
+            this.updateRes()
         })
         .catch(()=>{
             console.log("데이터 못받음")
 
-        }),
+        })
     
-        this.updateRes()
-    },
+    }
 }
 
 
