@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("select u from user u where u.user_id = :user_id")
 	Optional<User> findById(String user_id); // 회원정보 조회
-//	void updateUser(User user); // 회원정보 수정
-//	void deleteUser(String user_id); // 회원탈퇴
+	
+	@Query("select u from user u where u.nickname = :nickname")
+	Optional<User> findByNick(String nickname); // 닉네임 중복 체크
 }

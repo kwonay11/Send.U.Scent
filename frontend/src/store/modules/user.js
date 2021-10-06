@@ -10,22 +10,12 @@ export default {
   actions: {
     // 로그인 시도
     login({ dispatch }, loginObj) {
-      console.log("로그인오브젝트");
-      console.log(loginObj);
-
       axios
         .post("http://j5c204.p.ssafy.io/suscent/api/login/", loginObj) // user_id, password
         .then((res) => {
           if (res.data.code === 200) {
-            console.log("res");
-            console.log(res.data);
             let user_id = res.data.user_id;
-            console.log(user_id);
-
             localStorage.setItem("user_id", user_id);
-
-            console.log("로그인 완료");
-
             router.push({ name: "Home" });
           } else {
             swal("아이디와 비밀번호를 확인하세요.")
@@ -38,13 +28,10 @@ export default {
     },
 
     signup({ dispatch }, signupObj) {
-      console.log("회원가입오브젝트");
-      console.log(signupObj);
       axios
         .post("http://j5c204.p.ssafy.io/suscent/api/users/signup", signupObj)
         .then((res) => {
-          console.log(res);
-          console.log("회원가입 완료");
+          swal("회원가입을 축하합니다!");
           router.push({ name: "Login" });
         })
         .catch(() => {
