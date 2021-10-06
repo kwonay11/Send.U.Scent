@@ -76,6 +76,7 @@ export default {
             .then((res) => {
                 if(res.data.result === "success") {
                     this.wantList = res.data.wantlist
+                    this.error = false
                 } else {
                     const reason = res.data.reason
                     if(reason === "등록된 목록이 없습니다.") {
@@ -97,7 +98,7 @@ export default {
             } else {
                 const reason = res.data.reason
                 if(reason === "등록된 목록이 없습니다.")
-                    this.error = true;
+                    return;
                 else
                     swal("!데이터를 불러오는데 문제가 발생했습니다.")
             }
