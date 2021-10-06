@@ -61,14 +61,14 @@ app.get('/', function(req, res){
  * @path {GET} http://localhost:8888/api/users
  * @description 요청 데이터 값이 없고 반환 값이 있는 GET Method
  */
-app.get("/api/users", (req, res) => {
-    connection.query('SELECT * FROM user', function(err, rows) {
-        if(err) throw err;
+// app.get("/api/users", (req, res) => {
+//     connection.query('SELECT * FROM user', function(err, rows) {
+//         if(err) throw err;
 
-        console.log('The solution is: ', rows);
-        res.send(rows);
-    });
-})
+//         console.log('The solution is: ', rows);
+//         res.send(rows);
+//     });
+// })
 app.get("/suscent/api/notices", (req, res) => {
     connection.query('SELECT * FROM notice', function(err, rows) {
         if(err) throw err;
@@ -117,16 +117,13 @@ app.get("/api/users/user", (req, res) => {
  *  그렇기 때문에 다른 라우터 보다 아래 있어야 한다.
  */
 app.post("/suscent/api/login/", (req, res) => {
-    console.log('login')
-    console.log(req)
-    console.log(req.body)
-    console.log(req.body.user_id)
     connection.query('SELECT * FROM user', function(err, rows) {
-        if(err) console.log("로그인 실패");
-        console.log('res')
+        if (err) throw err
         connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [req.body.user_id, req.body.password], function(error, results, fields) {
-          if (results.length == 0) {
-            console.log('로그인실패띠')
+          if (results.length === 0) {
+            res.send({
+                "code" : 500
+            })
           } else {
 
             console.log('The solution is: ', results);
