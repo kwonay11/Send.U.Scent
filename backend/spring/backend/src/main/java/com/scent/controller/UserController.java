@@ -137,7 +137,7 @@ public class UserController {
 		return response;
 	}
 
-	@DeleteMapping("/delete}")
+	@DeleteMapping("/delete")
 	@ApiOperation(value = "회원 탈퇴", notes = "해당 유저의 정보를 삭제한다.")
 	public Map<String, Object> DeleteUser(@RequestParam String user_id) {
 		Map<String, Object> response = new HashMap<String, Object>();
