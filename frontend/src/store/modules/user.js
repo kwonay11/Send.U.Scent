@@ -37,7 +37,7 @@ export default {
       console.log(loginObj);
 
       axios
-        .post("http://j5c204.p.ssafy.io/suscent/api/login/", loginObj) // user_id, password
+        .post("http://localhost:8888/suscent/api/login/", loginObj) // user_id, password
         .then((res) => {
           console.log("res");
           console.log(res);

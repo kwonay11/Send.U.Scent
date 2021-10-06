@@ -125,6 +125,9 @@ app.post("/suscent/api/login/", (req, res) => {
         if(err) throw err;
         console.log('res')
         connection.query('SELECT * FROM user WHERE user_id = ? AND password = ?', [req.body.user_id, req.body.password], function(error, results, fields) {
+          if (results.length == 0) {
+            console.log('로그인실패띠')
+          } else {
 
             console.log('The solution is: ', results);
             
@@ -133,6 +136,7 @@ app.post("/suscent/api/login/", (req, res) => {
                 "user_id": results[0].user_id,
                 "success": "user login sucessfully"
             });
+          }
         })
     })
 })
