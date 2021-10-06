@@ -6,7 +6,16 @@
       </p>
       <div class="scents-box">
         <!-- accords -->
-        <table class="accords-table">
+        <table v-if="chkAccord" class="accords-table">
+          <th>
+            <td class="chk-accord-text">
+              내 취향의 Accord 정보가 없어요! <br>
+              지금 바로 테스트를 통해 알아볼까요?<br>
+              <router-link to="/recommend/mytest">테스트 하기📝</router-link>
+            </td>
+          </th>
+        </table>
+        <table v-else class="accords-table">
           <th>
             <td colspan="2" class="accords-1">
               {{user.accord1}}
@@ -55,8 +64,9 @@ export default {
           if (res.data.result === "success") {
             this.$store.commit("setUserInfo", res.data.user);
             this.user = this.userInfo;
-            // console.log("axios 요청 성공 후 user info")
-            // console.log(this.user)
+            if(this.user.accord1 === null) {
+              this.chkAccord = true
+            }
           } else {
             alert("에러가 발생했습니다.");
           }
@@ -73,6 +83,7 @@ export default {
     return {
       user: {},
       user_id: String,
+      chkAccord: false,
     }
   }
 
@@ -141,6 +152,15 @@ export default {
   align-content: center;
   justify-content: center;
   align-items: center;
+}
+.chk-accord-text > a {
+  margin-top: 30px;
+  color: $point-color;
+  font-size: $body-font-size;
+  line-height: 2.6em;
+}
+.chk-accord-text > a:hover {
+  color: $heart-color;
 }
 tr,th {
   height: 60px;
