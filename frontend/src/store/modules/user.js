@@ -11,7 +11,7 @@ export default {
     // 로그인 시도
     login({ dispatch }, loginObj) {
       axios
-        .post("http://j5c204.p.ssafy.io/suscent/api/login/", loginObj) // user_id, password
+        .post("https://j5c204.p.ssafy.io/suscent/api/login/", loginObj) // user_id, password
         .then((res) => {
           if (res.data.code === 200) {
             let user_id = res.data.user_id;
@@ -29,7 +29,7 @@ export default {
 
     signup({ dispatch }, signupObj) {
       axios
-        .post("http://j5c204.p.ssafy.io/suscent/api/users/signup", signupObj)
+        .post("https://j5c204.p.ssafy.io/suscent/api/users/signup", signupObj)
         .then((res) => {
           swal("회원가입을 축하합니다!");
           router.push({ name: "Login" });
