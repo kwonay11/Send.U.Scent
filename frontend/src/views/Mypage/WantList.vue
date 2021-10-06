@@ -77,8 +77,11 @@ export default {
                     this.wantList = res.data.wantlist
                 } else {
                     const reason = res.data.reason
-                    if(reason === "등록된 목록이 없습니다.")
+                    if(reason === "등록된 목록이 없습니다.") {
+                        this.error = true
                         return;
+                    }
+                        
                     else 
                         alert("!데이터를 불러오는데 문제가 발생했습니다.")
                 }
