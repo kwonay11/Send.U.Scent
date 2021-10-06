@@ -15,16 +15,20 @@ export default {
       axios
         .post("http://j5c204.p.ssafy.io/suscent/api/login/", loginObj) // user_id, password
         .then((res) => {
-          console.log("res");
-          console.log(res.data);
-          let user_id = res.data.user_id;
-          console.log(user_id);
+          if (res.data.code === 200) {
+            console.log("res");
+            console.log(res.data);
+            let user_id = res.data.user_id;
+            console.log(user_id);
 
-          localStorage.setItem("user_id", user_id);
+            localStorage.setItem("user_id", user_id);
 
-          console.log("로그인 완료");
+            console.log("로그인 완료");
 
-          router.push({ name: "Home" });
+            router.push({ name: "Home" });
+          } else {
+            alert("아이디와 비밀번호를 확인하세요.")
+          }
         })
         // 로그인 실패했을 때.
         .catch(() => {

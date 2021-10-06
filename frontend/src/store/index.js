@@ -9,6 +9,8 @@ export default createStore({
   state: {
     isLogin: false,
     userInfo: null,
+    userHave: null,
+    userWant: null,
   },
   mutations: {
     setIsLogined(state, isLogin) {
@@ -22,15 +24,21 @@ export default createStore({
       state.isLogin = false;
       state.userInfo = null;
     },
+    setUserHave(state, userHave) {
+      state.userHave = userHave;
+    },
+    setUserWant(state, userWant) {
+      state.userWant = userWant;
+    },
 
   },
   actions: {
-    getUserInfo({ commit }, payload) {
+    getUserInfo(payload) {
       http
         .get("/user/info", { params: { user_id: payload } })
         .then((res) => {
           if (res.data.result === "success") {
-            commit("setUserInfo", res.data.user);
+            this.$store.commit("setUserInfo", res.data.user);
             // console.log(this.user_nickname)
           } else {
             alert("에러가 발생했습니다.");
@@ -56,6 +64,12 @@ export default createStore({
     // },
     userInfo(state) {
       return state.userInfo;
+    },
+    userHave(state) {
+      return state.userHave;
+    },
+    userWant(state) {
+      return state.userWant;
     },
     
   },
