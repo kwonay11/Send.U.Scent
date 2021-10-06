@@ -153,6 +153,9 @@ export default {
       if(this.user_id === "admin") {
         this.idOk = false
         this.error.id = "사용할 수 없는 아이디입니다."
+      } else if(this.id.length === 0) {
+        this.idOk = false
+        this.error.id = "먼저 아이디를 입력해주세요."
       } else {
         http.get('/user/info/idchk', {params: {user_id : this.user_id}})
             .then((res) => {
@@ -172,6 +175,9 @@ export default {
       if(this.nickname === "admin") {
         this.nickOk = false
         this.error.nickname = "사용할 수 없는 닉네임입니다."
+      } else if(this.id.length === 0) {
+        this.nickOk = false
+        this.error.nickname = "먼저 닉네임을 입력해주세요."
       } else {
         http.get('/user/info/nickchk', {params: {nickname : this.nickname}})
             .then((res) => {
