@@ -4,7 +4,7 @@
     <page-title pageTitle="Perfume"/>
       <div class="filter-box">
           <form v-on:submit="onSubmitForm">
-            <input class="search-bar" type="text" placeholder="이름 or 브랜드" v-model="contents.title"> 
+            <input class="search-bar" type="text" placeholder=" 향수 이름 or 브랜드" v-model="contents.title"> 
             <button class="button">
             <img class="find" 
             src="../../assets/icons/find.png"/>            
@@ -14,37 +14,37 @@
             <div class="filter">
               <label class="title">|계절별</label>
               <div class="filter-check">
-                <input type="checkbox" value="spring" id="spring" onclick='checkOnlyOne(season)' v-model="season" />
+                <input type="checkbox" value="spring" v-model="season" />
                 <label for="spring">봄&#127800;</label>
                 <br />
-                <input type="checkbox" value="summer" onclick='checkOnlyOne(season)' v-model="season" />
+                <input type="checkbox" value="summer" v-model="season" />
                 <label for="summer">여름&#127817;</label>
                 <br />
-                <input type="checkbox" value="autumn" onclick='checkOnlyOne(season)' v-model="season" />
+                <input type="checkbox" value="autumn" v-model="season" />
                 <label for="autumn">가을&#127810;</label>
                 <br />
-                <input type="checkbox" value="winter" onclick='checkOnlyOne(season)' v-model="season" />
+                <input type="checkbox" value="winter" v-model="season" />
                 <label for="winter">겨울&#127876;</label>
               </div>
               <label class="title">|시간별</label>
               <br />
               <div class="filter-check">
-                <input type="checkbox" value="1" id="1" onclick='checkOnlyOne(daynight)' v-model="daynight" />
+                <input type="checkbox" value="1" id="1" v-model="daynight" />
                 <label for="day">낮&#127774;</label>
                 <br />
-                <input type="checkbox" value="2" id="2" onclick='checkOnlyOne(daynight)' v-model="daynight" />
+                <input type="checkbox" value="2" id="2" v-model="daynight" />
                 <label for="night">밤&#127769;</label>
               </div>       
               <label class="title">|성별</label>
               <br />
               <div class="filter-check">
-                <input type="checkbox" value="men" onclick='checkOnlyOne(gender)' v-model="gender"/>
+                <input type="checkbox" value="men" v-model="gender"/>
                 <label for="male">For him&#128102;</label>
                 <br />
-                <input type="checkbox" value="women" onclick='checkOnlyOne(gender)' v-model="gender"/>
+                <input type="checkbox" value="women" v-model="gender"/>
                 <label for="female">For her&#128103;</label>
                 <br />                
-                <input type="checkbox" value="women,men" onclick='checkOnlyOne(gender)' v-model="gender"/>
+                <input type="checkbox" value="women,men" v-model="gender"/>
                 <label for="female">For unisex&#128107;</label>                
               </div>
               <br />             
@@ -79,32 +79,26 @@ export default {
     gender: [],
     season: [],
     results:[],
-    comp: 'ProdListMulti',
     };
   },
   methods: {
     checkArr(){
-        console.log(this.gender[0]);      
         http
         .get(
             `/listPage/filter`,
             { params: {daynight:this.daynight[0], gender:this.gender[0], season:this.season[0]}}
         )          
         .then((res) => {
-            console.log(res);
             this.results = res.data;
           });
     },   
     onSubmitForm(e){ 
-      // form의 새로 고침 막기 
-      e.preventDefault(); 
-        console.log(this.contents.title);
+        e.preventDefault(); 
         http
         .get(
             `/listPage/search/${this.contents.title}`
         )          
         .then((res) => {
-            console.log(res);
             this.results = res.data; 
           });
     },
@@ -115,7 +109,6 @@ export default {
         )          
         .then((res) => {
             this.results = res.data;         
-            console.log(res);
           });
     },    
   },
