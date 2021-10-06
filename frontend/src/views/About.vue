@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/common.scss";
 #about{
-  height:350vh;
+  height:380vh;
 }
 .subtitle{
   font-family: $kor-font-family;
