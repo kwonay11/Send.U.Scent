@@ -101,6 +101,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+import http from '../../utils/http-common.js'
 export default {
   computed: {
     ...mapState(["isLogin", "userInfo"]),
@@ -114,6 +115,7 @@ export default {
         this.$store.commit("setIsLogined", false)
       } else {
         this.$store.commit("setIsLogined", true)
+        this.getUser()
       }
     },
     logoutChk() {
@@ -122,6 +124,21 @@ export default {
                   if(this.$route.path !== "/")
                     this.$router.replace("/");
                 })
+    },
+    getUser() {
+      this.user_id = localStorage.getItem("user_id")
+      http
+        .get("/user/info", { params: { user_id: this.user_id } })
+        .then((res) => {
+          if (res.data.result === "success") {
+            this.$store.commit("setUserInfo", res.data.user);
+          } else {
+            alert("에러가 발생했습니다.");
+          }
+        })
+        .catch(() => {
+          alert("에러 발생!");
+        });
     },
   },
   data() {
