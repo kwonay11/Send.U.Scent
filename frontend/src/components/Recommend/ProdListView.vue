@@ -61,7 +61,6 @@
 import ProdListMulti from './ProdListMulti.vue';
 import http from "../../utils/http-common.js";
 import PageTitle from '@/components/Header/PageTitle.vue';
-import API_BASE_URL from "../../utils/config.js";
 export default {
   name: "ProdListView",
   props: {
