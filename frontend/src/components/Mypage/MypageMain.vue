@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import PageTitle from '../../components/Header/PageTitle.vue';
 import MyProfile from '../../components/Mypage/MyProfile.vue';
 import MyReviews from '../../components/Mypage/MyReviews.vue';
@@ -47,11 +48,11 @@ export default {
             this.user_No = res.data.user.id;
             this.getList()
           } else {
-            alert("에러가 발생했습니다.");
+            swal("에러가 발생했습니다.");
           }
         })
         .catch(() => {
-          alert("에러 발생!");
+          swal("에러 발생!");
         });
       },
       getList() {
@@ -65,7 +66,7 @@ export default {
             if(reason === "등록된 목록이 없습니다.")
               return;
             else
-              alert("데이터를 불러오는데 문제가 발생했습니다.")
+              swal("데이터를 불러오는데 문제가 발생했습니다.")
           }
         })
       },

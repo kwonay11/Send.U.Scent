@@ -22,6 +22,7 @@
 
 <script>
 import http from '../utils/http-common.js'
+import swal from 'sweetalert';
 import { mapState } from 'vuex';
 export default {
     props: [
@@ -50,10 +51,10 @@ export default {
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        alert(this.prodInfo.perfume_name + " 향수를 보유 향수에 추가했습니다.");
+                        swal(this.prodInfo.perfume_name + " 향수를 보유 향수에 추가했습니다.");
                         this.$router.go()
                     } else {
-                        alert("데이터를 처리하는 중 문제가 발생했습니다.")
+                        swal("데이터를 처리하는 중 문제가 발생했습니다.")
                     }
                 })
             this.$emit("flag", false);

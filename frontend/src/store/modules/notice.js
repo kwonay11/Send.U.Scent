@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "../../router/index";
+import swal from 'sweetalert';
 
 export default {
   namespaced: true,
@@ -35,7 +36,7 @@ export default {
         })
         // 로그인 실패했을 때.
         .catch(() => {
-          alert("아이디과 비밀번호를 확인하세요.");
+          swal("아이디과 비밀번호를 확인하세요.");
         });
     },
 
@@ -60,7 +61,7 @@ export default {
           // dispatch('login', loginObj)
         })
         .catch(() => {
-          alert("다시 입력해주세요!");
+          swal("다시 입력해주세요!");
         });
     },
   },

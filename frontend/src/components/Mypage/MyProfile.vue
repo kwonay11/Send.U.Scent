@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import { mapState } from 'vuex';
 import http from '../../utils/http-common.js'
 export default {
@@ -68,11 +69,11 @@ export default {
               this.chkAccord = true
             }
           } else {
-            alert("에러가 발생했습니다.");
+            swal("에러가 발생했습니다.");
           }
         })
         .catch(() => {
-          alert("에러 발생!");
+          swal("에러 발생!");
         });
     },
     infoChk() {

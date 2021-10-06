@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import PV from 'password-validator';
 import http from '@/utils/http-common.js'
 import { mapState } from 'vuex';
@@ -106,11 +107,11 @@ export default {
               this.user_nickname = res.data.user.nickname
               this.password = res.data.user.password
               } else {
-              alert("에러가 발생했습니다.")
+              swal("에러가 발생했습니다.")
               }
           })
           .catch(() => {
-              alert("에러 발생!")
+              swal("에러 발생!")
           })
     },
     onCheckPassword() {
@@ -170,21 +171,21 @@ export default {
         http.put('/user/update', Form)
             .then((res) => {
               if(res.data.result === 'success') {
-                alert("수정 완료");
+                swal("수정 완료");
                 this.$router.push('/mypage');
               } else {
-                alert("문제가 발생했습니다.");
+                swal("문제가 발생했습니다.");
               }
             })
             .catch(() => {
-              alert("문제가 발생했습니다.");
+              swal("문제가 발생했습니다.");
             })
         this.$router.push('/mypage');
       } else if(this.submitChk == 2) {
-        alert("수정 사항이 없습니다.");
+        swal("수정 사항이 없습니다.");
         this.$router.push('/mypage');
       } else {
-        alert("문제가 발생했습니다. \n수정 중 틀린 곳은 없는 지 확인해주세요.");
+        swal("문제가 발생했습니다. \n수정 중 틀린 곳은 없는 지 확인해주세요.");
       }
     },
     cancelBtn() {

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import http from '../../utils/http-common.js'
 export default {
   name: "MyReivews",
@@ -42,14 +43,14 @@ export default {
         http.put(`/have/deleteRev/${review_id}`)
             .then((res) => {
               if(res.data.result === "success") {
-                alert(e + " 향수에 대한 리뷰가 삭제되었습니다.")
+                swal(e + " 향수에 대한 리뷰가 삭제되었습니다.")
                 this.$router.go()
               } else {
-                alert("데이터를 처리하던 중 문제가 발생했습니다.")
+                swal("데이터를 처리하던 중 문제가 발생했습니다.")
               }
             })
             .catch((error) => {
-              // alert("데이터를 처리하던 중 문제가 발생했습니다.")
+              // swal("데이터를 처리하던 중 문제가 발생했습니다.")
               console.log({...error})
             })
       }

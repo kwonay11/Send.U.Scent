@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import http from '../utils/http-common.js'
 import { mapState } from 'vuex';
 export default {
@@ -53,7 +54,7 @@ export default {
                     if(res.data.result === "success") {
                         this.likeActive = false
                     } else {
-                        alert("데이터를 처리하던 중 문제가 발생했습니다.")
+                        swal("데이터를 처리하던 중 문제가 발생했습니다.")
                     }
                 })
         },
@@ -68,7 +69,7 @@ export default {
                         this.likeActive = true
                         this.$router.go()
                     } else {
-                        alert("데이터를 처리하던 중 문제가 발생했습니다.")
+                        swal("데이터를 처리하던 중 문제가 발생했습니다.")
                     }
                 })
         },
@@ -77,10 +78,10 @@ export default {
                 http.delete('/have/delete', { params : {id : id}})
                     .then((res) => {
                         if(res.data.result === "success") {
-                            alert(name + " 향수를 가지고 있는 목록에서 삭제했습니다.")
+                            swal(name + " 향수를 가지고 있는 목록에서 삭제했습니다.")
                             this.$router.go()
                         } else {
-                            alert("데이터를 처리하던 중 문제가 발생했습니다.")
+                            swal("데이터를 처리하던 중 문제가 발생했습니다.")
                         }
                     })
             }

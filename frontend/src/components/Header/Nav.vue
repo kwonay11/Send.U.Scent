@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import { mapState, mapMutations } from 'vuex';
 import http from '../../utils/http-common.js'
 export default {
@@ -133,11 +134,11 @@ export default {
           if (res.data.result === "success") {
             this.$store.commit("setUserInfo", res.data.user);
           } else {
-            alert("에러가 발생했습니다.");
+            swal("에러가 발생했습니다.");
           }
         })
         .catch(() => {
-          alert("에러 발생!");
+          swal("에러 발생!");
         });
     },
   },

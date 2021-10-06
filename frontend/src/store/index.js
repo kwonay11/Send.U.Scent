@@ -4,6 +4,7 @@ import app from "./modules/app";
 import user from "./modules/user";
 import http from "../utils/http-common.js";
 import createPersistedState from 'vuex-persistedstate'
+import swal from 'sweetalert';
 
 export default createStore({
   state: {
@@ -41,11 +42,11 @@ export default createStore({
             this.$store.commit("setUserInfo", res.data.user);
             // console.log(this.user_nickname)
           } else {
-            alert("에러가 발생했습니다.");
+            swal("에러가 발생했습니다.");
           }
         })
         .catch(() => {
-          alert("에러 발생!");
+          swal("에러 발생!");
         });
     },
     logout({ commit }) {

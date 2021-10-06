@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import PageTitle from '../../components/Header/PageTitle.vue'
 import Prod from '../../components/Mypage/SimpleProdRes.vue'
 import GoTop from '../../components/GoTop.vue'
@@ -68,7 +69,7 @@ export default {
             if(reason === "등록된 목록이 없습니다.")
               return;
             else
-              alert("!데이터를 불러오는데 문제가 발생했습니다.")
+              swal("!데이터를 불러오는데 문제가 발생했습니다.")
           }
         })
       },
@@ -94,11 +95,11 @@ export default {
             })
       },
       addHave(perfume_id, title) {
-            // alert(id + "번 향수 리뷰");
+            // swal(id + "번 향수 리뷰");
             for (let i = 0; i < this.haveList.length; i++) {
                 if(perfume_id === this.haveList[i].perfume_id) {
                     // 보유 목록에 이미 있으면
-                    alert("이미 보유 중인 향수입니다.")
+                    swal("이미 보유 중인 향수입니다.")
                     return;
                 }
             }
@@ -110,9 +111,9 @@ export default {
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        alert( title + " 향수를 보유 향수에 추가했습니다.");
+                        swal( title + " 향수를 보유 향수에 추가했습니다.");
                     } else {
-                        alert("데이터를 처리하는 중 문제가 발생했습니다.")
+                        swal("데이터를 처리하는 중 문제가 발생했습니다.")
                     }
                 })
         },

@@ -30,6 +30,7 @@
 
 <script>
 import http from '../utils/http-common.js'
+import swal from 'sweetalert';
 export default {
   props: [
     "id",
@@ -62,14 +63,14 @@ export default {
       http.put('/have/update', Form)
           .then((res) => {
             if(res.data.result === "success") {
-              alert(this.name + " 향수의 리뷰가 등록되었습니다.")
+              swal(this.name + " 향수의 리뷰가 등록되었습니다.")
               this.$router.go()
             } else {
-              alert("등록 중 문제가 발생했습니다.")
+              swal("등록 중 문제가 발생했습니다.")
             }
           })
           .catch(() => {
-            alert("등록 중 문제가 발생했습니다.")
+            swal("등록 중 문제가 발생했습니다.")
           })
       this.$emit("flag", false);
     },

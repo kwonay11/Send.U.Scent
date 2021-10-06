@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import SIcon from '@/components/Recommend/SeasonIcon.vue'
 import SAccord from '@/components/Recommend/SimpleAccord.vue'
 import SNote from '@/components/Recommend/SimpleNote.vue'
@@ -295,7 +296,7 @@ export default {
     Modal(){
       // 이미 보유하고 있으면
       if(!this.likeActive) {
-        alert("이미 관심 목록에 등록한 향수입니다.")
+        swal("이미 관심 목록에 등록한 향수입니다.")
       } else {
         console.log("모달 켜져")
         this.setModal = true;
@@ -321,7 +322,7 @@ export default {
           if(reason === "등록된 목록이 없습니다.") {
             return;
           } else 
-          alert("!데이터를 불러오는데 문제가 발생했습니다.")
+          swal("!데이터를 불러오는데 문제가 발생했습니다.")
         }
       })
     },

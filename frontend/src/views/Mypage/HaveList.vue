@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import PageTitle from '../../components/Header/PageTitle.vue';
 import Prod from '../../components/SimpleProd.vue';
 import ReviewModal from '../../components/ModalReview.vue';
@@ -72,7 +73,7 @@ export default {
         this.selectedProd.id = id;
         this.selectedProd.title = title;
       } else {
-        alert("이미 리뷰를 작성한 향수입니다.")
+        swal("이미 리뷰를 작성한 향수입니다.")
       }
     },
     closeModal() {
@@ -90,7 +91,7 @@ export default {
             if(reason === "등록된 목록이 없습니다.")
               this.error = true;
             else
-              alert("!데이터를 불러오는데 문제가 발생했습니다.")
+              swal("!데이터를 불러오는데 문제가 발생했습니다.")
           }
         })
       },

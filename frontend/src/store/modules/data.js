@@ -1,5 +1,6 @@
 import api from "../../api";
 import http from "../../utils/http-common.js";
+import swal from 'sweetalert';
 
 // initial state
 const state = {
@@ -27,11 +28,11 @@ const actions = {
                     commit('setUserInfo', res.data.user);
                 // console.log(this.user_nickname)
                 } else {
-                alert("에러가 발생했습니다.")
+                swal("에러가 발생했습니다.")
                 }
             })
             .catch(() => {
-                alert("에러 발생!")
+                swal("에러 발생!")
             })
         
     }
