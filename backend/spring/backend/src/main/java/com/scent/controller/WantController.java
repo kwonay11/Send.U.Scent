@@ -88,7 +88,7 @@ public class WantController {
 	}
 	
 	@DeleteMapping("/delete")
-	@ApiOperation(value = "좋아요 목록 삭제")
+	@ApiOperation(value = "좋아요 목록 삭제", notes = "해당 목록의 고유 id를 받아 목록에서 제거한다.")
 	public Map<String, Object> deleteList(@RequestParam int id) {
 		Map<String, Object> response = new HashMap<String, Object>();
 

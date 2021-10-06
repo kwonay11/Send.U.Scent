@@ -3,10 +3,6 @@
   <div id="HaveListRoot">
     <page-title pageTitle="I have" />
     <div class="content-box mt-5 my-3">
-      <!-- <div class="rec-box mb-3">
-        <RecSlider :reccList="reccList" />
-        <div class="line"></div>
-      </div> -->
       <!-- 향수간 유사도 기반 추천 향수 -->
       <div v-if="reccList.length>0" class="rec-box mb-5">
         <RecSlider :reccList="reccList" ctitle="haveList" />
@@ -16,7 +12,7 @@
       <div class="have-list">
         <ul v-if="!error" class="item-list">
           <li class="item m-3"  v-for="(item, index) in haveList" :key="index">
-            <Prod :id="item.id" :name="item.title" :perfume_id="item.perfume_id" @click="writeReview(item.id, item.title, item.review)"/>
+            <Prod :id="item.id" :name="item.title" :perfume_id="item.perfume_id" listIs="have" @click="writeReview(item.id, item.title, item.review)"/>
           </li>
         </ul>
         <ul v-if="error" class="item-list">
@@ -103,12 +99,15 @@ export default {
           axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
                 .then((res) => {
                   this.reccList = res.data.reccList
-                  console.log(this.reccList)
+                  // console.log(this.reccList)
                 })
                 .catch((err) => {
                   console.log(err)
                 })
         }
+      },
+      addHaveProd() {
+        this.$router.push('/mypage/haveadd')
       },
   },
   data() {
@@ -160,7 +159,7 @@ span, p{
   font-weight: bold;
 }
 .item-list {
-    width: 800px;
+    width: 910px;
     margin: 0 auto;
 }
 .item {

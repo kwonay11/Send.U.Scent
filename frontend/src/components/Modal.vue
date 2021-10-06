@@ -12,7 +12,7 @@
                 <div class="modal-bottom">
                     <div class="button-group">
                         <button class="cancel-btn" @click="closeBtn">취소</button>
-                        <button class="add-btn" @click="addBtn">추가</button>
+                        <button class="add-btn" @click="addBtn()">추가</button>
                     </div>
                 </div>
             </div>
@@ -46,11 +46,11 @@ export default {
                 "user_id" : this.userInfo.id,
                 "perfume_id" : this.perfume_id
             }
-            console.log(Form)
+            console.log(this.prodInfo.perfume_name)
             http.post('/have/insert', Form)
                 .then((res) => {
                     if(res.data.result === "success") {
-                        alert(this.name + " 향수를 보유 향수에 추가했습니다.");
+                        alert(this.prodInfo.perfume_name + " 향수를 보유 향수에 추가했습니다.");
                         this.$router.go()
                     } else {
                         alert("데이터를 처리하는 중 문제가 발생했습니다.")

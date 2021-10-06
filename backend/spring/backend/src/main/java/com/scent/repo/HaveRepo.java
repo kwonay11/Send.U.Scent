@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,8 @@ public interface HaveRepo extends JpaRepository<HaveList, Integer>{
 	
 	@Query(value = "select * from userhave where user_id = ? and perfume_id = ?", nativeQuery = true)
 	Optional<HaveList> findByPerfume(int user_id, int perfume_id);
+
+	@Modifying
+	@Query(value = "delete from userhave where id = ?", nativeQuery = true)
+	void deleteById(int id);
 }
