@@ -14,7 +14,7 @@ export default {
       console.log("공지사항 목록들 디스패치");
       
       axios
-        .get("http://localhost:8888/suscent/api/notices/") // user_id, password
+        .get("http://j5c204.p.ssafy.io/suscent/api/notices/") // user_id, password
         .then((res) => {
           console.log("res");
           // console.log(res);
@@ -43,7 +43,7 @@ export default {
       console.log("하이");
       console.log(signupObj);
       axios
-        .post("http://localhost:8888/suscent/api/users/signup", signupObj)
+        .post("http://j5c204.p.ssafy.io/suscent/api/users/signup", signupObj)
         .then((res) => {
           console.log(res);
           // let user_id = res.data.user_id

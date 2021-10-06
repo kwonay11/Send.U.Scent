@@ -4,7 +4,7 @@
     <div v-if="perfumeInfo" class="content-box">
 
       <div class="per-title">{{ perfumeInfo.title }}</div>
-      <div>
+      <div v-if="isLogin">
         <img @click="Modal()" src="@/assets/icons/like2.png" alt="heart">
         <ModalLike v-if="setModal" @flag="closeModal" :id="this.perfumeInfo.perfume_id" :name="this.perfumeInfo.title"/>
         
@@ -89,7 +89,7 @@
       </div>
 
       <div class="d-content">
-        <div class="d-title" v-if="perfumeInfo.top_list.length!==0">
+        <div class="d-title">
           <strong>Top Notes</strong>
         </div>
         <ul>
@@ -99,7 +99,7 @@
         </ul>
       </div>
       <div class="d-content">
-        <div class="d-title" v-if="perfumeInfo.middle_list.length!==0">
+        <div class="d-title">
           <strong>Middle Notes</strong>
         </div>
         <ul>
@@ -109,7 +109,7 @@
         </ul>
       </div>
       <div class="d-content">
-        <div class="d-title" v-if="perfumeInfo.base_list.length!==0">
+        <div class="d-title">
           <strong>Base Notes</strong>
         </div>
         <ul>
@@ -150,6 +150,8 @@ import MyReviews from '@/components/Mypage/MyReviews.vue'
 import RecSlider from '@/components/Recommend/RecSlider.vue'
 import ModalLike from '@/components/ModalLike.vue';
 import GoTop from '../../components/GoTop.vue';
+import http from '../../utils/http-common.js'
+import { mapState } from 'vuex';
 
 import axios from 'axios'
 const DJANGO_URL = process.env.VUE_APP_DJANGO_URL
@@ -208,6 +210,8 @@ export default {
       ],
       reviewList: [],
       reccList: [],
+      likeActive: true,
+      wantList: [],
     }
   },
   watch: {
@@ -217,7 +221,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState(["isLogin","userInfo", "userWant"])
+  },
   created() {
+    this.wantListChk(this.$route.params.id)
     const perfume_id = this.$route.params.id
     this.getPerfumeInfo(perfume_id)
     .then((res) => {
@@ -278,11 +286,44 @@ export default {
         return res
       }
     },
-    Modal(){
-      this.setModal = true;
-    },
+    // Modal(){
+    //   this.setModal = true;
+    // },
     closeModal() {
       this.setModal = false;
+    },
+    Modal(){
+      // 이미 보유하고 있으면
+      if(!this.likeActive) {
+        alert("이미 관심 목록에 등록한 향수입니다.")
+      } else {
+        console.log("모달 켜져")
+        this.setModal = true;
+        console.log(this.setModal)
+      }
+    },
+  wantListChk(v) {
+    if(localStorage.getItem("user_id") !== null)
+      http
+      .get("/like/list", { params: { user_id : this.userInfo.id}})
+      .then((res) => {
+        if(res.data.result === "success") {
+          this.wantList = res.data.wantlist
+          for (let i = 0; i < this.wantList.length; i++) {
+            if(this.wantList[i].perfume_id === (v-'0')) {
+              // 보유 목록에 이미 있으면
+              this.likeActive = false
+              // return
+            }
+          }
+        } else {
+          const reason = res.data.reason
+          if(reason === "등록된 목록이 없습니다.") {
+            return;
+          } else 
+          alert("!데이터를 불러오는데 문제가 발생했습니다.")
+        }
+      })
     },
   },
 }

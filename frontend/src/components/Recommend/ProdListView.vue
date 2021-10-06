@@ -14,37 +14,37 @@
             <div class="filter">
               <label class="title">|계절별</label>
               <div class="filter-check">
-                <input type="checkbox" value="spring" v-model="season" />
+                <input type="checkbox" value="spring" id="spring" onclick='checkOnlyOne(season)' v-model="season" />
                 <label for="spring">봄&#127800;</label>
                 <br />
-                <input type="checkbox" value="summer" v-model="season" />
+                <input type="checkbox" value="summer" onclick='checkOnlyOne(season)' v-model="season" />
                 <label for="summer">여름&#127817;</label>
                 <br />
-                <input type="checkbox" value="autumn" v-model="season" />
+                <input type="checkbox" value="autumn" onclick='checkOnlyOne(season)' v-model="season" />
                 <label for="autumn">가을&#127810;</label>
                 <br />
-                <input type="checkbox" value="winter" v-model="season" />
+                <input type="checkbox" value="winter" onclick='checkOnlyOne(season)' v-model="season" />
                 <label for="winter">겨울&#127876;</label>
               </div>
               <label class="title">|시간별</label>
               <br />
               <div class="filter-check">
-                <input type="checkbox" value="1" v-model="daynight" />
-                <label for="night">낮&#127774;</label>
+                <input type="checkbox" value="1" id="1" onclick='checkOnlyOne(daynight)' v-model="daynight" />
+                <label for="day">낮&#127774;</label>
                 <br />
-                <input type="checkbox" value="2" v-model="daynight" />
-                <label for="day">밤&#127769;</label>
+                <input type="checkbox" value="2" id="2" onclick='checkOnlyOne(daynight)' v-model="daynight" />
+                <label for="night">밤&#127769;</label>
               </div>       
               <label class="title">|성별</label>
               <br />
               <div class="filter-check">
-                <input type="checkbox" value="men" v-model="gender"/>
+                <input type="checkbox" value="men" onclick='checkOnlyOne(gender)' v-model="gender"/>
                 <label for="male">For him&#128102;</label>
                 <br />
-                <input type="checkbox" value="women" v-model="gender"/>
+                <input type="checkbox" value="women" onclick='checkOnlyOne(gender)' v-model="gender"/>
                 <label for="female">For her&#128103;</label>
                 <br />                
-                <input type="checkbox" value="women,men" v-model="gender"/>
+                <input type="checkbox" value="women,men" onclick='checkOnlyOne(gender)' v-model="gender"/>
                 <label for="female">For unisex&#128107;</label>                
               </div>
               <br />             
@@ -79,20 +79,10 @@ export default {
     gender: [],
     season: [],
     results:[],
+    comp: 'ProdListMulti',
     };
   },
   methods: {
-  // 체크박스 하나만 체크되도록.
-    setCheckBoxAsRadio(targetObj, inObj){
-    var len = targetObj.length;
-    
-    if(len>1){ // 객체가 배열이라면. 배열이 아니면 그냥 체크박스로 작동
-      for(var i=0; i<len; i++){
-      if(targetObj[i] != inObj)
-        targetObj[i].checked = false;
-      }
-    }
-    }, 
     checkArr(){
         console.log(this.gender[0]);      
         http
@@ -104,18 +94,7 @@ export default {
             console.log(res);
             this.results = res.data;
           });
-    },
-    // searchArr(){
-    //     http
-    //     .get(
-    //         `/listPage/filter/${title}`,this.title
-    //     )          
-    //     .then((res) => {
-    //         console.log(res);
-    //         console.log("받음");
-    //         //this.$router.push({ name: "RecPerfume" });
-    //       });
-    // },    
+    },   
     onSubmitForm(e){ 
       // form의 새로 고침 막기 
       e.preventDefault(); 
