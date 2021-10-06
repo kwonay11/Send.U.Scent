@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
-	@Override
+	@Override // 테스트 결과 갱신
 	public int updateRes(String user_id, String accord1, String accord2, String accord3, String accord4, String accord5,
 			Integer longevity, Integer silage, String season) {
 		Optional<User> oUser = userRepo.findById(user_id);
@@ -74,6 +74,12 @@ public class UserServiceImpl implements UserService {
 			return 1;
 		}
 		return 0;
+	}
+
+	@Override // 닉네임 중복 체크
+	public Optional<User> getUserNick(String nickname) {
+		Optional<User> user = userRepo.findByNick(nickname);
+		return user;
 	}
 
 }

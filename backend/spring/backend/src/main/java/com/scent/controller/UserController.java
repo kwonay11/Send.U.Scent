@@ -151,4 +151,34 @@ public class UserController {
 		return response;
 
 	}
+	
+	@GetMapping("/info/idchk")
+	@ApiOperation(value = "아이디 중복 체크", notes = "해당 유저 id를 받아 기존에 등록되어 있는지 확인한다. 없으면 success 리턴")
+	public Map<String, Object> IdChk(@RequestParam String user_id) {
+		Map<String, Object> response = new HashMap<String, Object>();
+
+		Optional<User> user = userService.getUser(user_id);
+		if (!user.isPresent()) {
+			response.put("result", SUCCESS);
+		} else {
+			response.put("result", FAIL);
+			response.put("reason", "already used");
+		}
+		return response;
+	}
+	
+	@GetMapping("/info/nickchk")
+	@ApiOperation(value = "닉네임 중복 체크", notes = "해당 유저 nickname을 받아 기존에 등록되어 있는지 확인한다. 없으면 success 리턴")
+	public Map<String, Object> NickChk(@RequestParam String nickname) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		Optional<User> user = userService.getUserNick(nickname);
+		if (!user.isPresent()) {
+			response.put("result", SUCCESS);
+		} else {
+			response.put("result", FAIL);
+			response.put("reason", "already used");
+		}
+		return response;
+	}
 }
