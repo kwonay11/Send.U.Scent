@@ -30,13 +30,13 @@ export default {
     },
     getNoticeInfo(notice_id) {
       axios
-        .get(`http://localhost:8888/suscent/api/notice/${notice_id}`)
+        .get(`https://j5c204.p.ssafy.io/suscent/api/notice/${notice_id}`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           console.log("특정 공지 정보");
-          console.log(res.data);
+          // console.log(res.data);
           this.noticeInfo = res.data;
-          console.log(this.noticeInfo);
+          // console.log(this.noticeInfo);
         })
         .catch(() => {
           console.log("공지를 못 불러왔음");
@@ -45,7 +45,7 @@ export default {
   },
   created() {
     const notice_id = parseInt(this.$route.params.id) + 1;
-    console.log(notice_id);
+    // console.log(notice_id);
     this.getNoticeInfo(notice_id);
   },
 };
@@ -55,14 +55,14 @@ export default {
 #BoardReadRoot {
   font-size: 25px;
   .title-box {
-    border-bottom: 1px solid black;
-    // border-radius: 15px;
+    border-bottom: 1px solid rgb(92, 92, 92);
+
     width: 100%;
     height: 50px;
   }
   .contents-box {
-    border: 1px solid black;
-    border-radius: 15px;
+    border: 1px solid rgb(92, 92, 92);
+
     width: 100%;
     height: 300px;
   }

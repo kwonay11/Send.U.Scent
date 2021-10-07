@@ -30,6 +30,7 @@
 <script>
 import axios from "axios";
 import router from "../../router/index";
+
 export default {
   name: "WriteForm",
   data() {
@@ -42,7 +43,7 @@ export default {
   methods: {
     write(writeObj) {
       axios
-        .post("http://localhost:8888/suscent/api/notices/write/", writeObj) // user_id, password
+        .post("https://j5c204.p.ssafy.io/suscent/api/notices/write/", writeObj) // user_id, password
         .then((res) => {
           console.log("생성 성공");
           // console.log(res);
