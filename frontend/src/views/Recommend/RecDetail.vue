@@ -287,9 +287,6 @@ export default {
         return res
       }
     },
-    // Modal(){
-    //   this.setModal = true;
-    // },
     closeModal() {
       this.setModal = false;
     },
@@ -304,7 +301,7 @@ export default {
       }
     },
   wantListChk(v) {
-    if(localStorage.getItem("user_id") !== null)
+    if(this.userInfo !== null)
       http
       .get("/like/list", { params: { user_id : this.userInfo.id}})
       .then((res) => {
