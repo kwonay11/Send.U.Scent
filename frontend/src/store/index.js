@@ -56,7 +56,8 @@ export default createStore({
       localStorage.removeItem("longevity");
       localStorage.removeItem("sillage");
       localStorage.removeItem("season");
-      
+      this.state.userHave = null;
+      this.state.userWant = null;
     }
   },
   getters: {
