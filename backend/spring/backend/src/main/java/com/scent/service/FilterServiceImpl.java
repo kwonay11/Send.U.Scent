@@ -23,7 +23,7 @@ public class FilterServiceImpl implements FilterService {
 	
 	@Override
 	public List<Perfume> showAllList() {
-		List<Perfume> list = filterRepo.findTop500ByOrderByRatingscoreDesc();
+		List<Perfume> list = filterRepo.findTop1000ByOrderByRatingscoreDesc();
 		return list;
 
 	}
