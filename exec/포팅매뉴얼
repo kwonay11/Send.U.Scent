@@ -1,0 +1,85 @@
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>포팅 메뉴얼</summary>
+  <ol>
+    <li>
+        <a href="#built-with">Built With</a></li>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#Setting">Setting</a></li>
+    <li><a href="#Additional Settings">Additional Settings</a></li>
+    <li><a href="#Build & Deploy">Build & Deploy</a></li>
+    <li><a href="#DB">DB</a></li>
+  </ol>
+</details>
+
+## Built With
+
+This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+* [Django](https://www.djangoproject.com/)
+* [JDK-8](https://www.oracle.com/kr/java/technologies/javase/javase-jdk8-downloads.html)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Maven](https://maven.apache.org)
+* [JPA](https://spring.io/projects/spring-data-jpa)
+
+* IDE
+    * sts-3.9.14.RELEASE
+* Web Server
+    * [Nginx](https://www.nginx.com/)
+* DB
+    * [mysql](https://www.mysql.com/)
+* Front
+    * [NPM](https://www.npmjs.com/)
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+### Prerequisites
+
+
+### Installation
+
+1. Project URL
+    * []()
+2. Clone the repo
+   ```sh
+   git clone 
+   ```
+   
+### Setting
+1. Server 설정
+   
+2. DB 설정
+
+
+## Build & Deploy
+1. Frontend
+    ```sh
+    $ cd frontend
+    $ npm install
+    $ npm run build
+    ```
+2. Backend
+    ```sh~
+    $ cd backend
+    # application.* 파일들 권한 sudo로 설정되어있기 때문에
+    # sudo 권한으로 빌드
+    $ sudo mvn package
+    $ java -jar target/*.jar --server.servlet.context-path=/api
+    ```
+
+## DB
+* 계정: sent
+* schema : recommand
+* properties
+    * application.properties
+
+    
+
