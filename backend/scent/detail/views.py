@@ -3,10 +3,7 @@ from django.db import connection
 from django.http import JsonResponse, HttpResponse
 import random
 import pandas as pd
-import numpy as np
-
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.metrics import mean_squared_error
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -15,11 +12,9 @@ warnings.filterwarnings('ignore')
 def perInfo(datas):
     gender = datas[0][4].upper()
     accords = datas[0][3].split(",")
-    # top_list = datas[0][8].split(",")
     top_list = [] if datas[0][8].split(",") == [''] else datas[0][8].split(",")
     middle_list = [] if datas[0][9].split(",") == [''] else datas[0][9].split(",")
     base_list = [] if datas[0][10].split(",") == [''] else datas[0][10].split(",")
-    # base_list = datas[0][10].split(",")
 
     perfume_info = {
         'perfume_id': datas[0][0],
@@ -93,7 +88,7 @@ def review(request, perfume_id):
 @api_view(['GET'])
 def rec1(request, perfume_id):
     df = pd.read_csv('alist3.csv', encoding='utf-8')
-    dfr = pd.pivot_table(df, index='perfume_id')  # perfume_id:행, accord 종류들 80개 열
+    dfr = pd.pivot_table(df, index='perfume_id')
 
     item_sim = cosine_similarity(dfr, dfr)
     item_sim_df = pd.DataFrame(data=item_sim, index=dfr.index, columns=dfr.index)
