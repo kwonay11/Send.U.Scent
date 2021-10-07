@@ -38,7 +38,6 @@ import http from '../utils/http-common.js'
 import { mapState } from 'vuex';
 export default {
     props : [
-        // "prodList",
         "id",
         "name",
         "perfume_id",

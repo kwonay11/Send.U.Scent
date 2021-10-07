@@ -1,7 +1,6 @@
 // 이미지가 들어간 페이지 타이틀(About, Community, Mypage)
 <template>
     <div id="PageTitleRoot">
-        <!-- <div class="sub-title"> -->
         <div class="sub-title" :style="{ backgroundImage: 'url(' + this.pageUrl +')'}" >
             <div class="sub-title-bg">
                 <p class="title">{{this.page}}</p>
@@ -37,9 +36,7 @@ export default {
         },
     },
     mounted() {
-        // console.log(this.page);
         this.getImgSrc();
-        // console.log(this.pageUrl);
     },
 }
 </script>
@@ -56,7 +53,6 @@ export default {
 .sub-title {
   width: 100%;
   height: 250px;
-//   background-image: url("../../assets/images/PageTitle_4.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

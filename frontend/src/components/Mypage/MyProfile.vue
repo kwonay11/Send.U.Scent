@@ -5,7 +5,6 @@
         <router-link to="/mypage/modify" class="user-edit-btn"><i class="fas fa-user-edit edit-btn"></i></router-link>
       </p>
       <div class="scents-box">
-        <!-- accords -->
         <table v-if="chkAccord" class="accords-table">
           <th>
             <td class="chk-accord-text">
@@ -54,7 +53,6 @@ export default {
   },
   created() {
     this.getUser();
-    // console.log(this.userInfo)
   },
   methods: {
     getUser() {
@@ -75,9 +73,6 @@ export default {
         .catch(() => {
           swal("에러 발생!");
         });
-    },
-    infoChk() {
-      // if()
     },
   },
   data() {

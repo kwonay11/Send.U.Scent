@@ -95,7 +95,6 @@ export default {
             })
       },
       addHave(perfume_id, title) {
-            // swal(id + "번 향수 리뷰");
             for (let i = 0; i < this.haveList.length; i++) {
                 if(perfume_id === this.haveList[i].perfume_id) {
                     // 보유 목록에 이미 있으면

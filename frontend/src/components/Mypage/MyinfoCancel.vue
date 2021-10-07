@@ -58,17 +58,16 @@ export default {
       const ans = confirm('탈퇴 확인 시 계정이 삭제되며 돌이킬 수 없습니다. \n탈퇴하시겠습니까?');
       if(ans) {
         this.cancelYes = true;
-        // 여기에 회원 탈퇴 axios
         http.delete('/user/delete', {params: {user_id: this.user.userid}})
             .then((res) => {
               if(res.data.result === "success") {
                 this.$store.dispatch("logout")
               }
             })
+        localStorage.removeItem("user_id");
         this.countDownTimer();
         setTimeout(() => {
           this.$router.push('/');
-          localStorage.removeItem("user_id");
         }, 4000);
       }
     },

@@ -39,7 +39,6 @@ export default {
     methods: {
       getUser() {
         this.user_id = localStorage.getItem("user_id")
-        // this.$store.dispatch("getUserInfo", this.user_id)
         http
         .get("/user/info", { params: { user_id: this.user_id } })
         .then((res) => {

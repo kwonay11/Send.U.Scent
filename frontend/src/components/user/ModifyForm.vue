@@ -61,7 +61,6 @@ import swal from 'sweetalert';
 import PV from 'password-validator';
 import http from '@/utils/http-common.js'
 import { mapState } from 'vuex';
-import { mapGetters } from 'vuex';
 export default {
   created() {
     this.passwordSchema
@@ -74,7 +73,6 @@ export default {
       .has()
       .letters(),
     
-    // this.$store.commit("setIsLogined", true)
     this.getUser()
   },
   computed: {
@@ -97,13 +95,9 @@ export default {
   methods: {
     getUser() {
       this.user_id = localStorage.getItem("user_id")
-      // this.user_nickname = this.userInfo.nickname
-      // this.password = this.userInfo.password
       http.get('/user/info', {params: {user_id: this.user_id}})
           .then((res) => {
               if(res.data.result === "success") {
-                  // commit('setUserInfo', res.data.user);
-              // console.log(this.user_nickname)
               this.user_nickname = res.data.user.nickname
               this.password = res.data.user.password
               } else {
@@ -140,7 +134,7 @@ export default {
       }
     },
     checkForm() { // submit 전에 input 내용이 다 들어가 있는지 조건에 맞는지 확인
-      if(this.changeNicname && this.changeNicname) {
+      if(this.changeNicname && this.editUser_nickname) {
         // 닉네임 수정
         this.user_nickname = this.editUser_nickname;
         this.submitChk = 0;
@@ -200,7 +194,6 @@ export default {
     },
     onEdit(v) {
       if(v === 'nickname') {
-        // console.log("click")
         if(!this.changeNicname) {
           this.editNickname = !this.editNickname;
           window.document.getElementsByClassName('.edit-icon')
