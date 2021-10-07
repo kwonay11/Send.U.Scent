@@ -63,16 +63,11 @@ def tests_result(request):
         # print(accord_dic)
         context = {
             'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],perfumes[4][0]],
-            # 'perfume_id' : [perfumes[0][0],perfumes[1][0],perfumes[2][0],perfumes[3][0],5534],
             'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],perfumes[4][1]],
-            # 'title' : [perfumes[0][1],perfumes[1][1],perfumes[2][1],perfumes[3][1],'Artisan'],
             'perfume_id2' : [perfumes2[0][0],perfumes2[1][0],perfumes2[2][0],perfumes2[3][0],perfumes2[4][0]],
             'title2' : [perfumes2[0][1],perfumes2[1][1],perfumes2[2][1],perfumes2[3][1],perfumes2[4][1]],
             'accords':  accord_dic,
             'sorted_accords':  sorted_dic,
-            # "top":[perfumes[0][8],perfumes[1][8],perfumes[2][8],perfumes[3][8],perfumes[4][8]],
-            # "middle":[perfumes[0][9],perfumes[1][9],perfumes[2][9],perfumes[3][9],perfumes[4][9]],
-            # "base":[perfumes[0][10],perfumes[1][10],perfumes[2][10],perfumes[3][10],perfumes[4][10]],
             
         }
 

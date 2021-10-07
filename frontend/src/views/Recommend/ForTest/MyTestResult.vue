@@ -145,9 +145,8 @@ export default {
     created(){
         axios.get(`${DJANGO_URL}/tests/getresult/`)
         .then((res)=>{
-            console.log(res.data)
-            console.log("데이터 받아옴")
-            // console.log(res.data.perfume_id)
+            // console.log(res.data)
+            // console.log("데이터 받아옴")
             this.perfume_id = res.data.perfume_id
             this.title = res.data.title
             this.perfume_id2 = res.data.perfume_id2
@@ -287,7 +286,6 @@ export default {
      width: 100%;
      height:10vh;
      padding-left: 6vw;
-    //  float: left;
     margin-left:1vw;
     margin-right:0.5vw;
     
@@ -296,7 +294,6 @@ export default {
     
 }
 .img{
-    // position: relative;
     width: 54%;
     float: left;
     margin-left:0.5vw;
@@ -307,10 +304,6 @@ export default {
 }
 
 .perfume_title{
-    // display: flex;
-    // position: absolute;
-    // float:left;
-    // left:-10vw;
      width:59%;
     color:black;
     font-family:$eng-font-family;
@@ -328,8 +321,6 @@ export default {
     left:36%;
     top:41%;
     z-index: 22;
-//     color:$main-color !important;
-//     font-family:$eng-font-family;
 }
 .ac_dec{
     border:2px $main-color solid;

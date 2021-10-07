@@ -32,7 +32,6 @@ export default {
     padding-top: 5vh;
     padding-left: 5vh;
     font-size: 30px;
-    // height: 100px;
     display: flex;
     font-weight: bold;
 }
@@ -42,7 +41,6 @@ export default {
     color:white;
     margin-left: 5vh;
     margin-top: -2vh;;
-    // height: 100px;
     display: flex;
     
 }
@@ -54,7 +52,6 @@ export default {
     font-family: $eng-font-family;
     font-size: $detail-font-size;
     color:white;
-    // margin: -4vh;
     margin-top: 45px;
  
 }
