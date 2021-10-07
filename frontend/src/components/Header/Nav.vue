@@ -18,7 +18,6 @@
         class="dropdown-menu dropdown-menu-dark mt-3"
         aria-labelledby="navbarDarkDropdownMenuLink"
       >
-
         <li>
           <div class="drop-item">
             <router-link to="/recommend/perfume">Perfume</router-link>
@@ -62,9 +61,6 @@
             <router-link to="/notice">Notice</router-link>
           </div>
         </li>
-        <li>
-          <div class="drop-item"><router-link to="/qna">QnA</router-link></div>
-        </li>
       </ul>
     </div>
     <div v-if="isLogin" class="menu-item" style="padding: 20px">
@@ -76,12 +72,16 @@
       /></router-link>
     </div>
 
-    <div v-if="isLogin" class="menu-item" style="margin-right: 2vw; padding: 20px">
+    <div
+      v-if="isLogin"
+      class="menu-item"
+      style="margin-right: 2vw; padding: 20px"
+    >
       <img
-          src="@/assets/icons/Logout-btn.png"
-          alt="logout"
-          style="width: 1.2vw"
-          @click="logoutChk()"
+        src="@/assets/icons/Logout-btn.png"
+        alt="logout"
+        style="width: 1.2vw"
+        @click="logoutChk()"
       />
     </div>
     <div v-else class="menu-item" style="margin-right: 2vw; padding: 20px">
@@ -96,34 +96,32 @@
 </template>
 
 <script>
-import swal from 'sweetalert';
-import { mapState, mapMutations } from 'vuex';
-import http from '../../utils/http-common.js'
+import swal from "sweetalert";
+import { mapState, mapMutations } from "vuex";
+import http from "../../utils/http-common.js";
 export default {
   computed: {
     ...mapState(["isLogin", "userInfo"]),
   },
   created() {
-    this.loginChk()
+    this.loginChk();
   },
   methods: {
     loginChk() {
-      if(localStorage.getItem("user_id") === null) {
-        this.$store.commit("setIsLogined", false)
+      if (localStorage.getItem("user_id") === null) {
+        this.$store.commit("setIsLogined", false);
       } else {
-        this.$store.commit("setIsLogined", true)
-        this.getUser()
+        this.$store.commit("setIsLogined", true);
+        this.getUser();
       }
     },
     logoutChk() {
-      this.$store.dispatch("logout")
-                .then(() => {
-                  if(this.$route.path !== "/")
-                    this.$router.replace("/");
-                })
+      this.$store.dispatch("logout").then(() => {
+        if (this.$route.path !== "/") this.$router.replace("/");
+      });
     },
     getUser() {
-      this.user_id = localStorage.getItem("user_id")
+      this.user_id = localStorage.getItem("user_id");
       http
         .get("/user/info", { params: { user_id: this.user_id } })
         .then((res) => {
@@ -139,10 +137,9 @@ export default {
     },
   },
   data() {
-    return {
-    }
+    return {};
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
