@@ -27,7 +27,14 @@
           <button type="button" class="btn btn-success" v-if="isAdmin">
             수정
           </button>
-          <button type="button" class="btn btn-danger" v-if="isAdmin">X</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            v-if="isAdmin"
+            @click="goDelete(notice.id)"
+          >
+            X
+          </button>
         </tr>
       </tbody>
     </table>
@@ -53,8 +60,8 @@ export default {
         if (n.createdDate == null) {
           n.createdDate = "2021-10-08T0";
           let today = new Date();
-          console.log("today");
-          console.log(today);
+          // console.log("today");
+          // console.log(today);
         }
         date_arr.push(n.createdDate.split("T"));
       }
@@ -69,6 +76,19 @@ export default {
     goCreate() {
       console.log("생성고");
       this.$router.push("/notice/write");
+    },
+    goDelete(n) {
+      console.log("제거고");
+      axios
+        .delete(`http://localhost:8888/suscent/api/notices/delete/${n}`)
+        .then((res) => {
+          console.log(res);
+          console.log("제거 성공");
+          this.$router.go();
+        })
+        .catch(() => {
+          console.log("제거 실패");
+        });
     },
   },
   beforeCreate() {
