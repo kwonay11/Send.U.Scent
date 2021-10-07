@@ -36,6 +36,7 @@ export default {
         })
         .catch(() => {
           swal("다시 입력해주세요!");
+          location.reload()
         });
     },
   },
