@@ -179,26 +179,16 @@ app.get("/suscent/api/notice/:id", (req, res) => {
 
 
 /**
- * @path {POST} http://localhost:3000/api/users/add
- * @description POST Method
  * 
  *  POST 데이터를 생성할 때 사용된다.
  *  req.body에 데이터를 담아서 보통 보낸다.
  */
 app.post("/suscent/api/users/signup", (req, res) => {
-    console.log('=======================================')
-    console.log(req)
-    console.log('========================================')
+    // console.log('=======================================')
+    // console.log(req)
+    // console.log('========================================')
 
-    console.log(req.body)
-    // 구조분해를 통해 id 와 name을 추출
-    var person = {
-        "user_id": req.body.user_id,
-        "nickname": req.body.nickname,
-        "password": req.body.password
-    }
-    console.log('person')
-    console.log(person)
+    // console.log(req.body)
     
     connection.query(`INSERT INTO user(user_id, nickname, password) VALUES("${req.body.user_id}", "${req.body.nickname}", "${req.body.password}")`, function (error, results, fields) {
         if (error) {
@@ -211,7 +201,7 @@ app.post("/suscent/api/users/signup", (req, res) => {
             console.log(req.body.user_id)
             connection.query('SELECT * FROM user WHERE user_id = ?', [req.body.user_id], function(error, results, fields) {
 
-                console.log('The solution is: ', results);
+                // console.log('The solution is: ', results);
                 
                 res.send({
                     "code": 200,
@@ -224,22 +214,12 @@ app.post("/suscent/api/users/signup", (req, res) => {
         }
     })    
 })
-app.post("/suscent/api/notices/create", (req, res) => {
-    console.log('=======================================')
-    console.log(req)
-    console.log('========================================')
-
-    console.log(req.body)
-    // 구조분해를 통해 id 와 name을 추출
-    var person = {
-        "user_id": req.body.user_id,
-        "nickname": req.body.nickname,
-        "password": req.body.password
-    }
-    console.log('person')
-    console.log(person)
+app.post("/suscent/api/notices/write", (req, res) => {
+    // console.log('=======================================')
+    // console.log(req)
+    // console.log(req.body)
     
-    connection.query(`INSERT INTO user(user_id, nickname, password) VALUES("${req.body.user_id}", "${req.body.nickname}", "${req.body.password}")`, function (error, results, fields) {
+    connection.query(`INSERT INTO notice(title, contents) VALUES("${req.body.title}", "${req.body.contents}")`, function (error, results, fields) {
         if (error) {
             console.log("error ocurred", error);
             res.send({
@@ -247,28 +227,15 @@ app.post("/suscent/api/notices/create", (req, res) => {
                 "failed": "error ocurred"
             })
         } else {
-            console.log(req.body.user_id)
-            connection.query('SELECT * FROM user WHERE user_id = ?', [req.body.user_id], function(error, results, fields) {
-
-                console.log('The solution is: ', results);
-                
-                res.send({
-                    "code": 200,
-                    "user_id": results[0].user_id,
-                    "password": results[0].password,
-                    "nickname": results[0].nickname,
-                    "success": "user registered sucessfully"
-                });
+            console.log(req.body.title)
+            res.send({
+              "code" : 200,
+              "success": "성공띠"
             })
-        }
+          }
+        
     })    
 })
-
-
-
-
-
-
 
 // http listen port 생성 서버 실행
 app.listen(8888, () => console.log("Send.U.Scent :)"));
