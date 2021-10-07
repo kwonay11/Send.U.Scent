@@ -9,7 +9,7 @@
       <div class="mb-3">
         <label class="form-label">내용</label>
         <input
-          v-model="content"
+          v-model="contents"
           id="content-form"
           type="text"
           class="form-control"
@@ -17,8 +17,9 @@
       </div>
 
       <button
-        type="submit"
-        @click.self.prevent="write({ user, title, content })"
+        type="button"
+        class="btn btn-primary"
+        @click.self.prevent="write({ user, title, contents })"
       >
         생성
       </button>
@@ -34,8 +35,8 @@ export default {
   data() {
     return {
       user: "admin",
-      title: null,
-      content: null,
+      title: "",
+      contents: "",
     };
   },
   methods: {
