@@ -1,7 +1,14 @@
 // 공지사항, 문의하기 게시판 목록
 <template>
   <div id="BoardListRoot">
-    <button type="button" class="btn btn-primary">공지생성</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="goCreate"
+      v-if="isAdmin"
+    >
+      공지생성
+    </button>
     <table>
       <thead>
         <tr>
@@ -13,10 +20,14 @@
       <tbody>
         <tr :key="i" v-for="(notice, i) in notices" class="mylist">
           <td class="list">{{ i + 1 }}</td>
-          <td class="list" @mouseover="shape" @click="goread(i)">
+          <td class="list" @click="goread(i)">
             {{ notice.title }}
           </td>
           <td class="list">{{ this.date_refine[i][0] }}</td>
+          <button type="button" class="btn btn-success" v-if="isAdmin">
+            수정
+          </button>
+          <button type="button" class="btn btn-danger" v-if="isAdmin">X</button>
         </tr>
       </tbody>
     </table>
@@ -25,33 +36,46 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
       notices: [],
+      isAdmin: false,
     };
   },
   computed: {
     date_refine() {
       let date_arr = [];
+      console.log("디버깅");
+      console.log(this.notices);
       for (let n of this.notices) {
+        if (n.createdDate == null) {
+          n.createdDate = "2021-10-08T0";
+          let today = new Date();
+          console.log("today");
+          console.log(today);
+        }
         date_arr.push(n.createdDate.split("T"));
       }
       return date_arr;
     },
   },
   methods: {
-    shape() {},
     goread(i) {
       console.log("고");
       this.$router.push("/notice/" + i);
+    },
+    goCreate() {
+      console.log("생성고");
+      this.$router.push("/notice/write");
     },
   },
   beforeCreate() {
     console.log("공지사항 목록들 디스패치");
 
     axios
-      .get("https://j5c204.p.ssafy.io/suscent/api/notices/")
+      .get("http://localhost:8888/suscent/api/notices/")
       .then((res) => {
         console.log(res);
         console.log("목록 소환 성공");
@@ -63,10 +87,12 @@ export default {
       });
   },
   created() {
-    // console.log("나와랏");
-    // for (n of this.notices) {
-    //   console.log(n.data.data);
-    // }
+    let user_id = localStorage.getItem("user_id");
+    // console.log(this.user_id);
+    if (user_id == "admin") {
+      this.isAdmin = true;
+      console.log("안녕하세요 관리자님");
+    }
   },
   name: "BoardListView",
 };
