@@ -10,6 +10,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 public interface FilterRepo extends JpaRepository<Perfume, Integer>,QuerydslPredicateExecutor<Perfume> {
 	List<Perfume> findByTitleContaining(String title);
 	List<Perfume> findByBrandContaining(String brand);
-	List<Perfume> findTop500ByOrderByRatingscoreDesc();
+	List<Perfume> findTop1000ByOrderByRatingscoreDesc();
 	List<Perfume> findById(int id);
 }
