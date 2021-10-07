@@ -30,12 +30,12 @@ var users = [
  { id: 3, name: "유저3" }
 ];
 connection.connect();
-connection.query('SELECT * from user', function(err, rows, fields) {
-  if (!err)
-    console.log('The solution is: ', rows);
-  else
-    console.log('Error while performing Query.', err);
-});
+// connection.query('SELECT * from user', function(err, rows, fields) {
+//   if (!err)
+//     console.log('The solution is: ', rows);
+//   else
+//     console.log('Error while performing Query.', err);
+// });
 
 // configuration ===============================================================
 
@@ -271,4 +271,4 @@ app.post("/suscent/api/notices/create", (req, res) => {
 
 
 // http listen port 생성 서버 실행
-app.listen(8888, () => console.log("개발이 취미인 남자 :)"));
+app.listen(8888, () => console.log("Send.U.Scent :)"));
