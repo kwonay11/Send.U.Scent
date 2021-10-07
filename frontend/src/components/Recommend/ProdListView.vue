@@ -53,8 +53,11 @@
             <br />
           </div>
       </div>
-    <prod-list-multi :results="results"/>
-  </div>          
+      <div>
+      <div/>
+    <prod-list-multi :results="results" :counts="counts"/>
+  </div> 
+  </div>            
 </template>
 
 <script >
@@ -79,6 +82,7 @@ export default {
     gender: [],
     season: [],
     results:[],
+    counts: 0,
     };
   },
   methods: {
@@ -90,6 +94,7 @@ export default {
         )          
         .then((res) => {
             this.results = res.data;
+            this.counts = res.data.length;
           });
     },   
     onSubmitForm(e){ 
@@ -100,6 +105,7 @@ export default {
         )          
         .then((res) => {
             this.results = res.data; 
+            this.counts = res.data.length;
           });
     },
     defaultList(){
@@ -109,7 +115,8 @@ export default {
         )          
         .then((res) => {
             this.results = res.data;         
-          });
+            this.counts = res.data.length;
+});
     },    
   },
   created(){
