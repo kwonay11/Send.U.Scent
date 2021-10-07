@@ -1,8 +1,7 @@
 // 공지사항, 문의하기 게시판 목록
 <template>
   <div id="BoardListRoot">
-    <!-- <h1>공지사항목록들</h1> -->
-    <!-- {{ notices }}  -->
+    <button type="button" class="btn btn-primary">공지생성</button>
     <table>
       <thead>
         <tr>
@@ -17,7 +16,7 @@
           <td class="list" @mouseover="shape" @click="goread(i)">
             {{ notice.title }}
           </td>
-          <td class="list">{{ notice.createdDate.anua }}</td>
+          <td class="list">{{ this.date_refine[i][0] }}</td>
         </tr>
       </tbody>
     </table>
@@ -31,6 +30,15 @@ export default {
     return {
       notices: [],
     };
+  },
+  computed: {
+    date_refine() {
+      let date_arr = [];
+      for (let n of this.notices) {
+        date_arr.push(n.createdDate.split("T"));
+      }
+      return date_arr;
+    },
   },
   methods: {
     shape() {},
@@ -48,10 +56,17 @@ export default {
         console.log(res);
         console.log("목록 소환 성공");
         this.notices = res.data;
+        console.log(this.notices);
       })
       .catch(() => {
         console.log("목록을 못 불러왔음");
       });
+  },
+  created() {
+    // console.log("나와랏");
+    // for (n of this.notices) {
+    //   console.log(n.data.data);
+    // }
   },
   name: "BoardListView",
 };
