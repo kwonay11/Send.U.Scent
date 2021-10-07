@@ -50,6 +50,7 @@
 <script>
 import PageTitle from '../../components/Header/PageTitle.vue';
 import PV from 'password-validator';
+import swal from 'sweetalert';
 import http from '../../utils/http-common.js'
 import { mapActions } from "vuex";
 export default {
@@ -222,15 +223,15 @@ export default {
   beforeUnmount() {
     window.removeEventListener('beforeunload', this.unLoadEvent);
   },
-  beforeRouteLeave (to, next) {
+  beforeRouteLeave (to, from, next) {
     // 라이프사이클 메소드 : SPA에서 페이지 이동 시
     if(this.moveCheck) next();
     else {
       const ans = confirm('현재 페이지에서 이동하시겠습니까? \n 변경사항이 저장되지 않을 수 있습니다.')
       if(!ans)
-        next();
+        next(false);
       else
-        return;
+        next();
     }
   },
 };
