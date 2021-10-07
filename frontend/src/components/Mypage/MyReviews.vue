@@ -50,7 +50,6 @@ export default {
               }
             })
             .catch((error) => {
-              // swal("데이터를 처리하던 중 문제가 발생했습니다.")
               console.log({...error})
             })
       }

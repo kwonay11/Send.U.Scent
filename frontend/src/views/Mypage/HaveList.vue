@@ -3,7 +3,6 @@
   <div id="HaveListRoot">
     <page-title pageTitle="I have" />
     <div class="content-box mt-5 my-3">
-      <!-- 향수간 유사도 기반 추천 향수 -->
       <div v-if="reccList.length>0" class="rec-box mb-5">
         <RecSlider :reccList="reccList" ctitle="haveList" />
         <div class="line"></div>
@@ -67,7 +66,6 @@ export default {
   },
   methods: {
     writeReview(id, title, review) {
-      // alert(id + "번 향수 리뷰");
       if(review === null) {
         this.setModal = true;
         this.selectedProd.id = id;
@@ -85,7 +83,6 @@ export default {
         .then((res) => {
           if(res.data.result === "success") {
             this.haveList = res.data.havelist
-            // console.log(this.haveList)
           } else {
             const reason = res.data.reason
             if(reason === "등록된 목록이 없습니다.")
@@ -100,7 +97,6 @@ export default {
           axios.post(`${DJANGO_URL}/api/detail/rec2/`, { "user_id" : this.user_id})
                 .then((res) => {
                   this.reccList = res.data.reccList
-                  // console.log(this.reccList)
                 })
                 .catch((err) => {
                   console.log(err)

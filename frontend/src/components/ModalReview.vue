@@ -75,9 +75,6 @@ export default {
       this.$emit("flag", false);
     },
     score(e) {
-      // console.log("click " + e + "score");
-      // console.log(this.nowScore);
-      // 이전에 선택한 점수보다 현재 누른 점수가 작으면 앞서 눌렀던 큰 점수들 off 를 위해 초기화
       if(e < this.review.score) {
         for(let i = 0; i < 5; i++) {
           this.setScoreImg[i] = this.offScoreImg;
@@ -96,9 +93,6 @@ export default {
         this.zeroScore = false; // 0점이 아님
       }
       this.review.score = e;
-      
-      
-      
     },
   },
   mounted() {
