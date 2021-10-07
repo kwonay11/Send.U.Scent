@@ -31,7 +31,7 @@
                 v-for="(item, index) in question.a"
                 :key="index"
                 >
-                 <!-- <button class="answer-item col-md-6" @click="checkAns(item.type,this.index)">{{item.answer}}</button> -->
+                
                  <button class="answer-item col-md-6 fadeIn" @click="checkAns(item.type)">{{item.answer}}</button>
                 </div>
             </div>
@@ -56,7 +56,7 @@ export default {
           step: 0,
           idx: 0,
           select:0,
-          // resultString: [],
+
           contents:{
             resultString: '',
 
@@ -78,7 +78,7 @@ export default {
         //마지막 문항인지 체크
         checkAns(type){
           console.log("타입",type)
-          // console.log("질문 번호",this.idx)
+
           this.contents.resultString += type
           if (this.step == 0){
             this.season = type
@@ -107,7 +107,7 @@ export default {
           if (this.step ==2 || this.step == 3 || this.step == 4 || this.step == 5 || this.step == 6){
                 this.contents.resultString += "/"
               }
-          // this.resultString.push(type)
+   
           console.log("결과 스트링",this.contents.resultString)
             
             // 마지막 문항이면 결과로 넘기기

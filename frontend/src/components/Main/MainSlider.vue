@@ -78,7 +78,6 @@ img{
     filter: brightness(77%);;
 }
 .mySlides-text{
-    /* z-index: 20; */
     position: absolute;
     top: 40%;
     width: 100%;

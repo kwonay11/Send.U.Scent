@@ -3,13 +3,7 @@
     <div id="BestPerFumeRoot">
         <h3>BEST PERFUME</h3>
          <splide :options="options">
-           <!-- for문으로 돌리면 슬라이더가 깨짐 -->
-           <!-- <div v-for="(value,index) in items" v-bind:key="index">
-            <splide-slide>
-            <img :src="`https://fimgs.net/mdimg/perfume/375x500.${value.perfume_id}.jpg`" alt="Test">
-            <p>{{value.title}}</p>
-            </splide-slide>
-           </div> -->
+      
             <splide-slide>
               <router-link :to="`/recommend/detail/52110`">
                 <img src="https://fimgs.net/mdimg/perfume/375x500.52110.jpg" alt="Test">
@@ -94,14 +88,7 @@ export default {
             autoplay    : true,
             dots: true,
         },
-        // items: [
-        //   {perfume_id:5904, title: "Hesperide"},
-        //   {perfume_id:13793, title: "Lys d'Eau"},
-        //   {perfume_id:31236, title: "No 3"},
-        //   {perfume_id:42664, title: "Midori"},
-        //   {perfume_id:13754, title: "No. 5 Midnight + Swim"},
-        //   {perfume_id:20971, title: "Love JLS"},
-        // ]
+        
       };
     },
     
