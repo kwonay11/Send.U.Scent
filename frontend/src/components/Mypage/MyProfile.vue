@@ -1,7 +1,7 @@
 <template>
   <div id="MyProfileRoot">
     <div class="profile-box">
-      <p class="user-id">| {{user_id}}
+      <p class="user-id">| {{userInfo.nickname}}
         <router-link to="/mypage/modify" class="user-edit-btn"><i class="fas fa-user-edit edit-btn"></i></router-link>
       </p>
       <div class="scents-box">
