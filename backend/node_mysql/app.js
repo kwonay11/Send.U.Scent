@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true}));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
     res.header("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
     next();
 });
@@ -133,6 +133,25 @@ app.get("/suscent/api/notice/:id", (req, res) => {
       });
     })
     
+})
+app.put("/suscent/api/notice/modify/", (req, res) => {
+  console.log('처음수정')
+  connection.query(`UPDATE notice SET user=? AND title=? AND contents=? where id=?` ,[req.body.user, req.body.title, req.body.contents, req.body.id], function (error, results, fields) {
+    if (error) {
+      console.log("error ocurred", error);
+      res.send({
+        "code" : 400,
+        "failed": "error ocurred"
+      })
+    } else {
+      console.log(req.body.title)
+      res.send({
+        "code" : 200,
+        "failed": "success"
+      })
+      
+      }
+  })    
 })
 
 

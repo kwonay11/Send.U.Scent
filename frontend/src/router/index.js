@@ -18,6 +18,7 @@ import QnA from "../views/Community/QnA.vue";
 import BoardWrite from "@/components/Board/WriteForm.vue";
 import BoardListView from "@/components/Board/BoardListView.vue";
 import BoardRead from "@/components/Board/BoardReadForm.vue";
+import ModifyForm from "@/components/Board/ModifyForm.vue";
 // Mypage 메뉴
 import Mypage from "../views/Mypage/Mypage.vue";
 import MypageMain from "@/components/Mypage/MypageMain.vue";
@@ -25,7 +26,7 @@ import MyinfoModify from "@/components/Mypage/MyinfoModify.vue";
 import MyinfoCancel from "@/components/Mypage/MyinfoCancel.vue";
 import HaveList from "../views/Mypage/HaveList.vue";
 import WantList from "../views/Mypage/WantList.vue";
-import MyHaveAdd from '@/components/Mypage/MyHaveAdd.vue';
+import MyHaveAdd from "@/components/Mypage/MyHaveAdd.vue";
 // 에러 페이지
 import Page404 from "../views/404.vue";
 
@@ -122,7 +123,7 @@ const routes = [
         // 공지사항 글 수정
         path: "modify/:id",
         name: "NoticeModify",
-        component: BoardWrite,
+        component: ModifyForm,
       },
     ],
   },

@@ -24,9 +24,14 @@
             {{ notice.title }}
           </td>
           <td class="list">{{ this.date_refine[i][0] }}</td>
-          <button type="button" class="btn btn-success" v-if="isAdmin">
+          <!-- <button
+            type="button"
+            class="btn btn-success"
+            v-if="isAdmin"
+            @click="goupdate(i)"
+          >
             수정
-          </button>
+          </button> -->
           <button
             type="button"
             class="btn btn-danger"
@@ -59,7 +64,7 @@ export default {
       for (let n of this.notices) {
         if (n.createdDate == null) {
           n.createdDate = "2021-10-08T0";
-          let today = new Date();
+          // let today = new Date();
           // console.log("today");
           // console.log(today);
         }
@@ -73,6 +78,10 @@ export default {
       console.log("고");
       this.$router.push("/notice/" + i);
     },
+    goupdate(i) {
+      console.log("고");
+      this.$router.push("/notice/modify/" + i);
+    },
     goCreate() {
       console.log("생성고");
       this.$router.push("/notice/write");
@@ -80,7 +89,7 @@ export default {
     goDelete(n) {
       console.log("제거고");
       axios
-        .delete(`http://localhost:8888/suscent/api/notices/delete/${n}`)
+        .delete(`https://j5c204.p.ssafy.io/suscent/api/notices/delete/${n}`)
         .then((res) => {
           console.log(res);
           console.log("제거 성공");
@@ -95,11 +104,11 @@ export default {
     console.log("공지사항 목록들 디스패치");
 
     axios
-      .get("http://localhost:8888/suscent/api/notices/")
+      .get("https://j5c204.p.ssafy.io/suscent/api/notices/")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         console.log("목록 소환 성공");
-        this.notices = res.data;
+        // this.notices = res.data;
         console.log(this.notices);
       })
       .catch(() => {
