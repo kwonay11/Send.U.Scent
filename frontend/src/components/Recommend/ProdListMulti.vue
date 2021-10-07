@@ -3,14 +3,6 @@
     <div id="ProdOneRoot">
         <div class="perfume-page">
             <div class="perfume-container"> 
-                <!-- <div class="accord-filter">
-                    <div>ALL</div>
-                    <a>ALL | </a>
-                    <a>시트러스 | </a>
-                    <a>우디 | </a>
-                    <a>머스크 | </a>
-                    <a>플로랄  </a>                
-                </div> -->
                 <div class="perfume-list"> 
                     <div class="card-list">
                         
@@ -27,13 +19,9 @@
                 <br />
             </div>  
                 <div class="btn-cover">
-                    <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-                        이전
-                        </button>
+                        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">이전</button>
                         <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-                        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn2" >
-                            다음
-                    </button>
+                        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn2">다음</button>
                 </div>
                 </div>                   
         </div>   
@@ -68,11 +56,6 @@ export default {
             listSize = this.pageSize,
             page = Math.floor(listLeng / listSize);
         if (listLeng % listSize > 0) page += 1;
-        
-        /*
-        아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
-        이런식으로 if 문 없이 고칠 수도 있다!
-        */
         sessionStorage.setItem("page",page);
         return page;
         },
@@ -103,7 +86,6 @@ export default {
     margin: 2px 200px 10px 110px;  
     
 }
-
 // .perfume-list{
 //     font-family: $kor-font-family;
 //     width: 1300px;
@@ -136,31 +118,28 @@ export default {
     text-align: center;
     height: 50px;
     padding-left: 12%;
-    //margin-right: 1.2%;
-//   right: 10%;
 }
 .btn-cover .page-btn {
-  width: 5rem;
-  height: 2rem;
-  letter-spacing: 0.5px;
-  border-radius: 10px;
-  background-color:$point-color;  
-  border:none;
-  color:white; 
+    width: 5rem;
+    height: 2rem;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    background-color:$point-color;  
+    border:none;
+    color:white; 
 
 }
 .btn-cover .page-btn2 {
-  width: 5rem;
-  height: 2rem;
-  letter-spacing: 0.5px;
-  border-radius: 10px;
-  background-color:$point-color;  
-  border:none;
-  color:white;
-  
+    width: 5rem;
+    height: 2rem;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    background-color:$point-color;  
+    border:none;
+    color:white;
 }
 .btn-cover .page-count {
-  padding: 0 1rem;
+    padding: 0 1rem;
 }
 .title-txt{
     font-weight: bold;

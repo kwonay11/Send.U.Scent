@@ -10,7 +10,6 @@
         
       </div>
 
-      <!-- 요약(평점,브랜드,젠더,노트) -->
       <div class="prod-content-main">
         <div class="prod-content-img">
           <img class="per-img" :src="`https://fimgs.net/mdimg/perfume/375x500.${perfumeInfo.perfume_id}.jpg`" alt="perfume-image">
@@ -53,8 +52,6 @@
         </div>
       </div>
 
-
-      <!-- 지속력,잔향,계절,낮밤 -->
       <div class="line"></div>
       <ul>
         <li class="icon" v-for="(item, idx) in iconList" :key="idx">
@@ -63,15 +60,11 @@
       </ul>
       <div class="line"></div>
 
-
-      <!-- 향수간 유사도 기반 추천 향수 -->
       <div v-if="reccList.length>0">
         <RecSlider :reccList="reccList" ctitle="recDetail" />
         <div class="line"></div>
       </div>
 
-
-      <!-- 상세설명(accord, note) -->
       <div class="d-desc">
         이미지로 분위기를 느껴보세요
       </div>
@@ -119,8 +112,6 @@
         </ul>
       </div>
 
-
-      <!-- 리뷰 -->
       <div v-if="reviewList.length===0">
         <div class="line"></div>
       </div>
@@ -130,8 +121,6 @@
         <div class="line"></div>
       </div>
 
-
-      <!-- 뒤로가기 버튼 -->
       <div class="center-btn">
         <button class="back-btn" @click="goBack">목록</button>
       </div>
@@ -287,9 +276,6 @@ export default {
         return res
       }
     },
-    // Modal(){
-    //   this.setModal = true;
-    // },
     closeModal() {
       this.setModal = false;
     },
@@ -304,7 +290,7 @@ export default {
       }
     },
   wantListChk(v) {
-    if(localStorage.getItem("user_id") !== null)
+    if(this.userInfo !== null)
       http
       .get("/like/list", { params: { user_id : this.userInfo.id}})
       .then((res) => {

@@ -18,11 +18,7 @@
         class="dropdown-menu dropdown-menu-dark mt-3"
         aria-labelledby="navbarDarkDropdownMenuLink"
       >
-        <!-- <li>
-          <div class="drop-item">
-            <router-link to="/recommend/all">ALL</router-link>
-          </div>
-        </li> -->
+
         <li>
           <div class="drop-item">
             <router-link to="/recommend/perfume">Perfume</router-link>
@@ -79,7 +75,7 @@
           style="width: 1vw"
       /></router-link>
     </div>
-    <!-- 로그인 상태일 때 로그아웃 처리해야함-->
+
     <div v-if="isLogin" class="menu-item" style="margin-right: 2vw; padding: 20px">
       <img
           src="@/assets/icons/Logout-btn.png"
@@ -179,13 +175,9 @@ export default {
   font-family: $eng-font-family;
   padding-top: 0.8%;
   padding-bottom: 0.8%;
-  // margin-left:0.2%;
-  // padding-right:0.5%;
-  /* padding: 10px; */
   position: relative;
   text-align: center;
   border-bottom: 5px solid transparent;
-  // display: flex;
   transition: 0.4s;
 }
 
@@ -243,11 +235,9 @@ export default {
   padding-bottom: 0.8%;
   padding-left: 0.4%;
   padding-right: 0.4%;
-  /* padding: 10px; */
   position: relative;
   text-align: center;
   border-bottom: 5px solid transparent;
-  // display: flex;
   transition: 0.4s;
 }
 #NavRoot .menu-item-rec.active,

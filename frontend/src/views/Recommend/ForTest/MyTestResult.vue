@@ -4,7 +4,7 @@
 
     <div class="box">
         <div class="title fadeIn">Send you your Scent</div>
-        <div class="subtitle fadeIn">회원님에게 어울리는 향수에 대한
+        <div class="subtitle fadeIn">{{$store.state.userInfo.nickname}}님에게 어울리는 향수에 대한
         </div>
         <div class="best fadeIn">
             <p >가장 잘 맞는 향은, </p>
@@ -25,7 +25,7 @@
 
    
    
-        <div class="dec fadeIn"> 회원님이 좋아하실 만한 향수들이에요.</div>
+        <div class="dec fadeIn">{{$store.state.userInfo.nickname}}님이 좋아하실 만한 향수들이에요.</div>
         <div class="perfume">
             <div  v-for="(value,idx) in perfume_id" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
@@ -38,7 +38,7 @@
             
         </div>
 
-        <div class="dec2 fadeIn"> 회원님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
+        <div class="dec2 fadeIn">{{$store.state.userInfo.nickname}}님과 비슷한 취향의 다른 사용자들이 선택한 향수들이에요.</div>
          <div class="perfume2">
             <div  v-for="(value,idx) in perfume_id2" v-bind:key="idx">
                     <router-link :to="`/recommend/detail/${value}`">
@@ -145,9 +145,8 @@ export default {
     created(){
         axios.get(`${DJANGO_URL}/tests/getresult/`)
         .then((res)=>{
-            console.log(res.data)
-            console.log("데이터 받아옴")
-            // console.log(res.data.perfume_id)
+            // console.log(res.data)
+            // console.log("데이터 받아옴")
             this.perfume_id = res.data.perfume_id
             this.title = res.data.title
             this.perfume_id2 = res.data.perfume_id2
@@ -287,7 +286,6 @@ export default {
      width: 100%;
      height:10vh;
      padding-left: 6vw;
-    //  float: left;
     margin-left:1vw;
     margin-right:0.5vw;
     
@@ -296,7 +294,6 @@ export default {
     
 }
 .img{
-    // position: relative;
     width: 54%;
     float: left;
     margin-left:0.5vw;
@@ -307,10 +304,6 @@ export default {
 }
 
 .perfume_title{
-    // display: flex;
-    // position: absolute;
-    // float:left;
-    // left:-10vw;
      width:59%;
     color:black;
     font-family:$eng-font-family;
@@ -328,8 +321,6 @@ export default {
     left:36%;
     top:41%;
     z-index: 22;
-//     color:$main-color !important;
-//     font-family:$eng-font-family;
 }
 .ac_dec{
     border:2px $main-color solid;

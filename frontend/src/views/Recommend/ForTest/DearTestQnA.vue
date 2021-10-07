@@ -31,7 +31,6 @@
                 v-for="(item, index) in question.a"
                 :key="index"
                 >
-                 <!-- <button class="answer-item col-md-6" @click="checkAns(item.type,this.index)">{{item.answer}}</button> -->
                  <button class="answer-item col-md-6 fadeIn" @click="checkAns(item.type)">{{item.answer}}</button>
                 </div>
             </div>
@@ -129,7 +128,7 @@ export default {
   width:80%;
   left: 9.8%;
   height: 100%;
-  // padding-left: 50px;
+
 
 }
 .statusbar{
