@@ -110,26 +110,26 @@
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%208.png)
 
-1. 향수의 지속력(longevity)과 잔향(sillage) 정도, 계절별 추천도와 낮/밤 추천도를 시각적으로 확인할 수 있습니다.
+2. 향수의 지속력(longevity)과 잔향(sillage) 정도, 계절별 추천도와 낮/밤 추천도를 시각적으로 확인할 수 있습니다.
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%209.png)
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2010.png)
 
-1. **코사인 유사도**를 기반으로 향수간 유사도가 높은 상위 10개의 향수를 보여줍니다.
+3. **코사인 유사도**를 기반으로 향수간 유사도가 높은 상위 10개의 향수를 보여줍니다.
 마음에 드는 향수와 유사한 향수를 추천 받을 수 있습니다.
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2011.png)
 
-1. 이미지로 분위기를 느낄 수 있도록 향의 핵심 조화(accord)를 표현하였습니다.
+4. 이미지로 분위기를 느낄 수 있도록 향의 핵심 조화(accord)를 표현하였습니다.
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2012.png)
 
-1. 향의 노트들도 상위 3개씩 이미지로 나타내어 원재료를 한눈에 파악할 수 있도록 했습니다.
+5. 향의 노트들도 상위 3개씩 이미지로 나타내어 원재료를 한눈에 파악할 수 있도록 했습니다.
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2013.png)
 
-1. 향수를 보유하고 있는 회원들의 리뷰를 보여줍니다.
+6. 향수를 보유하고 있는 회원들의 리뷰를 보여줍니다.
 
 ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2014.png)
 
