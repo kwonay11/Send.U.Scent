@@ -155,7 +155,7 @@
     
     ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2018.png)
     
-1. 가지고 있는 목록(보유 향수) 등록 및 관리
+2. 가지고 있는 목록(보유 향수) 등록 및 관리
 - 검색 후 보유 향수 등록
     
     ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2019.png)
@@ -176,7 +176,7 @@
     
     ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2023.png)
     
-1. 관심 목록 등록 및 관리
+3. 관심 목록 등록 및 관리
 - 향수 상세페이지에서 등록한 관심 향수 목록 확인
     
     ![Untitled](README%20e9ee94eddc584bf2bf7bf31d1bf8dd2b/Untitled%2024.png)
