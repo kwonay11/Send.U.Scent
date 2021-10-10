@@ -1,12 +1,30 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <Nav v-if="$route.name !== 'Page404'"/>
+   
+  
+
+    <router-view />
+    <Footer v-if="$route.name !== 'Page404'"/>
+
   </div>
-  <router-view />
 </template>
 
-<style>
+<script>
+import Nav from "@/components/Header/Nav.vue"
+import Footer from "@/components/Footer.vue"
+export default {
+  name: "App",
+  components:{
+    Nav,
+    Footer,
+  },
+}
+
+</script>
+
+<style lang="scss">
+@import "./styles/common.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,17 +32,29 @@
   text-align: center;
   color: #2c3e50;
 }
+body::-webkit-scrollbar {
+  width: 7px;
+}
+// scrollbar 상태바
+body::-webkit-scrollbar-thumb {
+  background-color: $sub-color;
+  border-radius: 10px;
+  border: 1px solid $light-color;
+}
+// scrollbar 전체바
+body::-webkit-scrollbar-track {
+  background-color: $light-color;
+  border-radius: 10px;
+  margin: 10px;
+}
+// 마우스 드래그
+::selection {
+  // background: #e5f9ff;
+  background: #ffebe4;
+}
 
-#nav {
+/* #nav {
   padding: 30px;
-}
+} */
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

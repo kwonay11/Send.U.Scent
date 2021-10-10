@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+// colors
+$white-color: #f6f6f6;
+$black-color: #242424; // footer, 검은 구분선
+$dark-color: #626262; // 보통의 글씨 컬러
+$light-color: #f4f6f6;
+$gray-color: #c4c4c4; // 취소버튼, 비활성 버튼, 연한 구분선 등
+$main-color: #78949d;
+$point-color: #fa9d81; // 메인 버튼 컬러
+$sub-color: #b1b6b7; // 메인 컬러와 그룹으로 쓰이는 컬러
+$sub-point-color: #f28e85; // 추가 버튼, a 링크 포인트 컬러
+$sub-light-color: #ddc9c6;
+$heart-color: #f66352;
+
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Playfair+Display:wght@400;500;600&display=swap");
+$eng-font-family: "Playfair Display", serif;
+$kor-font-family: "Nanum Gothic", sans-serif;
+$title-font-size: 48px;
+$subtitle-font-size: 30px;
+$bodytitle-font-size: 24px;
+$body-subtitle-font-size: 20px;
+$body-font-size: 18px;
+$detail-font-size: 14px;
+$smallest-font-size: 12px;
+
+// default setting
+a {
+	text-decoration: none;
+}
+ul {
+	padding: 0;
+	margin: 0;
+}
+li {
+	list-style: none;
+}
+input {
+	border: 0;
+	background: none;
+}
+input:focus {
+	outline: none;
+}
+
+// div class
+.content-box {
+	width: 80vw;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	top: 250px;
+	// background-color: gray;
+}
+.wrap {
+	min-height: 100%;
+	position: relative;
+	width: 100%;
+	padding-bottom: 200px; /* footer height */
+}

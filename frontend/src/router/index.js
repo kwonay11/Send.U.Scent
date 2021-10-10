@@ -1,6 +1,3 @@
-// import Router from "vue-router";
-// import Vue from "vue";
-
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 // Recommend 메뉴
@@ -9,20 +6,33 @@ import RecPerfume from "../views/Recommend/RecPerfume.vue";
 import RecSoftener from "../views/Recommend/RecSoftener.vue";
 import RecDetail from "../views/Recommend/RecDetail.vue";
 
-import TestMain from "../views/Recommend/ForTest/TestMain.vue";
-import TestQna from "../views/Recommend/ForTest/TestQnA.vue";
-import TestResult from "../views/Recommend/ForTest/TestResult.vue";
+import MyTestMain from "../views/Recommend/ForTest/MyTestMain.vue";
+import DearTestMain from "../views/Recommend/ForTest/DearTestMain.vue";
+import MyTestQnA from "../views/Recommend/ForTest/MyTestQnA.vue";
+import DearTestQnA from "../views/Recommend/ForTest/DearTestQnA.vue";
+import MyTestResult from "../views/Recommend/ForTest/MyTestResult.vue";
+import DearTestResult from "../views/Recommend/ForTest/DearTestResult.vue";
 // Community 메뉴
-import Notice from "../views/Community/Notice.vue"
-import QnA from "../views/Community/QnA.vue"
-import BoardWrite from "@/components/Board/WriteForm.vue"
-import BoardRead from "@/components/Board/BoardReadForm.vue"
+import Notice from "../views/Community/Notice.vue";
+import QnA from "../views/Community/QnA.vue";
+import BoardWrite from "@/components/Board/WriteForm.vue";
+import BoardListView from "@/components/Board/BoardListView.vue";
+import BoardRead from "@/components/Board/BoardReadForm.vue";
+import ModifyForm from "@/components/Board/ModifyForm.vue";
 // Mypage 메뉴
-import Mypage from "../views/Mypage/Mypage.vue"
-import HaveList from "../views/Mypage/HaveList.vue"
-import WantList from "../views/Mypage/WantList.vue"
+import Mypage from "../views/Mypage/Mypage.vue";
+import MypageMain from "@/components/Mypage/MypageMain.vue";
+import MyinfoModify from "@/components/Mypage/MyinfoModify.vue";
+import MyinfoCancel from "@/components/Mypage/MyinfoCancel.vue";
+import HaveList from "../views/Mypage/HaveList.vue";
+import WantList from "../views/Mypage/WantList.vue";
+import MyHaveAdd from "@/components/Mypage/MyHaveAdd.vue";
 // 에러 페이지
-import Page404 from "../views/404.vue"
+import Page404 from "../views/404.vue";
+
+// User 메뉴
+import SignUp from "@/components/user/SignUpForm.vue";
+import LogIn from "@/components/user/LoginForm.vue";
 
 const routes = [
   {
@@ -33,126 +43,181 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: () =>
-      import("../views/About.vue"),
+    component: () => import("../views/About.vue"),
   },
   {
     path: "/recommend",
     component: RecAll,
     children: [
       {
-        path: '/perfume',
-        name: 'Perfume',
+        path: "perfume",
+        name: "Perfume",
         component: RecPerfume,
       },
       {
-        path: '/softener',
-        name: 'Softener',
+        path: "softener",
+        name: "Softener",
         component: RecSoftener,
       },
       {
-        path: '/detail/:id',
-        name: 'RecDetail',
+        path: "detail/:id",
+        name: "RecDetail",
         component: RecDetail,
       },
       {
-        path: '/test',
-        name: 'Test',
-        component: TestMain,
+        path: "mytest",
+        name: "MyTest",
+        component: MyTestMain,
       },
       {
-        path: '/testQnA',
-        name: 'TestQna',
-        component: TestQna,
+        path: "deartest",
+        name: "DearTest",
+        component: DearTestMain,
       },
       {
-        path: '/testResult',
-        name: 'TestResult',
-        component: TestResult,
+        path: "mytestQnA",
+        name: "MyTestQnA",
+        component: MyTestQnA,
       },
-    ]
+      {
+        path: "deartestQnA",
+        name: "DearTestQnA",
+        component: DearTestQnA,
+      },
+      {
+        path: "mytestResult",
+        name: "MyTestResult",
+        component: MyTestResult,
+      },
+      {
+        path: "deartestResult",
+        name: "DearTestResult",
+        component: DearTestResult,
+      },
+    ],
   },
   {
-    path: '/notice',
-    name: 'Notice',
+    path: "/notice",
+    name: "Notice",
     component: Notice,
     children: [
       {
+        // 공지사항 게시글 목록
+        path: "",
+        name: "BoardListView",
+        component: BoardListView,
+      },
+      {
         // 공지사항 게시글 하나 읽기
-        path: ':id',
-        name: 'NoticeRead',
+        path: ":id",
+        name: "NoticeRead",
         component: BoardRead,
       },
       {
         // 공지사항 글쓰기
-        path: '/write',
-        name: 'NoticeWrite',
+        path: "write",
+        name: "NoticeWrite",
         component: BoardWrite,
       },
       {
         // 공지사항 글 수정
-        path: '/modify/:id',
-        name: 'NoticeModify',
-        component: BoardWrite,
+        path: "modify/:id",
+        name: "NoticeModify",
+        component: ModifyForm,
       },
     ],
   },
+  // {
+  //   path: "/notice/:id",
+  //   name: "NoticeRead",
+  //   component: BoardRead,
+  // },
   {
-    path: '/qna',
-    name: 'Qna',
+    path: "/qna",
+    name: "Qna",
     component: QnA,
     children: [
       {
         // 문의하기 게시글 하나 읽기
-        path: ':id',
-        name: 'QnaRead',
+        path: ":id",
+        name: "QnaRead",
         component: BoardRead,
       },
       {
         // 문의하기 글쓰기
-        path: '/write',
-        name: 'QnaWrite',
+        path: "write",
+        name: "QnaWrite",
         component: BoardWrite,
       },
       {
         // 문의하기 글 수정
-        path: '/modify/:id',
-        name: 'QnaModify',
+        path: "modify/:id",
+        name: "QnaModify",
         component: BoardWrite,
       },
       {
         // 문의하기 답글 수정
-        path: '/modify/answer/:id',
-        name: 'QnaAnsModify',
+        path: "modify/answer/:id",
+        name: "QnaAnsModify",
         component: BoardWrite,
       },
     ],
   },
   {
-    path: '/mypage',
-    name: 'MyPage',
+    path: "/mypage",
+    name: "MyPage",
     component: Mypage,
     children: [
       {
-        path: '/havelist',
-        name: 'HaveList',
+        path: "",
+        name: "MypageMain",
+        component: MypageMain,
+      },
+      {
+        path: "modify",
+        name: "MyinfoModify",
+        component: MyinfoModify,
+      },
+      {
+        path: "cancel",
+        name: "MyinfoCancel",
+        component: MyinfoCancel,
+      },
+      {
+        path: "havelist",
+        name: "HaveList",
         component: HaveList,
       },
       {
-        path: '/wantlist',
-        name: 'WantList',
+        path: "haveadd",
+        name: "HaveAdd",
+        component: MyHaveAdd,
+      },
+      {
+        path: "wantlist",
+        name: "WantList",
         component: WantList,
       },
     ],
   },
   {
-    path: '/404',
-    name: 'Page404',
+    path: "/404",
+    name: "Page404",
     component: Page404,
   },
   {
-    path: '/:catchAll(.*)', // vue3 사용자 정의 정규표현식 매개변수 사용
-    redirect: '/404'
+    path: "/:catchAll(.*)", // vue3 사용자 정의 정규표현식 매개변수 사용
+    redirect: "/404",
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: SignUp,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: LogIn,
   },
 ];
 
